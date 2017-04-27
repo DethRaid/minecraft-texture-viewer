@@ -5,7 +5,7 @@
 #include <easylogging++.h>
 #include <stdexcept>
 
-preview_panel::preview_panel(wxFrame* parent, wxGLAttributes& attrs) : wxGLCanvas(parent, attrs) {
+texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& attrs) : wxGLCanvas(parent, attrs) {
 	wxGLContextAttrs contextAttribs;
 	contextAttribs.PlatformDefaults().CoreProfile().OGLVersion(4, 5).EndList();
 
@@ -17,30 +17,31 @@ preview_panel::preview_panel(wxFrame* parent, wxGLAttributes& attrs) : wxGLCanva
 	}
 
 	context->SetCurrent(*this);
+	SetCurrent(*context);
+
+	init_opengl();
+	glViewport(0, 0, window_width, window_height);
 }
 
-void preview_panel::render(wxPaintEvent& WXUNUSED(event)) {
+void texture_preview_canvas::render(wxPaintEvent& WXUNUSED(event)) {
+	LOG(INFO) << "Rendering";
 	wxPaintDC(this);
-	glClearColor(0, 0, 0, 0);
-	glClear(GL_COLOR);
+	SetCurrent(*context);
 
-	glFlush();
+	if(render_available) {
+		glClear(GL_COLOR);
+
+		glFlush();
+	}
 	SwapBuffers();
 }
 
-void preview_panel::on_size_change(wxSizeEvent& event) {
+void texture_preview_canvas::on_size_change(wxSizeEvent& event) {
 	event.Skip();
 
 	SetCurrent(*context);
 
-	if(gladLoadGL()) {
-		LOG(ERROR) << "Could not load OpenGL functions";
-		//throw std::runtime_error("Could not initialize OpenGL");
-	}
-
 	PostSizeEvent();
-
-	SetCurrent(*context);
 
 	window_height = event.GetSize().y;
 	window_height = event.GetSize().x;
@@ -48,7 +49,20 @@ void preview_panel::on_size_change(wxSizeEvent& event) {
 	glViewport(0, 0, window_width, window_height);
 }
 
-wxBEGIN_EVENT_TABLE(preview_panel, wxGLCanvas)
-EVT_PAINT(preview_panel::render)
-EVT_SIZE(preview_panel::on_size_change)
+void texture_preview_canvas::init_opengl() {
+	if(!gladLoadGL()) {
+		LOG(ERROR) << "Could not load OpenGL functions";
+		//throw std::runtime_error("Could not initialize OpenGL");
+	}
+
+	render_available = true;
+	glClearColor(0, 0, 0, 0);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glClearDepth(1.0);
+}
+
+wxBEGIN_EVENT_TABLE(texture_preview_canvas, wxGLCanvas)
+EVT_PAINT(texture_preview_canvas::render)
+EVT_SIZE(texture_preview_canvas::on_size_change)
 wxEND_EVENT_TABLE()

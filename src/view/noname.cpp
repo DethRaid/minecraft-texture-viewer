@@ -13,11 +13,19 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxBoxSizer* bSizer1;
-	bSizer1 = new wxBoxSizer( wxHORIZONTAL );
+	m_statusBar1 = this->CreateStatusBar( 1, wxST_SIZEGRIP, wxID_ANY );
+	wxBoxSizer* bSizer15;
+	bSizer15 = new wxBoxSizer( wxHORIZONTAL );
 	
-	gl_panel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTAB_TRAVERSAL );
-	bSizer1->Add( gl_panel, 1, wxEXPAND | wxALL, 5 );
+	opengl_panel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* opengl_panel_sizer;
+	opengl_panel_sizer = new wxBoxSizer( wxVERTICAL );
+	
+	
+	opengl_panel->SetSizer( opengl_panel_sizer );
+	opengl_panel->Layout();
+	opengl_panel_sizer->Fit( opengl_panel );
+	bSizer15->Add( opengl_panel, 1, wxEXPAND | wxALL, 5 );
 	
 	options_panel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( 250,-1 ), wxTAB_TRAVERSAL );
 	options_panel->SetMinSize( wxSize( 250,-1 ) );
@@ -37,12 +45,11 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	
 	options_panel->SetSizer( bSizer2 );
 	options_panel->Layout();
-	bSizer1->Add( options_panel, 1, wxEXPAND | wxALL, 5 );
+	bSizer15->Add( options_panel, 1, wxALL, 5 );
 	
 	
-	this->SetSizer( bSizer1 );
+	this->SetSizer( bSizer15 );
 	this->Layout();
-	m_statusBar1 = this->CreateStatusBar( 1, wxST_SIZEGRIP, wxID_ANY );
 	
 	this->Centre( wxBOTH );
 }
@@ -155,32 +162,6 @@ _constant_texture_picker::_constant_texture_picker( wxWindow* parent, wxWindowID
 	m_staticline1 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	bSizer4->Add( m_staticline1, 0, wxEXPAND | wxALL, 5 );
 	
-	wxBoxSizer* bSizer12;
-	bSizer12 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer10;
-	bSizer10 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText6 = new wxStaticText( this, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText6->Wrap( -1 );
-	bSizer10->Add( m_staticText6, 0, wxALL, 5 );
-	
-	loaded_texture_label = new wxStaticText( this, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	loaded_texture_label->Wrap( -1 );
-	bSizer10->Add( loaded_texture_label, 0, wxALL, 5 );
-	
-	
-	bSizer12->Add( bSizer10, 1, 0, 5 );
-	
-	select_texture_button = new wxButton( this, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer12->Add( select_texture_button, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	
-	bSizer4->Add( bSizer12, 1, wxEXPAND, 5 );
-	
-	m_staticline2 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-	bSizer4->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
-	
 	wxBoxSizer* bSizer5;
 	bSizer5 = new wxBoxSizer( wxHORIZONTAL );
 	
@@ -205,6 +186,32 @@ _constant_texture_picker::_constant_texture_picker( wxWindow* parent, wxWindowID
 	
 	
 	bSizer4->Add( bSizer5, 1, wxEXPAND, 5 );
+	
+	m_staticline2 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	bSizer4->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
+	
+	wxBoxSizer* bSizer12;
+	bSizer12 = new wxBoxSizer( wxVERTICAL );
+	
+	wxBoxSizer* bSizer10;
+	bSizer10 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText6 = new wxStaticText( this, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText6->Wrap( -1 );
+	bSizer10->Add( m_staticText6, 0, wxALL, 5 );
+	
+	loaded_texture_label = new wxStaticText( this, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
+	loaded_texture_label->Wrap( -1 );
+	bSizer10->Add( loaded_texture_label, 0, wxALL, 5 );
+	
+	
+	bSizer12->Add( bSizer10, 1, 0, 5 );
+	
+	select_texture_button = new wxButton( this, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer12->Add( select_texture_button, 0, wxALIGN_CENTER|wxALL, 5 );
+	
+	
+	bSizer4->Add( bSizer12, 1, wxEXPAND, 5 );
 	
 	
 	this->SetSizer( bSizer4 );

@@ -7,7 +7,7 @@
 
 #include <easylogging++.h>
 
-main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpack Texture Viewer", wxPoint(50, 50), wxSize(450, 340)) {
+main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpack Texture Viewer") {
 	wxGLAttributes attrs;
 	attrs.PlatformDefaults().Defaults().EndList();
 	bool accepted = wxGLCanvas::IsDisplaySupported(attrs);
@@ -24,5 +24,7 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 		}
 	}
 
-	auto opengl_panel = new preview_panel(this, attrs);
+	auto texture_canvas = new texture_preview_canvas(this, attrs);
+	opengl_panel->GetSizer()->Add(texture_canvas, 1, wxEXPAND | wxALL, 0);
+	opengl_panel->Layout();
 }

@@ -10,17 +10,21 @@
 #endif
 #include <wx/glcanvas.h>
 
-class preview_panel : public wxGLCanvas {
+class texture_preview_canvas : public wxGLCanvas {
 public:
-	preview_panel(wxFrame* parent, wxGLAttributes& attrs);
+	texture_preview_canvas(wxFrame* parent, wxGLAttributes& attrs);
 	void render(wxPaintEvent& event);
 	void on_size_change(wxSizeEvent& event);
 protected:
 	wxDECLARE_EVENT_TABLE();
 private:
 	std::unique_ptr<wxGLContext> context;
-	int window_height;
-	int window_width;
+	int window_height = 200;
+	int window_width = 200;
+
+	bool render_available = false;
+
+	void init_opengl();
 };
 
 

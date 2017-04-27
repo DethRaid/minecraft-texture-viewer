@@ -10,16 +10,16 @@
 
 #include <wx/artprov.h>
 #include <wx/xrc/xmlres.h>
-#include <wx/panel.h>
+#include <wx/statusbr.h>
 #include <wx/gdicmn.h>
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
 #include <wx/string.h>
+#include <wx/sizer.h>
+#include <wx/panel.h>
 #include <wx/stattext.h>
 #include <wx/scrolwin.h>
-#include <wx/sizer.h>
-#include <wx/statusbr.h>
 #include <wx/frame.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
@@ -40,11 +40,11 @@ class _main_window : public wxFrame
 	private:
 	
 	protected:
-		wxPanel* gl_panel;
+		wxStatusBar* m_statusBar1;
+		wxPanel* opengl_panel;
 		wxPanel* options_panel;
 		wxStaticText* m_staticText1;
 		wxScrolledWindow* texture_selector_scroll;
-		wxStatusBar* m_statusBar1;
 	
 	public:
 		
@@ -94,12 +94,12 @@ class _constant_texture_picker : public wxPanel
 		wxStaticText* texture_name_label;
 		wxStaticBitmap* color_preview;
 		wxStaticLine* m_staticline1;
+		wxSlider* red_slider;
+		wxStaticText* red_label;
+		wxStaticLine* m_staticline2;
 		wxStaticText* m_staticText6;
 		wxStaticText* loaded_texture_label;
 		wxButton* select_texture_button;
-		wxStaticLine* m_staticline2;
-		wxSlider* red_slider;
-		wxStaticText* red_label;
 	
 	public:
 		
