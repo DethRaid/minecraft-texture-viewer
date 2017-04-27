@@ -1,4 +1,8 @@
 #include "app.h"
+#include <easylogging++.h>
+#include <easylogging++.cc>
+
+INITIALIZE_EASYLOGGINGPP
 
 bool texture_previewer_app::OnInit() {
 	main_app_window = std::make_unique<main_window>();

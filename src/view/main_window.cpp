@@ -3,5 +3,8 @@
 //
 
 #include "main_window.h"
+#include "preview_panel.h"
 
-main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpack Texture Viewer", wxPoint(50, 50), wxSize(450, 340)) {}
+main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpack Texture Viewer", wxPoint(50, 50), wxSize(450, 340)) {
+	// gl_panel = new preview_panel(this);
+}

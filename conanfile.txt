@@ -1,4 +1,5 @@
 [requires]
+easyloggingpp/9.94.1@memsharded/testing
 
 [generators]
 cmake
