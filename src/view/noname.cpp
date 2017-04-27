@@ -15,17 +15,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	
 	m_statusBar1 = this->CreateStatusBar( 1, wxST_SIZEGRIP, wxID_ANY );
 	wxBoxSizer* bSizer15;
-	bSizer15 = new wxBoxSizer( wxHORIZONTAL );
-	
-	opengl_panel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* opengl_panel_sizer;
-	opengl_panel_sizer = new wxBoxSizer( wxVERTICAL );
-	
-	
-	opengl_panel->SetSizer( opengl_panel_sizer );
-	opengl_panel->Layout();
-	opengl_panel_sizer->Fit( opengl_panel );
-	bSizer15->Add( opengl_panel, 1, wxEXPAND | wxALL, 5 );
+	bSizer15 = new wxBoxSizer( wxVERTICAL );
 	
 	options_panel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( 250,-1 ), wxTAB_TRAVERSAL );
 	options_panel->SetMinSize( wxSize( 250,-1 ) );
@@ -45,7 +35,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	
 	options_panel->SetSizer( bSizer2 );
 	options_panel->Layout();
-	bSizer15->Add( options_panel, 1, wxALL, 5 );
+	bSizer15->Add( options_panel, 1, wxALIGN_RIGHT|wxALL, 5 );
 	
 	
 	this->SetSizer( bSizer15 );
