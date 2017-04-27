@@ -12,12 +12,15 @@
 
 class preview_panel : public wxGLCanvas {
 public:
-	preview_panel(wxFrame* parent);
+	preview_panel(wxFrame* parent, wxGLAttributes& attrs);
 	void render(wxPaintEvent& event);
+	void on_size_change(wxSizeEvent& event);
 protected:
 	wxDECLARE_EVENT_TABLE();
 private:
 	std::unique_ptr<wxGLContext> context;
+	int window_height;
+	int window_width;
 };
 
 

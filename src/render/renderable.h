@@ -3,7 +3,8 @@
 
 #include <memory>
 
-#include <wx/glcanvas.h>
+#include "glad.h"
+#include "material.h"
 
 /*!
  * \brief Something that can be rendered

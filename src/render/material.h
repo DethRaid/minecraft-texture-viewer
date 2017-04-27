@@ -1,11 +1,7 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
-#include <wx/wxprec.h>
-
-#ifndef WX_PRECOMP
-#include <wx/wx.h>
-#endif
+#include "glad.h"
 
 #include <unordered_map>
 #include <string>

@@ -11,9 +11,9 @@ set(CMAKE_CXX_STANDARD 14)
 add_definitions(-D_UNICODE -D_CRT_SECURE_NO_WARNINGS)
 
 file(GLOB VIEW_FILES src/view/*.cpp)
-file(GLOB RENDER_FILES serc/render/*.cpp)
+file(GLOB RENDER_FILES src/render/*.cpp)
 
-set(SOURCE_FILES ${VIEW_FILES} ${RENDER_FILES})
+set(SOURCE_FILES ${VIEW_FILES} ${RENDER_FILES} src/render/glad.c)
 add_executable(TexturePreviewer ${SOURCE_FILES})
 
 target_link_libraries(TexturePreviewer wxbase31ud wxmsw31ud_core wxmsw31ud_gl)
