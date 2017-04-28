@@ -1,5 +1,7 @@
 [requires]
 easyloggingpp/9.94.1@memsharded/testing
+glm/0.9.7.6@dlarudgus20/stable
+stb_image/2.12@dsobczyk/testing
 
 [generators]
 cmake

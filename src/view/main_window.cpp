@@ -3,7 +3,6 @@
 //
 
 #include "main_window.h"
-#include "texture_preview_canvas.h"
 
 #include <easylogging++.h>
 
@@ -24,7 +23,9 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 		}
 	}
 
-	auto texture_canvas = new texture_preview_canvas(this, attrs);
-	//opengl_panel->GetSizer()->Add(texture_canvas, 1, wxEXPAND | wxALL, 0);
-	//opengl_panel->Layout();
+	auto options_panel_width = options_panel->GetSize().GetWidth();
+
+	auto size = GetClientSize();
+	size -= wxSize(options_panel_width, 0);
+	gl_canvas = std::make_unique<texture_preview_canvas>(this, attrs, size);
 }

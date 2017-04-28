@@ -35,7 +35,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	
 	options_panel->SetSizer( bSizer2 );
 	options_panel->Layout();
-	bSizer15->Add( options_panel, 1, wxALIGN_RIGHT|wxALL, 5 );
+	bSizer15->Add( options_panel, 1, wxALIGN_RIGHT, 5 );
 	
 	
 	this->SetSizer( bSizer15 );

@@ -15,13 +15,47 @@ set(CONAN_SHARED_LINKER_FLAGS_EASYLOGGINGPP "")
 set(CONAN_EXE_LINKER_FLAGS_EASYLOGGINGPP "")
 
 
+set(CONAN_GLM_ROOT "C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9")
+set(CONAN_INCLUDE_DIRS_GLM "C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include")
+set(CONAN_LIB_DIRS_GLM "C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib")
+set(CONAN_BIN_DIRS_GLM "C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin")
+set(CONAN_RES_DIRS_GLM "C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res")
+set(CONAN_BUILD_DIRS_GLM "C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/")
+set(CONAN_LIBS_GLM )
+set(CONAN_DEFINES_GLM )
+# COMPILE_DEFINITIONS are equal to CONAN_DEFINES without -D, for targets
+set(CONAN_COMPILE_DEFINITIONS_GLM )
+
+set(CONAN_C_FLAGS_GLM "")
+set(CONAN_CXX_FLAGS_GLM "")
+set(CONAN_SHARED_LINKER_FLAGS_GLM "")
+set(CONAN_EXE_LINKER_FLAGS_GLM "")
+
+
+set(CONAN_STB_IMAGE_ROOT "C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9")
+set(CONAN_INCLUDE_DIRS_STB_IMAGE "C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include")
+set(CONAN_LIB_DIRS_STB_IMAGE "C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib")
+set(CONAN_BIN_DIRS_STB_IMAGE "C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin")
+set(CONAN_RES_DIRS_STB_IMAGE "C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res")
+set(CONAN_BUILD_DIRS_STB_IMAGE "C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/")
+set(CONAN_LIBS_STB_IMAGE )
+set(CONAN_DEFINES_STB_IMAGE )
+# COMPILE_DEFINITIONS are equal to CONAN_DEFINES without -D, for targets
+set(CONAN_COMPILE_DEFINITIONS_STB_IMAGE )
+
+set(CONAN_C_FLAGS_STB_IMAGE "")
+set(CONAN_CXX_FLAGS_STB_IMAGE "")
+set(CONAN_SHARED_LINKER_FLAGS_STB_IMAGE "")
+set(CONAN_EXE_LINKER_FLAGS_STB_IMAGE "")
+
+
 
 ### Definition of global aggregated variables ###
 
 set(CONAN_PACKAGE_NAME None)
 set(CONAN_PACKAGE_VERSION None)
 
-set(CONAN_DEPENDENCIES easyloggingpp)
+set(CONAN_DEPENDENCIES easyloggingpp glm stb_image)
 # Storing original command line args (CMake helper) flags
 set(CONAN_CMD_CXX_FLAGS ${CONAN_CXX_FLAGS})
 
@@ -29,13 +63,23 @@ set(CONAN_CMD_SHARED_LINKER_FLAGS ${CONAN_SHARED_LINKER_FLAGS})
 set(CONAN_CMD_C_FLAGS ${CONAN_C_FLAGS})
 # Defining accumulated conan variables for all deps
 
-set(CONAN_INCLUDE_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include" ${CONAN_INCLUDE_DIRS})
-set(CONAN_LIB_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib" ${CONAN_LIB_DIRS})
-set(CONAN_BIN_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin" ${CONAN_BIN_DIRS})
-set(CONAN_RES_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res" ${CONAN_RES_DIRS})
+set(CONAN_INCLUDE_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
+			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include" ${CONAN_INCLUDE_DIRS})
+set(CONAN_LIB_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib"
+			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib"
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib" ${CONAN_LIB_DIRS})
+set(CONAN_BIN_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin"
+			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin"
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin" ${CONAN_BIN_DIRS})
+set(CONAN_RES_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res"
+			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res"
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res" ${CONAN_RES_DIRS})
 set(CONAN_LIBS  ${CONAN_LIBS})
 set(CONAN_DEFINES  ${CONAN_DEFINES})
-set(CONAN_CMAKE_MODULE_PATH "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/" ${CONAN_CMAKE_MODULE_PATH})
+set(CONAN_CMAKE_MODULE_PATH "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/"
+			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/"
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/" ${CONAN_CMAKE_MODULE_PATH})
 
 set(CONAN_CXX_FLAGS " ${CONAN_CXX_FLAGS}")
 set(CONAN_SHARED_LINKER_FLAGS " ${CONAN_SHARED_LINKER_FLAGS}")
@@ -84,7 +128,69 @@ macro(conan_define_targets)
                                                                   $<$<CONFIG:Release>:${CONAN_C_FLAGS_EASYLOGGINGPP_RELEASE} ${CONAN_CXX_FLAGS_EASYLOGGINGPP_RELEASE}>
                                                                   $<$<CONFIG:Debug>:${CONAN_C_FLAGS_EASYLOGGINGPP_DEBUG}  ${CONAN_CXX_FLAGS_EASYLOGGINGPP_DEBUG}>)
  
-    set(CONAN_TARGETS CONAN_PKG::easyloggingpp)
+
+    conan_find_libraries_abs_path("${CONAN_LIBS_GLM}" "${CONAN_LIB_DIRS_GLM}"
+                                  CONAN_FULLPATH_LIBS_GLM)
+    conan_find_libraries_abs_path("${CONAN_LIBS_GLM_DEBUG}" "${CONAN_LIB_DIRS_GLM_DEBUG}"
+                                  CONAN_FULLPATH_LIBS_GLM_DEBUG)
+    conan_find_libraries_abs_path("${CONAN_LIBS_GLM_RELEASE}" "${CONAN_LIB_DIRS_GLM_RELEASE}"
+                                  CONAN_FULLPATH_LIBS_GLM_RELEASE)
+
+    add_library(CONAN_PKG::glm INTERFACE IMPORTED)
+    foreach(build_type "" "_DEBUG" "_RELEASE")
+        string(REPLACE " " ";" "CONAN_C_FLAGS_GLM${build_type}"     "${CONAN_C_FLAGS_GLM${build_type}}")
+        string(REPLACE " " ";" "CONAN_CXX_FLAGS_GLM${build_type}"   "${CONAN_CXX_FLAGS_GLM${build_type}}")
+        string(REPLACE " " ";" "CONAN_SHARED_LINKER_FLAGS_GLM${build_type}" "${CONAN_SHARED_LINKER_FLAGS_GLM${build_type}}")
+        string(REPLACE " " ";" "CONAN_EXE_LINKER_FLAGS_GLM${build_type}"    "${CONAN_EXE_LINKER_FLAGS_GLM${build_type}}")
+    endforeach()
+
+    # Property INTERFACE_LINK_FLAGS do not work, necessary to add to INTERFACE_LINK_LIBRARIES
+    set_property(TARGET CONAN_PKG::glm PROPERTY INTERFACE_LINK_LIBRARIES ${CONAN_FULLPATH_LIBS_GLM} ${CONAN_SHARED_LINKER_FLAGS_GLM} ${CONAN_EXE_LINKER_FLAGS_GLM}
+                                                                 $<$<CONFIG:Release>:${CONAN_FULLPATH_LIBS_GLM_RELEASE} ${CONAN_SHARED_LINKER_FLAGS_GLM_RELEASE} ${CONAN_EXE_LINKER_FLAGS_GLM_RELEASE}>
+                                                                 $<$<CONFIG:Debug>:${CONAN_FULLPATH_LIBS_GLM_DEBUG} ${CONAN_SHARED_LINKER_FLAGS_GLM_DEBUG} ${CONAN_EXE_LINKER_FLAGS_GLM_DEBUG}>
+                                                                 )
+    set_property(TARGET CONAN_PKG::glm PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CONAN_INCLUDE_DIRS_GLM}
+                                                                      $<$<CONFIG:Release>:${CONAN_INCLUDE_DIRS_GLM_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_INCLUDE_DIRS_GLM_DEBUG}>)
+    set_property(TARGET CONAN_PKG::glm PROPERTY INTERFACE_COMPILE_DEFINITIONS ${CONAN_COMPILE_DEFINITIONS_GLM}
+                                                                      $<$<CONFIG:Release>:${CONAN_COMPILE_DEFINITIONS_GLM_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_COMPILE_DEFINITIONS_GLM_DEBUG}>)
+    set_property(TARGET CONAN_PKG::glm PROPERTY INTERFACE_COMPILE_OPTIONS ${CONAN_C_FLAGS_GLM} ${CONAN_CXX_FLAGS_GLM}
+                                                                  $<$<CONFIG:Release>:${CONAN_C_FLAGS_GLM_RELEASE} ${CONAN_CXX_FLAGS_GLM_RELEASE}>
+                                                                  $<$<CONFIG:Debug>:${CONAN_C_FLAGS_GLM_DEBUG}  ${CONAN_CXX_FLAGS_GLM_DEBUG}>)
+ 
+
+    conan_find_libraries_abs_path("${CONAN_LIBS_STB_IMAGE}" "${CONAN_LIB_DIRS_STB_IMAGE}"
+                                  CONAN_FULLPATH_LIBS_STB_IMAGE)
+    conan_find_libraries_abs_path("${CONAN_LIBS_STB_IMAGE_DEBUG}" "${CONAN_LIB_DIRS_STB_IMAGE_DEBUG}"
+                                  CONAN_FULLPATH_LIBS_STB_IMAGE_DEBUG)
+    conan_find_libraries_abs_path("${CONAN_LIBS_STB_IMAGE_RELEASE}" "${CONAN_LIB_DIRS_STB_IMAGE_RELEASE}"
+                                  CONAN_FULLPATH_LIBS_STB_IMAGE_RELEASE)
+
+    add_library(CONAN_PKG::stb_image INTERFACE IMPORTED)
+    foreach(build_type "" "_DEBUG" "_RELEASE")
+        string(REPLACE " " ";" "CONAN_C_FLAGS_STB_IMAGE${build_type}"     "${CONAN_C_FLAGS_STB_IMAGE${build_type}}")
+        string(REPLACE " " ";" "CONAN_CXX_FLAGS_STB_IMAGE${build_type}"   "${CONAN_CXX_FLAGS_STB_IMAGE${build_type}}")
+        string(REPLACE " " ";" "CONAN_SHARED_LINKER_FLAGS_STB_IMAGE${build_type}" "${CONAN_SHARED_LINKER_FLAGS_STB_IMAGE${build_type}}")
+        string(REPLACE " " ";" "CONAN_EXE_LINKER_FLAGS_STB_IMAGE${build_type}"    "${CONAN_EXE_LINKER_FLAGS_STB_IMAGE${build_type}}")
+    endforeach()
+
+    # Property INTERFACE_LINK_FLAGS do not work, necessary to add to INTERFACE_LINK_LIBRARIES
+    set_property(TARGET CONAN_PKG::stb_image PROPERTY INTERFACE_LINK_LIBRARIES ${CONAN_FULLPATH_LIBS_STB_IMAGE} ${CONAN_SHARED_LINKER_FLAGS_STB_IMAGE} ${CONAN_EXE_LINKER_FLAGS_STB_IMAGE}
+                                                                 $<$<CONFIG:Release>:${CONAN_FULLPATH_LIBS_STB_IMAGE_RELEASE} ${CONAN_SHARED_LINKER_FLAGS_STB_IMAGE_RELEASE} ${CONAN_EXE_LINKER_FLAGS_STB_IMAGE_RELEASE}>
+                                                                 $<$<CONFIG:Debug>:${CONAN_FULLPATH_LIBS_STB_IMAGE_DEBUG} ${CONAN_SHARED_LINKER_FLAGS_STB_IMAGE_DEBUG} ${CONAN_EXE_LINKER_FLAGS_STB_IMAGE_DEBUG}>
+                                                                 )
+    set_property(TARGET CONAN_PKG::stb_image PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CONAN_INCLUDE_DIRS_STB_IMAGE}
+                                                                      $<$<CONFIG:Release>:${CONAN_INCLUDE_DIRS_STB_IMAGE_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_INCLUDE_DIRS_STB_IMAGE_DEBUG}>)
+    set_property(TARGET CONAN_PKG::stb_image PROPERTY INTERFACE_COMPILE_DEFINITIONS ${CONAN_COMPILE_DEFINITIONS_STB_IMAGE}
+                                                                      $<$<CONFIG:Release>:${CONAN_COMPILE_DEFINITIONS_STB_IMAGE_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_COMPILE_DEFINITIONS_STB_IMAGE_DEBUG}>)
+    set_property(TARGET CONAN_PKG::stb_image PROPERTY INTERFACE_COMPILE_OPTIONS ${CONAN_C_FLAGS_STB_IMAGE} ${CONAN_CXX_FLAGS_STB_IMAGE}
+                                                                  $<$<CONFIG:Release>:${CONAN_C_FLAGS_STB_IMAGE_RELEASE} ${CONAN_CXX_FLAGS_STB_IMAGE_RELEASE}>
+                                                                  $<$<CONFIG:Debug>:${CONAN_C_FLAGS_STB_IMAGE_DEBUG}  ${CONAN_CXX_FLAGS_STB_IMAGE_DEBUG}>)
+ 
+    set(CONAN_TARGETS CONAN_PKG::easyloggingpp CONAN_PKG::glm CONAN_PKG::stb_image)
 
 endmacro()
 

@@ -6,11 +6,13 @@
 #define TEXTUREPREVIEWER_MAIN_WINDOW_H
 
 #include "noname.h"
+#include "texture_preview_canvas.h"
 
 class main_window : public _main_window {
 public:
     main_window();
-
+private:
+	std::unique_ptr<texture_preview_canvas> gl_canvas;
 };
 
 

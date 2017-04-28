@@ -8,6 +8,8 @@
 
 [requires]
     easyloggingpp/9.Y.Z
+    glm/0.9.7.6
+    stb_image/2.Y.Z
 
 [options]
 
@@ -22,6 +24,8 @@
 
 [full_requires]
     easyloggingpp/9.94.1@memsharded/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    glm/0.9.7.6@dlarudgus20/stable:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    stb_image/2.12@dsobczyk/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
 
 [full_options]
 
