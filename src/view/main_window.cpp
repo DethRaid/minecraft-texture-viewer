@@ -29,3 +29,13 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 	size -= wxSize(options_panel_width, 0);
 	gl_canvas = std::make_unique<texture_preview_canvas>(this, attrs, size);
 }
+
+void main_window::hook_up_albedo_controls() {
+	auto slider_update_function = [&](wxScrollEvent& event) {
+		auto red_val = albedo_red_slider->GetValue();
+		auto green_value = albedo_green_slider->GetValue();
+		auto blue_val = albedo_blue_slider->GetValue();
+
+		albedo->set_color(red_val, green_value, blue_val);
+	};
+}

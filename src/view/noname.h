@@ -17,17 +17,19 @@
 #include <wx/settings.h>
 #include <wx/string.h>
 #include <wx/stattext.h>
-#include <wx/scrolwin.h>
-#include <wx/sizer.h>
-#include <wx/panel.h>
-#include <wx/frame.h>
+#include <wx/statline.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
 #include <wx/icon.h>
 #include <wx/statbmp.h>
-#include <wx/statline.h>
 #include <wx/slider.h>
+#include <wx/textctrl.h>
+#include <wx/gbsizer.h>
+#include <wx/sizer.h>
 #include <wx/button.h>
+#include <wx/panel.h>
+#include <wx/scrolwin.h>
+#include <wx/frame.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -44,66 +46,128 @@ class _main_window : public wxFrame
 		wxPanel* options_panel;
 		wxStaticText* m_staticText1;
 		wxScrolledWindow* texture_selector_scroll;
+		wxStaticLine* m_staticline33;
+		wxPanel* albedo_panel;
+		wxStaticText* texture_name_label1;
+		wxStaticBitmap* albedo_preview;
+		wxStaticLine* m_staticline11;
+		wxSlider* albedo_red_slider;
+		wxTextCtrl* albedo_red_input;
+		wxStaticText* red_label1;
+		wxSlider* albedo_green_slider;
+		wxTextCtrl* albedo_green_input;
+		wxStaticText* green_label;
+		wxSlider* albedo_blue_slider;
+		wxTextCtrl* albedo_blue_input;
+		wxStaticText* blue_label;
+		wxStaticLine* m_staticline21;
+		wxStaticText* m_staticText61;
+		wxStaticText* albedo_loaded_label;
+		wxButton* albedo_select_texture_button;
+		wxStaticLine* m_staticline331;
+		wxPanel* normal_panel;
+		wxStaticText* texture_name_label11;
+		wxStaticBitmap* normal_preview;
+		wxStaticLine* m_staticline111;
+		wxStaticText* m_staticText611;
+		wxStaticText* normal_loaded_label;
+		wxButton* normal_select_texture_button;
+		wxStaticLine* m_staticline3311;
+		wxPanel* specular_color_panel;
+		wxStaticText* texture_name_label12;
+		wxStaticBitmap* specualr_color_preview;
+		wxStaticLine* m_staticline112;
+		wxSlider* specular_red_slider;
+		wxTextCtrl* specular_red_input;
+		wxStaticText* red_label11;
+		wxSlider* specualr_green_slider;
+		wxTextCtrl* specular_green_input;
+		wxStaticText* green_label1;
+		wxSlider* specular_blue_slider;
+		wxTextCtrl* specular_blue_input;
+		wxStaticText* blue_label1;
+		wxStaticLine* m_staticline211;
+		wxStaticText* m_staticText612;
+		wxStaticText* specular_loaded_texture_label;
+		wxButton* specular_select_texture_button;
+		wxStaticLine* m_staticline33111;
+		wxPanel* roughness_panel;
+		wxStaticText* roughness_texture_name_labell;
+		wxStaticBitmap* roughness_color_preview;
+		wxStaticLine* m_staticline113;
+		wxSlider* rougness_slider;
+		wxTextCtrl* roughness_input;
+		wxStaticText* red_label12;
+		wxStaticLine* m_staticline212;
+		wxStaticText* m_staticText613;
+		wxStaticText* roughness_loaded_texture_label;
+		wxButton* roughness_select_texture_button;
+		wxStaticLine* ao_;
+		wxPanel* emission_panel;
+		wxStaticText* texture_name_label13;
+		wxStaticBitmap* emission_preview;
+		wxStaticLine* m_staticline114;
+		wxSlider* emission_slider;
+		wxTextCtrl* emission_input;
+		wxStaticText* red_label13;
+		wxStaticLine* m_staticline213;
+		wxStaticText* m_staticText614;
+		wxStaticText* emission_loaded_texture_label;
+		wxButton* emission_select_texture_button;
+		wxStaticLine* m_staticline332;
+		wxPanel* height_panel;
+		wxStaticText* texture_name_label14;
+		wxStaticBitmap* height_color_preview;
+		wxStaticLine* m_staticline115;
+		wxSlider* height_slider;
+		wxTextCtrl* height_input;
+		wxStaticText* red_label14;
+		wxStaticLine* m_staticline214;
+		wxStaticText* m_staticText615;
+		wxStaticText* height_loaded_texture_label;
+		wxButton* height_select_texture_button;
+		wxStaticLine* m_staticline333;
+		wxPanel* porosity_panel;
+		wxStaticText* texture_name_label15;
+		wxStaticBitmap* porosity_color_preview;
+		wxStaticLine* m_staticline116;
+		wxSlider* porosity_slider;
+		wxTextCtrl* porosity_input;
+		wxStaticText* red_label15;
+		wxStaticLine* m_staticline215;
+		wxStaticText* m_staticText616;
+		wxStaticText* porosity_loaded_texture_label;
+		wxButton* porosity_select_texture_button;
+		wxStaticLine* m_staticline334;
+		wxPanel* translucense_panel;
+		wxStaticText* texture_name_label17;
+		wxStaticBitmap* translucence_color_preview;
+		wxStaticLine* m_staticline118;
+		wxSlider* translucence_slider;
+		wxTextCtrl* translucence_red_input;
+		wxStaticText* red_label17;
+		wxStaticLine* m_staticline217;
+		wxStaticText* m_staticText618;
+		wxStaticText* translucence_loaded_texture_label;
+		wxButton* translucence_select_texture_button;
+		wxStaticLine* m_staticline3341;
+		wxPanel* ao_panel;
+		wxStaticText* texture_name_label16;
+		wxStaticBitmap* ao_color_preview;
+		wxStaticLine* m_staticline117;
+		wxSlider* ao_slider;
+		wxTextCtrl* ao_input;
+		wxStaticText* red_label16;
+		wxStaticLine* m_staticline216;
+		wxStaticText* m_staticText617;
+		wxStaticText* ao_loaded_texture_label;
+		wxButton* ao_select_texture_button;
 	
 	public:
 		
-		_main_window( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1007,634 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		_main_window( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1498,1149 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~_main_window();
-	
-};
-
-///////////////////////////////////////////////////////////////////////////////
-/// Class _color_texture_picker
-///////////////////////////////////////////////////////////////////////////////
-class _color_texture_picker : public wxPanel 
-{
-	private:
-	
-	protected:
-		wxStaticText* texture_name_label;
-		wxStaticBitmap* color_preview;
-		wxStaticLine* m_staticline1;
-		wxSlider* red_slider;
-		wxSlider* green_slider;
-		wxSlider* blue_slider;
-		wxStaticText* red_label;
-		wxStaticText* green_label;
-		wxStaticText* blue_label;
-		wxStaticLine* m_staticline2;
-		wxStaticText* m_staticText6;
-		wxStaticText* loaded_texture_label;
-		wxButton* select_texture_button;
-	
-	public:
-		
-		_color_texture_picker( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 250,-1 ), long style = wxTAB_TRAVERSAL ); 
-		~_color_texture_picker();
-	
-};
-
-///////////////////////////////////////////////////////////////////////////////
-/// Class _constant_texture_picker
-///////////////////////////////////////////////////////////////////////////////
-class _constant_texture_picker : public wxPanel 
-{
-	private:
-	
-	protected:
-		wxStaticText* texture_name_label;
-		wxStaticBitmap* color_preview;
-		wxStaticLine* m_staticline1;
-		wxSlider* red_slider;
-		wxStaticText* red_label;
-		wxStaticLine* m_staticline2;
-		wxStaticText* m_staticText6;
-		wxStaticText* loaded_texture_label;
-		wxButton* select_texture_button;
-	
-	public:
-		
-		_constant_texture_picker( wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 250,-1 ), long style = wxTAB_TRAVERSAL ); 
-		~_constant_texture_picker();
 	
 };
 

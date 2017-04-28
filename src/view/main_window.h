@@ -5,14 +5,21 @@
 #ifndef TEXTUREPREVIEWER_MAIN_WINDOW_H
 #define TEXTUREPREVIEWER_MAIN_WINDOW_H
 
-#include "noname.h"
+#include "../render/gl_texture.h"
+
 #include "texture_preview_canvas.h"
+#include "noname.h"
+
 
 class main_window : public _main_window {
 public:
     main_window();
 private:
 	std::unique_ptr<texture_preview_canvas> gl_canvas;
+
+	std::shared_ptr<gl_texture> albedo;
+
+	void hook_up_albedo_controls();
 };
 
 
