@@ -25,14 +25,15 @@
 #include <wx/slider.h>
 #include <wx/textctrl.h>
 #include <wx/gbsizer.h>
-#include <wx/sizer.h>
-#include <wx/button.h>
+#include <wx/filepicker.h>
 #include <wx/panel.h>
 #include <wx/scrolwin.h>
+#include <wx/sizer.h>
 #include <wx/frame.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
+#define albedo_slider 1000
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _main_window
@@ -61,17 +62,13 @@ class _main_window : public wxFrame
 		wxTextCtrl* albedo_blue_input;
 		wxStaticText* blue_label;
 		wxStaticLine* m_staticline21;
-		wxStaticText* m_staticText61;
-		wxStaticText* albedo_loaded_label;
-		wxButton* albedo_select_texture_button;
+		wxFilePickerCtrl* albedo_file_picker;
 		wxStaticLine* m_staticline331;
 		wxPanel* normal_panel;
 		wxStaticText* texture_name_label11;
 		wxStaticBitmap* normal_preview;
 		wxStaticLine* m_staticline111;
-		wxStaticText* m_staticText611;
-		wxStaticText* normal_loaded_label;
-		wxButton* normal_select_texture_button;
+		wxFilePickerCtrl* normal_file_picker;
 		wxStaticLine* m_staticline3311;
 		wxPanel* specular_color_panel;
 		wxStaticText* texture_name_label12;
@@ -87,9 +84,7 @@ class _main_window : public wxFrame
 		wxTextCtrl* specular_blue_input;
 		wxStaticText* blue_label1;
 		wxStaticLine* m_staticline211;
-		wxStaticText* m_staticText612;
-		wxStaticText* specular_loaded_texture_label;
-		wxButton* specular_select_texture_button;
+		wxFilePickerCtrl* specular_color_file_picker;
 		wxStaticLine* m_staticline33111;
 		wxPanel* roughness_panel;
 		wxStaticText* roughness_texture_name_labell;
@@ -99,9 +94,7 @@ class _main_window : public wxFrame
 		wxTextCtrl* roughness_input;
 		wxStaticText* red_label12;
 		wxStaticLine* m_staticline212;
-		wxStaticText* m_staticText613;
-		wxStaticText* roughness_loaded_texture_label;
-		wxButton* roughness_select_texture_button;
+		wxFilePickerCtrl* smoothness_file_picker;
 		wxStaticLine* ao_;
 		wxPanel* emission_panel;
 		wxStaticText* texture_name_label13;
@@ -111,9 +104,7 @@ class _main_window : public wxFrame
 		wxTextCtrl* emission_input;
 		wxStaticText* red_label13;
 		wxStaticLine* m_staticline213;
-		wxStaticText* m_staticText614;
-		wxStaticText* emission_loaded_texture_label;
-		wxButton* emission_select_texture_button;
+		wxFilePickerCtrl* emission_file_picker;
 		wxStaticLine* m_staticline332;
 		wxPanel* height_panel;
 		wxStaticText* texture_name_label14;
@@ -123,9 +114,7 @@ class _main_window : public wxFrame
 		wxTextCtrl* height_input;
 		wxStaticText* red_label14;
 		wxStaticLine* m_staticline214;
-		wxStaticText* m_staticText615;
-		wxStaticText* height_loaded_texture_label;
-		wxButton* height_select_texture_button;
+		wxFilePickerCtrl* heightmap_file_picker;
 		wxStaticLine* m_staticline333;
 		wxPanel* porosity_panel;
 		wxStaticText* texture_name_label15;
@@ -135,9 +124,7 @@ class _main_window : public wxFrame
 		wxTextCtrl* porosity_input;
 		wxStaticText* red_label15;
 		wxStaticLine* m_staticline215;
-		wxStaticText* m_staticText616;
-		wxStaticText* porosity_loaded_texture_label;
-		wxButton* porosity_select_texture_button;
+		wxFilePickerCtrl* porosity_file_picker;
 		wxStaticLine* m_staticline334;
 		wxPanel* translucense_panel;
 		wxStaticText* texture_name_label17;
@@ -147,9 +134,7 @@ class _main_window : public wxFrame
 		wxTextCtrl* translucence_red_input;
 		wxStaticText* red_label17;
 		wxStaticLine* m_staticline217;
-		wxStaticText* m_staticText618;
-		wxStaticText* translucence_loaded_texture_label;
-		wxButton* translucence_select_texture_button;
+		wxFilePickerCtrl* translucense_file_picker;
 		wxStaticLine* m_staticline3341;
 		wxPanel* ao_panel;
 		wxStaticText* texture_name_label16;
@@ -159,9 +144,7 @@ class _main_window : public wxFrame
 		wxTextCtrl* ao_input;
 		wxStaticText* red_label16;
 		wxStaticLine* m_staticline216;
-		wxStaticText* m_staticText617;
-		wxStaticText* ao_loaded_texture_label;
-		wxButton* ao_select_texture_button;
+		wxFilePickerCtrl* ao_file_picker;
 	
 	public:
 		

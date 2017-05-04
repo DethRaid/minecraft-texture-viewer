@@ -56,7 +56,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer2->SetFlexibleDirection( wxBOTH );
 	gbSizer2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	albedo_red_slider = new wxSlider( albedo_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	albedo_red_slider = new wxSlider( albedo_panel, albedo_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer2->Add( albedo_red_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	albedo_red_input = new wxTextCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
@@ -66,7 +66,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	red_label1->Wrap( -1 );
 	gbSizer2->Add( red_label1, wxGBPosition( 0, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	albedo_green_slider = new wxSlider( albedo_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	albedo_green_slider = new wxSlider( albedo_panel, albedo_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer2->Add( albedo_green_slider, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	albedo_green_input = new wxTextCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
@@ -76,7 +76,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	green_label->Wrap( -1 );
 	gbSizer2->Add( green_label, wxGBPosition( 1, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	albedo_blue_slider = new wxSlider( albedo_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	albedo_blue_slider = new wxSlider( albedo_panel, albedo_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer2->Add( albedo_blue_slider, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	albedo_blue_input = new wxTextCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
@@ -92,28 +92,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline21 = new wxStaticLine( albedo_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer3->Add( m_staticline21, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	wxBoxSizer* bSizer121;
-	bSizer121 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer101;
-	bSizer101 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText61 = new wxStaticText( albedo_panel, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText61->Wrap( -1 );
-	bSizer101->Add( m_staticText61, 0, wxALL, 5 );
-	
-	albedo_loaded_label = new wxStaticText( albedo_panel, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	albedo_loaded_label->Wrap( -1 );
-	bSizer101->Add( albedo_loaded_label, 0, wxALL|wxEXPAND, 5 );
-	
-	
-	bSizer121->Add( bSizer101, 1, wxEXPAND, 5 );
-	
-	albedo_select_texture_button = new wxButton( albedo_panel, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer121->Add( albedo_select_texture_button, 0, wxALIGN_CENTER|wxALL|wxEXPAND, 5 );
-	
-	
-	gbSizer3->Add( bSizer121, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	albedo_file_picker = new wxFilePickerCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer3->Add( albedo_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	albedo_panel->SetSizer( gbSizer3 );
@@ -140,24 +120,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline111 = new wxStaticLine( normal_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
 	gbSizer31->Add( m_staticline111, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
-	wxGridBagSizer* gbSizer23;
-	gbSizer23 = new wxGridBagSizer( 0, 0 );
-	gbSizer23->SetFlexibleDirection( wxBOTH );
-	gbSizer23->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_staticText611 = new wxStaticText( normal_panel, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText611->Wrap( -1 );
-	gbSizer23->Add( m_staticText611, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
-	
-	normal_loaded_label = new wxStaticText( normal_panel, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	normal_loaded_label->Wrap( -1 );
-	gbSizer23->Add( normal_loaded_label, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
-	
-	normal_select_texture_button = new wxButton( normal_panel, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxSize( 230,-1 ), 0 );
-	gbSizer23->Add( normal_select_texture_button, wxGBPosition( 1, 0 ), wxGBSpan( 1, 2 ), wxALIGN_CENTER|wxALL|wxEXPAND, 5 );
-	
-	
-	gbSizer31->Add( gbSizer23, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	normal_file_picker = new wxFilePickerCtrl( normal_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer31->Add( normal_file_picker, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	normal_panel->SetSizer( gbSizer31 );
@@ -225,28 +189,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline211 = new wxStaticLine( specular_color_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer32->Add( m_staticline211, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	wxBoxSizer* bSizer1211;
-	bSizer1211 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer1011;
-	bSizer1011 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText612 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText612->Wrap( -1 );
-	bSizer1011->Add( m_staticText612, 0, wxALL, 5 );
-	
-	specular_loaded_texture_label = new wxStaticText( specular_color_panel, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	specular_loaded_texture_label->Wrap( -1 );
-	bSizer1011->Add( specular_loaded_texture_label, 0, wxALL|wxEXPAND, 5 );
-	
-	
-	bSizer1211->Add( bSizer1011, 1, wxEXPAND, 5 );
-	
-	specular_select_texture_button = new wxButton( specular_color_panel, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer1211->Add( specular_select_texture_button, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	
-	gbSizer32->Add( bSizer1211, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	specular_color_file_picker = new wxFilePickerCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer32->Add( specular_color_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	specular_color_panel->SetSizer( gbSizer32 );
@@ -294,28 +238,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline212 = new wxStaticLine( roughness_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer33->Add( m_staticline212, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	wxBoxSizer* bSizer1212;
-	bSizer1212 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer1012;
-	bSizer1012 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText613 = new wxStaticText( roughness_panel, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText613->Wrap( -1 );
-	bSizer1012->Add( m_staticText613, 0, wxALL, 5 );
-	
-	roughness_loaded_texture_label = new wxStaticText( roughness_panel, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	roughness_loaded_texture_label->Wrap( -1 );
-	bSizer1012->Add( roughness_loaded_texture_label, 0, wxALL|wxEXPAND, 5 );
-	
-	
-	bSizer1212->Add( bSizer1012, 1, wxEXPAND, 5 );
-	
-	roughness_select_texture_button = new wxButton( roughness_panel, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer1212->Add( roughness_select_texture_button, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	
-	gbSizer33->Add( bSizer1212, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	smoothness_file_picker = new wxFilePickerCtrl( roughness_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer33->Add( smoothness_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	roughness_panel->SetSizer( gbSizer33 );
@@ -363,28 +287,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline213 = new wxStaticLine( emission_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer34->Add( m_staticline213, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	wxBoxSizer* bSizer1213;
-	bSizer1213 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer1013;
-	bSizer1013 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText614 = new wxStaticText( emission_panel, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText614->Wrap( -1 );
-	bSizer1013->Add( m_staticText614, 0, wxALL, 5 );
-	
-	emission_loaded_texture_label = new wxStaticText( emission_panel, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	emission_loaded_texture_label->Wrap( -1 );
-	bSizer1013->Add( emission_loaded_texture_label, 0, wxALL, 5 );
-	
-	
-	bSizer1213->Add( bSizer1013, 1, wxEXPAND, 5 );
-	
-	emission_select_texture_button = new wxButton( emission_panel, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer1213->Add( emission_select_texture_button, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	
-	gbSizer34->Add( bSizer1213, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	emission_file_picker = new wxFilePickerCtrl( emission_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer34->Add( emission_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	emission_panel->SetSizer( gbSizer34 );
@@ -432,28 +336,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline214 = new wxStaticLine( height_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer35->Add( m_staticline214, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	wxBoxSizer* bSizer1214;
-	bSizer1214 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer1014;
-	bSizer1014 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText615 = new wxStaticText( height_panel, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText615->Wrap( -1 );
-	bSizer1014->Add( m_staticText615, 0, wxALL, 5 );
-	
-	height_loaded_texture_label = new wxStaticText( height_panel, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	height_loaded_texture_label->Wrap( -1 );
-	bSizer1014->Add( height_loaded_texture_label, 0, wxALL, 5 );
-	
-	
-	bSizer1214->Add( bSizer1014, 1, wxEXPAND, 5 );
-	
-	height_select_texture_button = new wxButton( height_panel, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer1214->Add( height_select_texture_button, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	
-	gbSizer35->Add( bSizer1214, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	heightmap_file_picker = new wxFilePickerCtrl( height_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer35->Add( heightmap_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	height_panel->SetSizer( gbSizer35 );
@@ -501,28 +385,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline215 = new wxStaticLine( porosity_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer36->Add( m_staticline215, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	wxBoxSizer* bSizer1215;
-	bSizer1215 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer1015;
-	bSizer1015 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText616 = new wxStaticText( porosity_panel, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText616->Wrap( -1 );
-	bSizer1015->Add( m_staticText616, 0, wxALL, 5 );
-	
-	porosity_loaded_texture_label = new wxStaticText( porosity_panel, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	porosity_loaded_texture_label->Wrap( -1 );
-	bSizer1015->Add( porosity_loaded_texture_label, 0, wxALL, 5 );
-	
-	
-	bSizer1215->Add( bSizer1015, 1, wxEXPAND, 5 );
-	
-	porosity_select_texture_button = new wxButton( porosity_panel, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer1215->Add( porosity_select_texture_button, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	
-	gbSizer36->Add( bSizer1215, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	porosity_file_picker = new wxFilePickerCtrl( porosity_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer36->Add( porosity_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	porosity_panel->SetSizer( gbSizer36 );
@@ -570,28 +434,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline217 = new wxStaticLine( translucense_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer38->Add( m_staticline217, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	wxBoxSizer* bSizer1217;
-	bSizer1217 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer1017;
-	bSizer1017 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText618 = new wxStaticText( translucense_panel, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText618->Wrap( -1 );
-	bSizer1017->Add( m_staticText618, 0, wxALL, 5 );
-	
-	translucence_loaded_texture_label = new wxStaticText( translucense_panel, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	translucence_loaded_texture_label->Wrap( -1 );
-	bSizer1017->Add( translucence_loaded_texture_label, 0, wxALL, 5 );
-	
-	
-	bSizer1217->Add( bSizer1017, 1, wxEXPAND, 5 );
-	
-	translucence_select_texture_button = new wxButton( translucense_panel, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer1217->Add( translucence_select_texture_button, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	
-	gbSizer38->Add( bSizer1217, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	translucense_file_picker = new wxFilePickerCtrl( translucense_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer38->Add( translucense_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	translucense_panel->SetSizer( gbSizer38 );
@@ -639,28 +483,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline216 = new wxStaticLine( ao_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer37->Add( m_staticline216, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	wxBoxSizer* bSizer1216;
-	bSizer1216 = new wxBoxSizer( wxVERTICAL );
-	
-	wxBoxSizer* bSizer1016;
-	bSizer1016 = new wxBoxSizer( wxHORIZONTAL );
-	
-	m_staticText617 = new wxStaticText( ao_panel, wxID_ANY, wxT("Loaded Texture:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText617->Wrap( -1 );
-	bSizer1016->Add( m_staticText617, 0, wxALL, 5 );
-	
-	ao_loaded_texture_label = new wxStaticText( ao_panel, wxID_ANY, wxT("none"), wxDefaultPosition, wxDefaultSize, 0 );
-	ao_loaded_texture_label->Wrap( -1 );
-	bSizer1016->Add( ao_loaded_texture_label, 0, wxALL, 5 );
-	
-	
-	bSizer1216->Add( bSizer1016, 1, wxEXPAND, 5 );
-	
-	ao_select_texture_button = new wxButton( ao_panel, wxID_ANY, wxT("Select a Texture"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer1216->Add( ao_select_texture_button, 0, wxALIGN_CENTER|wxALL, 5 );
-	
-	
-	gbSizer37->Add( bSizer1216, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	ao_file_picker = new wxFilePickerCtrl( ao_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer37->Add( ao_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	ao_panel->SetSizer( gbSizer37 );
