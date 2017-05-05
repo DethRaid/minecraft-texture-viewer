@@ -153,7 +153,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer21->SetFlexibleDirection( wxBOTH );
 	gbSizer21->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	specular_red_slider = new wxSlider( specular_color_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	specular_red_slider = new wxSlider( specular_color_panel, specular_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer21->Add( specular_red_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	specular_red_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
@@ -163,8 +163,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	red_label11->Wrap( -1 );
 	gbSizer21->Add( red_label11, wxGBPosition( 0, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	specualr_green_slider = new wxSlider( specular_color_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
-	gbSizer21->Add( specualr_green_slider, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	specular_green_slider = new wxSlider( specular_color_panel, specular_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	gbSizer21->Add( specular_green_slider, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	specular_green_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
 	gbSizer21->Add( specular_green_input, wxGBPosition( 1, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
@@ -173,7 +173,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	green_label1->Wrap( -1 );
 	gbSizer21->Add( green_label1, wxGBPosition( 1, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	specular_blue_slider = new wxSlider( specular_color_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	specular_blue_slider = new wxSlider( specular_color_panel, specular_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer21->Add( specular_blue_slider, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	specular_blue_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );

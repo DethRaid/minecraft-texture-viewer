@@ -34,6 +34,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #define albedo_slider 1000
+#define specular_slider 1001
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _main_window
@@ -77,7 +78,7 @@ class _main_window : public wxFrame
 		wxSlider* specular_red_slider;
 		wxTextCtrl* specular_red_input;
 		wxStaticText* red_label11;
-		wxSlider* specualr_green_slider;
+		wxSlider* specular_green_slider;
 		wxTextCtrl* specular_green_input;
 		wxStaticText* green_label1;
 		wxSlider* specular_blue_slider;

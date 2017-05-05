@@ -17,14 +17,10 @@ public:
 private:
 	std::unique_ptr<texture_preview_canvas> gl_canvas;
 
-	gl_texture albedo;
+	std::shared_ptr<gl_texture> albedo;
 
 	void hook_up_albedo_controls();
-
-	void on_albedo_slider(wxScrollEvent& event);
-
-	DECLARE_EVENT_TABLE()
-
+	
 	enum {
 		main_window_albedo_slider,
 	};
