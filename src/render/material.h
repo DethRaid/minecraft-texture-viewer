@@ -10,6 +10,7 @@
  * \brief Defines a material that can be used to render things
  */
 class material {
+public:
 	material(std::string fragment_shader_source, std::string vertex_shader_source);
 
 	void bind();

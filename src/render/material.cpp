@@ -10,7 +10,7 @@ material::material(std::string fragment_shader_soruce, std::string vertex_shader
 }
 
 GLuint material::get_uniform_location(std::string uniform_name) {
-	if(uniform_locations.find(uniform_name) == uniform_locations.end) {
+	if(uniform_locations.find(uniform_name) == uniform_locations.end()) {
 		uniform_locations[uniform_name] = glGetUniformLocation(program_id, uniform_name.c_str());
 	}
 

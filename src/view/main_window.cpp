@@ -33,7 +33,7 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 }
 
 void main_window::hook_up_albedo_controls() {
-	albedo = std::make_shared<gl_texture>();
+	albedo = std::make_shared<gl_texture>(3);
 	auto slider_update_function = [&](wxCommandEvent& event) {
 		LOG(INFO) << "Updating albedo color";
 		auto red_val = albedo_red_slider->GetValue();
