@@ -17,6 +17,10 @@ GLuint material::get_uniform_location(std::string uniform_name) {
 	return uniform_locations[uniform_name];
 }
 
+void material::bind() {
+	glUseProgram(program_id);
+}
+
 GLuint create_program(GLuint vertex_id, GLuint fragment_id) {
 	GLuint program_id = glCreateProgram();
 	LOG(TRACE) << "Created shader program " << program_id;
