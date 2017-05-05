@@ -1,7 +1,20 @@
 #include "renderable.h"
 
+vertex::vertex(glm::vec3 position, glm::vec3 normal, glm::vec3 tangent, glm::vec2 uv) 
+	: position(position), normal(normal), tangent(tangent), uv(uv) {}
+
+void renderable::draw() {
+	mat->bind();
+	glBindVertexArray(vao);
+	glDrawElements(GL_TRIANGLES, num_indices, GL_INT, 0);
+}
 
 void renderable::set_vertex_data(std::vector<vertex> vertices, std::vector<int> indices) {
+	num_indices = indices.size();
+
+	if(vao > 0) {
+		glDeleteVertexArrays(1, &vao);
+	}
 	glCreateVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 

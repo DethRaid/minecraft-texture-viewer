@@ -4,8 +4,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
-gl_texture::gl_texture() {
+gl_texture::gl_texture(int binding) {
 	glGenTextures(1, &gl_name);
+	glBindTexture(binding, gl_name);
 }
 
 gl_texture::gl_texture(gl_texture&& other) {

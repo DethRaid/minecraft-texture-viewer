@@ -8,16 +8,11 @@
 class gl_texture {
 public:
 	/*!
-	* \brief Initializes a new texture_model with the given texture data
+	* \brief Initializes a new gl_texture and sets its binding to the given binding location
 	*
-	* The given data is sent to the GPU
-	*
-	* \param data The raw data of the texture
-	* \param width The width of the texture, in pixels
-	* \param height The height of the texture, in pixels
-	* \param num_components The number of color components that this texture has
+	* \param binding The location to bind this texture to
 	*/
-	gl_texture();
+	gl_texture(int binding);
 
 	gl_texture(gl_texture&& other);
 

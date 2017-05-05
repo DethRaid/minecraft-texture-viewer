@@ -3,12 +3,10 @@
 #include <easylogging++.h>
 
 material::material(std::string fragment_shader_soruce, std::string vertex_shader_source) {
-	program_id = glCreateProgram();
-
 	auto fragment_id = create_shader(fragment_shader_soruce, GL_FRAGMENT_SHADER);
 	auto vertex_id = create_shader(vertex_shader_source, GL_VERTEX_SHADER);
 
-
+	program_id = create_program(fragment_id, vertex_id);
 }
 
 GLuint material::get_uniform_location(std::string uniform_name) {
@@ -19,8 +17,8 @@ GLuint material::get_uniform_location(std::string uniform_name) {
 	return uniform_locations[uniform_name];
 }
 
-void material::link(GLuint vertex_id, GLuint fragment_id) {
-	program_id = glCreateProgram();
+GLuint create_program(GLuint vertex_id, GLuint fragment_id) {
+	GLuint program_id = glCreateProgram();
 	LOG(TRACE) << "Created shader program " << program_id;
 
 	glAttachShader(program_id, vertex_id);
@@ -36,6 +34,8 @@ void material::link(GLuint vertex_id, GLuint fragment_id) {
 	glDeleteShader(vertex_id);
 	glDetachShader(program_id, fragment_id);
 	glDeleteShader(fragment_id);
+
+	return program_id;
 }
 
 GLuint create_shader(const std::string& shader_source, const GLenum shader_type) {

@@ -7,11 +7,13 @@
 #include "material.h"
 #include <glm\glm.hpp>
 
-class vertex {
+struct vertex {
 	glm::vec3 position;
 	glm::vec3 normal;
 	glm::vec3 tangent;
 	glm::vec2 uv;
+
+	vertex(glm::vec3 position, glm::vec3 normal, glm::vec3 tangent, glm::vec2 uv);
 };
 
 /*!
@@ -27,8 +29,9 @@ public:
 	void set_material(std::shared_ptr<material> new_material);
 private:
 	std::shared_ptr<material> mat;
+	int num_indices;
 
-	GLuint vao;
+	GLuint vao = -1;
 };
 
 #endif
