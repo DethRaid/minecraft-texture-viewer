@@ -1,7 +1,7 @@
 #include "data_loading.h"
 
 renderable load_cube() {
-	auto cube_mat = load_material("cube");
+	auto cube_mat = load_material("cube_lighting_pass");
 
 	auto cube = renderable{};
 
