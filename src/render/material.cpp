@@ -3,7 +3,10 @@
 #include <easylogging++.h>
 
 material::material(std::string fragment_shader_soruce, std::string vertex_shader_source) {
+	LOG(INFO) << "Loading fragment shader";
 	auto fragment_id = create_shader(fragment_shader_soruce, GL_FRAGMENT_SHADER);
+
+	LOG(INFO) << "Loading vertex shader";
 	auto vertex_id = create_shader(vertex_shader_source, GL_VERTEX_SHADER);
 
 	program_id = create_program(fragment_id, vertex_id);

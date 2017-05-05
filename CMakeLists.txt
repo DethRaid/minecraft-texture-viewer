@@ -4,6 +4,10 @@ project(TexturePreviewer)
 include(${CMAKE_CURRENT_LIST_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+# Build where I want you to dammit
+set(BUILD_DIR ${CMAKE_CURRENT_LIST_DIR}/build)
+set(EXECUTABLE_OUTPUT_PATH ${dir} CACHE PATH "Build directory" FORCE)
+
 include_directories(E:\\wxWidgets-3.1.0\\include E:\\wxWidgets-3.1.0\\include\\msvc)
 link_directories(E:\\wxWidgets-3.1.0\\lib\\vc_lib)
 

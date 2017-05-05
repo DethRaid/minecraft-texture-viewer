@@ -28,7 +28,7 @@ public:
 	void load_from_file(std::string filename);
 
 private:
-	unsigned char* data;
+	unsigned char* data = nullptr;
 	int width;
 	int height;
 	int num_components;

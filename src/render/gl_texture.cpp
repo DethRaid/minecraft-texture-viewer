@@ -22,7 +22,9 @@ gl_texture::gl_texture(gl_texture&& other) {
 
 gl_texture::~gl_texture() {
 	glDeleteTextures(1, &gl_name);
-	delete[] data;
+	if(data != nullptr) {
+		delete[] data;
+	}
 }
 
 GLuint gl_texture::get_gl_name() {
@@ -38,7 +40,6 @@ void gl_texture::set_color(int red, int green, int blue) {
 	width = 1;
 	height = 1;
 	num_components = 3;
-
 	upload_texture_data();
 }
 

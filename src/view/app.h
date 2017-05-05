@@ -14,6 +14,7 @@
 class texture_previewer_app : public wxApp {
 public:
 	virtual bool OnInit();
+	virtual int OnExit();
 private:
 	std::unique_ptr<main_window> main_app_window;
 };

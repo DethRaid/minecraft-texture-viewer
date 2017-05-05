@@ -3,6 +3,9 @@
 
 #include <memory>
 #include "../render/glad.h"
+#include "../render/renderable.h"
+#include "../render/material.h"
+#include "../render/data_loading.h"
 
 #include <wx/wxprec.h>
 
@@ -10,12 +13,24 @@
 #include <wx/wx.h>
 #endif
 #include <wx/glcanvas.h>
+#include <wx/timer.h>
+
+class texture_preview_canvas;
+
+class render_timer : public wxTimer {
+	texture_preview_canvas* pane;
+public:
+	render_timer(texture_preview_canvas* pane);
+	void Notify();
+	void start();
+};
 
 class texture_preview_canvas : public wxGLCanvas {
 public:
 	texture_preview_canvas(wxFrame* parent, wxGLAttributes& attrs, wxSize& size);
-	void render(wxPaintEvent& event);
 	void on_size_change(wxSizeEvent& event);
+	void on_paint(wxPaintEvent& evt);
+	void render();
 protected:
 	wxDECLARE_EVENT_TABLE();
 private:
@@ -25,7 +40,14 @@ private:
 
 	bool render_available = false;
 
+	std::unique_ptr<render_timer> timer;
+
+	std::shared_ptr<renderable> cube;
+	std::shared_ptr<material> cube_lighting;
+	std::shared_ptr<material> cube_combine;
+
 	void init_opengl();
+	void init_resources();
 };
 
 

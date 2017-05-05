@@ -10,6 +10,11 @@ bool texture_previewer_app::OnInit() {
 	return true;
 }
 
+int texture_previewer_app::OnExit() {
+	main_app_window.release();
+	return 0;
+}
+
 void main(int argc, char** argv) {
 	wxApp* app = new texture_previewer_app();
 	wxApp::SetInstance(app);
