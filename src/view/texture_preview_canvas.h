@@ -6,6 +6,7 @@
 #include "../render/renderable.h"
 #include "../render/material.h"
 #include "../render/data_loading.h"
+#include "../render/framebuffer.h"
 
 #include <wx/wxprec.h>
 
@@ -42,9 +43,12 @@ private:
 
 	std::unique_ptr<render_timer> timer;
 
+	std::unique_ptr<framebuffer> render_framebuffer;
 	std::shared_ptr<renderable> cube;
 	std::shared_ptr<material> cube_lighting;
 	std::shared_ptr<material> cube_combine;
+
+	std::shared_ptr<material> test_mat;
 
 	void init_opengl();
 	void init_resources();

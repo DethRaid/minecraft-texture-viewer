@@ -62,9 +62,10 @@ void texture_preview_canvas::init_opengl() {
 
 	render_available = true;
 	glClearColor(0, 0, 0, 0);
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
-	glClearDepth(1.0);
+	//glEnable(GL_DEPTH_TEST);
+	//glDepthFunc(GL_LESS);
+	//glClearDepth(1.0);
+	glDisable(GL_CULL_FACE);
 
 	LOG(INFO) << "OpenGL functions loaded";
 }
@@ -72,16 +73,25 @@ void texture_preview_canvas::init_opengl() {
 void texture_preview_canvas::init_resources() {
 	cube = std::make_shared<renderable>(load_cube());
 
-	auto test_material = load_material("test");
-	cube->set_material(test_material);
+	test_mat = load_material("test");
+	cube_combine = load_material("cube_combine_pass");
+
+	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
 }
 
 void texture_preview_canvas::render() {
 	SetCurrent(*context);
 
 	wxPaintDC(this);
-	glClear(GL_COLOR_BUFFER_BIT);
 
+	render_framebuffer->bind();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	cube->set_material(test_mat);
+	cube->draw();
+	render_framebuffer->generate_mipmaps();
+
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	cube->set_material(cube_combine);
 	cube->draw();
 
 	glFlush();

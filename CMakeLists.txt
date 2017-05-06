@@ -21,3 +21,4 @@ set(SOURCE_FILES ${VIEW_FILES} ${RENDER_FILES} src/render/glad.c)
 add_executable(TexturePreviewer ${SOURCE_FILES})
 
 target_link_libraries(TexturePreviewer wxbase31ud wxmsw31ud_core wxmsw31ud_gl)
+

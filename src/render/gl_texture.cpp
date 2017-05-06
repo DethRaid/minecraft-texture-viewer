@@ -5,7 +5,7 @@
 #include <stb_image.h>
 
 gl_texture::gl_texture(int binding) {
-	glGenTextures(1, &gl_name);
+	glCreateTextures(GL_TEXTURE_2D, 1, &gl_name);
 	glBindTexture(binding, gl_name);
 }
 
