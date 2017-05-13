@@ -16,7 +16,7 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 		LOG(WARNING) << "Could not create OpenGL context with default attributes, trying again";
 
 		attrs.Reset();
-		attrs.PlatformDefaults().RGBA().DoubleBuffer().Depth(16).EndList();
+		attrs.PlatformDefaults().MinRGBA(8, 8, 8, 8).DoubleBuffer().Depth(24).EndList();
 		accepted = wxGLCanvas::IsDisplaySupported(attrs);
 
 		if(!accepted) {
@@ -30,6 +30,12 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 	size -= wxSize(options_panel_width, 0);
 	gl_canvas = std::make_unique<texture_preview_canvas>(this, attrs, size);
 	hook_up_albedo_controls();
+}
+
+void main_window::on_size_change(wxSizeEvent& event) {
+	auto size = event.GetSize();
+	size -= wxSize(options_panel->GetSize().GetWidth(), 0);
+	gl_canvas->on_size_change(size);
 }
 
 void main_window::hook_up_albedo_controls() {
@@ -47,3 +53,7 @@ void main_window::hook_up_albedo_controls() {
 	albedo_green_slider->Bind(wxEVT_SLIDER, slider_update_function);
 	albedo_blue_slider->Bind(wxEVT_SLIDER, slider_update_function);
 }
+
+wxBEGIN_EVENT_TABLE(main_window, _main_window)
+	EVT_SIZE(main_window::on_size_change)
+wxEND_EVENT_TABLE()

@@ -29,8 +29,9 @@ public:
 class texture_preview_canvas : public wxGLCanvas {
 public:
 	texture_preview_canvas(wxFrame* parent, wxGLAttributes& attrs, wxSize& size);
-	void on_size_change(wxSizeEvent& event);
+	void on_size_change(wxSize& size);
 	void on_paint(wxPaintEvent& evt);
+	void on_idle(wxIdleEvent& evt);
 	void render();
 protected:
 	wxDECLARE_EVENT_TABLE();

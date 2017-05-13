@@ -2,6 +2,25 @@
 
 #include <easylogging++.h>
 
+void check_all_errors() {
+	GLenum err(glGetError());
+
+	while(err != GL_NO_ERROR) {
+		std::string error;
+
+		switch(err) {
+		case GL_INVALID_OPERATION:      error = "INVALID_OPERATION";      break;
+		case GL_INVALID_ENUM:           error = "INVALID_ENUM";           break;
+		case GL_INVALID_VALUE:          error = "INVALID_VALUE";          break;
+		case GL_OUT_OF_MEMORY:          error = "OUT_OF_MEMORY";          break;
+		case GL_INVALID_FRAMEBUFFER_OPERATION:  error = "INVALID_FRAMEBUFFER_OPERATION";  break;
+		}
+
+		LOG(ERROR) << "GL_" << error.c_str();
+		err = glGetError();
+	}
+}
+
 vertex::vertex(glm::vec3 position, glm::vec3 normal, glm::vec3 tangent, glm::vec2 uv) 
 	: position(position), normal(normal), tangent(tangent), uv(uv) {}
 
@@ -10,7 +29,7 @@ void renderable::draw() {
 		mat->bind();
 	}
 	glBindVertexArray(vao);
-	glDrawElements(GL_TRIANGLES, num_indices, GL_INT, 0);
+	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, 0);
 }
 
 void renderable::set_vertex_data(std::vector<vertex> vertices, std::vector<int> indices) {

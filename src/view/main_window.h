@@ -14,16 +14,15 @@
 class main_window : public _main_window {
 public:
     main_window();
+	void on_size_change(wxSizeEvent& event);
+protected:
+	wxDECLARE_EVENT_TABLE();
 private:
 	std::unique_ptr<texture_preview_canvas> gl_canvas;
 
 	std::shared_ptr<gl_texture> albedo;
 
 	void hook_up_albedo_controls();
-	
-	enum {
-		main_window_albedo_slider,
-	};
 };
 
 

@@ -8,6 +8,8 @@ public:
 	framebuffer(int width, int height);
 	framebuffer(framebuffer&& other);
 
+	~framebuffer();
+
 	void bind();
 	void generate_mipmaps();
 private:

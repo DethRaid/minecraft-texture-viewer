@@ -6,7 +6,7 @@
 
 gl_texture::gl_texture(int binding) {
 	glCreateTextures(GL_TEXTURE_2D, 1, &gl_name);
-	glBindTexture(binding, gl_name);
+	glBindTextureUnit(binding, gl_name);
 }
 
 gl_texture::gl_texture(gl_texture&& other) {

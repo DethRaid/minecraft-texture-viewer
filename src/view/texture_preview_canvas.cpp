@@ -13,10 +13,14 @@ void render_timer::start() {
 	wxTimer::Start(16);
 }
 
+void APIENTRY error_callback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* user_param) {
+	LOG(ERROR) << message;
+}
+
 texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& attrs, wxSize& size) 
 	: wxGLCanvas(parent, attrs, wxID_ANY, wxDefaultPosition, size) {
 	wxGLContextAttrs contextAttribs;
-	contextAttribs.PlatformDefaults().CoreProfile().OGLVersion(4, 5).EndList();
+	contextAttribs.PlatformDefaults().CoreProfile().OGLVersion(4, 5).DebugCtx().EndList();
 
 	context = std::make_unique<wxGLContext>(this, nullptr, &contextAttribs);
 
@@ -29,6 +33,7 @@ texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& 
 
 	init_opengl();
 	glViewport(0, 0, window_width, window_height);
+	SwapBuffers();
 
 	init_resources();
 
@@ -36,36 +41,43 @@ texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& 
 	timer->start();
 }
 
-void texture_preview_canvas::on_size_change(wxSizeEvent& event) {
-	event.Skip();
-
+void texture_preview_canvas::on_size_change(wxSize& size) {
 	SetCurrent(*context);
 
-	PostSizeEvent();
-
-	window_height = event.GetSize().y;
-	window_height = event.GetSize().x;
+	window_height = size.y;
+	window_width = size.x;
+	LOG(INFO) << "Changing size to " << window_width << " by " << window_height;
 
 	glViewport(0, 0, window_width, window_height);
+	if(render_framebuffer) {
+		render_framebuffer.reset();
+	}
+	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
 }
 
 void texture_preview_canvas::on_paint(wxPaintEvent& evt) {
-	//wxPaintDC dc(this);
 	render();
+}
+
+void texture_preview_canvas::on_idle(wxIdleEvent& evt) {
+	Refresh();
 }
 
 void texture_preview_canvas::init_opengl() {
 	if(!gladLoadGL()) {
 		LOG(ERROR) << "Could not load OpenGL functions";
+		el::Loggers::flushAll();
+	
 		//throw std::runtime_error("Could not initialize OpenGL");
 	}
 
+	glDebugMessageCallback(error_callback, nullptr);
+
 	render_available = true;
-	glClearColor(0, 0, 0, 0);
-	//glEnable(GL_DEPTH_TEST);
-	//glDepthFunc(GL_LESS);
-	//glClearDepth(1.0);
-	glDisable(GL_CULL_FACE);
+	glClearColor(0, 0, 0, 1);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glClearDepth(1.0);
 
 	LOG(INFO) << "OpenGL functions loaded";
 }
@@ -80,25 +92,29 @@ void texture_preview_canvas::init_resources() {
 }
 
 void texture_preview_canvas::render() {
+	wxPaintDC dc(this);
 	SetCurrent(*context);
 
 	wxPaintDC(this);
 
 	render_framebuffer->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	cube->set_material(test_mat);
 	cube->draw();
+
 	render_framebuffer->generate_mipmaps();
 
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	cube->set_material(cube_combine);
 	cube->draw();
-
+	
 	glFlush();
 	SwapBuffers();
 }
 
 wxBEGIN_EVENT_TABLE(texture_preview_canvas, wxGLCanvas)
-	EVT_SIZE(texture_preview_canvas::on_size_change)
 	EVT_PAINT(texture_preview_canvas::on_paint)
+	EVT_IDLE(texture_preview_canvas::on_idle)
 wxEND_EVENT_TABLE()
