@@ -11,7 +11,7 @@ layout(binding = 16) uniform sampler2D normal_tex;
 layout(location = 0) out vec4 final_color;
 
 void main() {
-	vec3 color_sample = texture(diffuse_color_tex, uv).rgb * vec3(1, 0.5, 0.5);
+	vec3 color_sample = texture(diffuse_color_tex, uv).rgb;
 
 	final_color = vec4(color_sample, 1);
 }

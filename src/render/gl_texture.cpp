@@ -58,17 +58,22 @@ void gl_texture::load_from_file(std::string filename) {
 
 void gl_texture::upload_texture_data() {
 	GLenum format;
+	GLenum internal_format;
 	switch(num_components) {
 	case 1:
+		internal_format = GL_R8;
 		format = GL_RED;
 		break;
 	case 2:
+		internal_format = GL_RG8;
 		format = GL_RG;
 		break;
 	case 3:
+		internal_format = GL_RGB8;
 		format = GL_RGB;
 		break;
 	case 4:
+		internal_format = GL_RGBA8;
 		format = GL_RGBA;
 		break;
 	default:
@@ -76,11 +81,17 @@ void gl_texture::upload_texture_data() {
 			<< " components "
 			<< ", but I need a number in [1,4]";
 	}
+
+	if(!storage_allocated) {
+		glTextureStorage2D(gl_name, 1, internal_format, width, height);
+		storage_allocated = true;
+	}
 	
 	GLint previous_texture;
 	glGetIntegerv(GL_TEXTURE_BINDING_2D, &previous_texture);
 	glBindTexture(GL_TEXTURE_2D, gl_name);
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_FLOAT, data);
+	glTextureSubImage2D(gl_name, 0, 0, 0, width, height, format, GL_UNSIGNED_BYTE, data);
+	LOG(TRACE) << "Texture data updated";
 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

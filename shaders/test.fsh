@@ -10,7 +10,7 @@ layout(location = 1) out vec3 diffuse_out;
 layout(location = 3) out vec3 normal_out;
 
 void main() {
-    color_out = vec3(1, 1, 1);	// texture(albedo_tex, uv).rgb;
+    color_out = texture(albedo_tex, uv).rgb;
 	diffuse_out = vec3(max(0, dot(vec3(1, 1, 1), normal)));
 	normal_out = normal * 0.5 + 0.5;
 }

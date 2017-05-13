@@ -34,6 +34,7 @@ private:
 	int num_components;
 
 	GLuint gl_name;
+	bool storage_allocated = false;
 
 	void upload_texture_data();
 };

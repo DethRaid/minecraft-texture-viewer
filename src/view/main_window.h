@@ -23,6 +23,9 @@ private:
 	std::shared_ptr<gl_texture> albedo;
 
 	void hook_up_albedo_controls();
+	void set_albedo_inputs(int red, int green, int blue);
+
+	void set_input_value(wxTextCtrl* input, int value);
 };
 
 
