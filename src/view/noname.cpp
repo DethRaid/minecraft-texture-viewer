@@ -59,7 +59,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	albedo_red_slider = new wxSlider( albedo_panel, albedo_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer2->Add( albedo_red_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	albedo_red_input = new wxTextCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	albedo_red_input = new wxTextCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer2->Add( albedo_red_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	red_label1 = new wxStaticText( albedo_panel, wxID_ANY, wxT("red"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -69,7 +69,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	albedo_green_slider = new wxSlider( albedo_panel, albedo_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer2->Add( albedo_green_slider, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	albedo_green_input = new wxTextCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	albedo_green_input = new wxTextCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer2->Add( albedo_green_input, wxGBPosition( 1, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	green_label = new wxStaticText( albedo_panel, wxID_ANY, wxT("green"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -79,7 +79,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	albedo_blue_slider = new wxSlider( albedo_panel, albedo_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer2->Add( albedo_blue_slider, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	albedo_blue_input = new wxTextCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	albedo_blue_input = new wxTextCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer2->Add( albedo_blue_input, wxGBPosition( 2, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	blue_label = new wxStaticText( albedo_panel, wxID_ANY, wxT("blue"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -92,7 +92,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline21 = new wxStaticLine( albedo_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer3->Add( m_staticline21, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	albedo_file_picker = new wxFilePickerCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	albedo_file_picker = new wxFilePickerCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	gbSizer3->Add( albedo_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
@@ -156,7 +156,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	specular_red_slider = new wxSlider( specular_color_panel, specular_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer21->Add( specular_red_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	specular_red_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	specular_red_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer21->Add( specular_red_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	red_label11 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("red"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -166,7 +166,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	specular_green_slider = new wxSlider( specular_color_panel, specular_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer21->Add( specular_green_slider, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	specular_green_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	specular_green_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer21->Add( specular_green_input, wxGBPosition( 1, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	green_label1 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("green"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -176,7 +176,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	specular_blue_slider = new wxSlider( specular_color_panel, specular_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer21->Add( specular_blue_slider, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	specular_blue_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	specular_blue_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer21->Add( specular_blue_input, wxGBPosition( 2, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	blue_label1 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("blue"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -189,8 +189,8 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline211 = new wxStaticLine( specular_color_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer32->Add( m_staticline211, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	specular_color_file_picker = new wxFilePickerCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	gbSizer32->Add( specular_color_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
+	specular_file_picker = new wxFilePickerCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer32->Add( specular_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	specular_color_panel->SetSizer( gbSizer32 );
@@ -201,20 +201,20 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline33111 = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
 	gbSizer1->Add( m_staticline33111, wxGBPosition( 6, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	roughness_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	smoothness_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer33;
 	gbSizer33 = new wxGridBagSizer( 0, 0 );
 	gbSizer33->SetFlexibleDirection( wxVERTICAL );
 	gbSizer33->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	roughness_texture_name_labell = new wxStaticText( roughness_panel, wxID_ANY, wxT("Smoothness"), wxDefaultPosition, wxDefaultSize, 0 );
+	roughness_texture_name_labell = new wxStaticText( smoothness_panel, wxID_ANY, wxT("Smoothness"), wxDefaultPosition, wxDefaultSize, 0 );
 	roughness_texture_name_labell->Wrap( -1 );
 	gbSizer33->Add( roughness_texture_name_labell, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
-	roughness_color_preview = new wxStaticBitmap( roughness_panel, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, 0 );
+	roughness_color_preview = new wxStaticBitmap( smoothness_panel, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, 0 );
 	gbSizer33->Add( roughness_color_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
-	m_staticline113 = new wxStaticLine( roughness_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
+	m_staticline113 = new wxStaticLine( smoothness_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
 	gbSizer33->Add( m_staticline113, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	wxGridBagSizer* gbSizer22;
@@ -222,30 +222,30 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer22->SetFlexibleDirection( wxBOTH );
 	gbSizer22->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	rougness_slider = new wxSlider( roughness_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
-	gbSizer22->Add( rougness_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	smoothness_slider = new wxSlider( smoothness_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	gbSizer22->Add( smoothness_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	roughness_input = new wxTextCtrl( roughness_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
-	gbSizer22->Add( roughness_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	smoothness_input = new wxTextCtrl( smoothness_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
+	gbSizer22->Add( smoothness_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	red_label12 = new wxStaticText( roughness_panel, wxID_ANY, wxT("smoothness"), wxDefaultPosition, wxSize( -1,20 ), 0 );
+	red_label12 = new wxStaticText( smoothness_panel, wxID_ANY, wxT("smoothness"), wxDefaultPosition, wxSize( -1,20 ), 0 );
 	red_label12->Wrap( -1 );
 	gbSizer22->Add( red_label12, wxGBPosition( 0, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	
 	gbSizer33->Add( gbSizer22, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
 	
-	m_staticline212 = new wxStaticLine( roughness_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	m_staticline212 = new wxStaticLine( smoothness_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer33->Add( m_staticline212, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	smoothness_file_picker = new wxFilePickerCtrl( roughness_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	smoothness_file_picker = new wxFilePickerCtrl( smoothness_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	gbSizer33->Add( smoothness_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
-	roughness_panel->SetSizer( gbSizer33 );
-	roughness_panel->Layout();
-	gbSizer33->Fit( roughness_panel );
-	gbSizer1->Add( roughness_panel, wxGBPosition( 7, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	smoothness_panel->SetSizer( gbSizer33 );
+	smoothness_panel->Layout();
+	gbSizer33->Fit( smoothness_panel );
+	gbSizer1->Add( smoothness_panel, wxGBPosition( 7, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	ao_ = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
 	gbSizer1->Add( ao_, wxGBPosition( 8, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
@@ -274,7 +274,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	emission_slider = new wxSlider( emission_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer24->Add( emission_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	emission_input = new wxTextCtrl( emission_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	emission_input = new wxTextCtrl( emission_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer24->Add( emission_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	red_label13 = new wxStaticText( emission_panel, wxID_ANY, wxT("emission"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -323,7 +323,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	height_slider = new wxSlider( height_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer25->Add( height_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	height_input = new wxTextCtrl( height_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	height_input = new wxTextCtrl( height_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer25->Add( height_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	red_label14 = new wxStaticText( height_panel, wxID_ANY, wxT("height"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -372,7 +372,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	porosity_slider = new wxSlider( porosity_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer26->Add( porosity_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	porosity_input = new wxTextCtrl( porosity_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	porosity_input = new wxTextCtrl( porosity_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer26->Add( porosity_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	red_label15 = new wxStaticText( porosity_panel, wxID_ANY, wxT("porosity"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -421,7 +421,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	translucence_slider = new wxSlider( translucense_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer28->Add( translucence_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	translucence_red_input = new wxTextCtrl( translucense_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	translucence_red_input = new wxTextCtrl( translucense_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer28->Add( translucence_red_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	red_label17 = new wxStaticText( translucense_panel, wxID_ANY, wxT("translucense"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -470,7 +470,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	ao_slider = new wxSlider( ao_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer27->Add( ao_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	ao_input = new wxTextCtrl( ao_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), 0 );
+	ao_input = new wxTextCtrl( ao_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
 	gbSizer27->Add( ao_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	red_label16 = new wxStaticText( ao_panel, wxID_ANY, wxT("AO"), wxDefaultPosition, wxSize( -1,20 ), 0 );

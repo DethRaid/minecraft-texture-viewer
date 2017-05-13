@@ -85,14 +85,14 @@ class _main_window : public wxFrame
 		wxTextCtrl* specular_blue_input;
 		wxStaticText* blue_label1;
 		wxStaticLine* m_staticline211;
-		wxFilePickerCtrl* specular_color_file_picker;
+		wxFilePickerCtrl* specular_file_picker;
 		wxStaticLine* m_staticline33111;
-		wxPanel* roughness_panel;
+		wxPanel* smoothness_panel;
 		wxStaticText* roughness_texture_name_labell;
 		wxStaticBitmap* roughness_color_preview;
 		wxStaticLine* m_staticline113;
-		wxSlider* rougness_slider;
-		wxTextCtrl* roughness_input;
+		wxSlider* smoothness_slider;
+		wxTextCtrl* smoothness_input;
 		wxStaticText* red_label12;
 		wxStaticLine* m_staticline212;
 		wxFilePickerCtrl* smoothness_file_picker;

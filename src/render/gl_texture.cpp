@@ -4,9 +4,35 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
-gl_texture::gl_texture(int binding) {
-	glCreateTextures(GL_TEXTURE_2D, 1, &gl_name);
-	glBindTextureUnit(binding, gl_name);
+gl_texture::gl_texture(int binding, int red, int green, int blue) {
+	create(binding);
+
+	data = new unsigned char[3];
+	data[0] = red;
+	data[1] = green;
+	data[2] = blue;
+
+	width = 1;
+	height = 1;
+	num_components = 3;
+	upload_texture_data();
+}
+
+gl_texture::gl_texture(int binding, int grayscale) {
+	create(binding);
+
+	data = new unsigned char[1];
+	data[0] = grayscale;
+	width = 1;
+	height = 1;
+	upload_texture_data();
+}
+
+gl_texture::gl_texture(int binding, std::string& filename) {
+	create(binding);
+
+	data = stbi_load(filename.c_str(), &width, &height, &num_components, 0);
+	upload_texture_data();
 }
 
 gl_texture::gl_texture(gl_texture&& other) {
@@ -27,33 +53,13 @@ gl_texture::~gl_texture() {
 	}
 }
 
+void gl_texture::create(int binding) {
+	glCreateTextures(GL_TEXTURE_2D, 1, &gl_name);
+	glBindTextureUnit(binding, gl_name);
+}
+
 GLuint gl_texture::get_gl_name() {
 	return gl_name;
-}
-
-void gl_texture::set_color(int red, int green, int blue) {
-	data = new unsigned char[3];
-	data[0] = red;
-	data[1] = green;
-	data[2] = blue;
-
-	width = 1;
-	height = 1;
-	num_components = 3;
-	upload_texture_data();
-}
-
-void gl_texture::set_color(int grayscale) {
-	data = new unsigned char[1];
-	data[0] = grayscale;
-	width = 1;
-	height = 1;
-	upload_texture_data();
-}
-
-void gl_texture::load_from_file(std::string filename) {
-	data = stbi_load(filename.c_str(), &width, &height, &num_components, 0);
-	upload_texture_data();
 }
 
 void gl_texture::upload_texture_data() {

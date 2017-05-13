@@ -1008,7 +1008,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -1299,7 +1299,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -1590,7 +1590,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -1865,7 +1865,7 @@
                                                             <property name="validator_type">wxDefaultValidator</property>
                                                             <property name="validator_variable"></property>
                                                             <property name="value"></property>
-                                                            <property name="wildcard">*.png,*.jpg,*.jpeg,*.tiff</property>
+                                                            <property name="wildcard">Image files|*.png;*.jpg;*.jpeg;*.tiff</property>
                                                             <property name="window_extra_style"></property>
                                                             <property name="window_name"></property>
                                                             <property name="window_style"></property>
@@ -2514,7 +2514,7 @@
                                             <property name="flag">wxALL</property>
                                             <property name="row">5</property>
                                             <property name="rowspan">1</property>
-                                            <object class="wxPanel" expanded="0">
+                                            <object class="wxPanel" expanded="1">
                                                 <property name="BottomDockable">1</property>
                                                 <property name="LeftDockable">1</property>
                                                 <property name="RightDockable">1</property>
@@ -2588,7 +2588,7 @@
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
                                                 <event name="OnUpdateUI"></event>
-                                                <object class="wxGridBagSizer" expanded="0">
+                                                <object class="wxGridBagSizer" expanded="1">
                                                     <property name="empty_cell_size"></property>
                                                     <property name="flexible_direction">wxVERTICAL</property>
                                                     <property name="growablecols"></property>
@@ -2853,14 +2853,14 @@
                                                             <event name="OnUpdateUI"></event>
                                                         </object>
                                                     </object>
-                                                    <object class="gbsizeritem" expanded="0">
+                                                    <object class="gbsizeritem" expanded="1">
                                                         <property name="border">5</property>
                                                         <property name="colspan">1</property>
                                                         <property name="column">0</property>
                                                         <property name="flag">wxEXPAND</property>
                                                         <property name="row">3</property>
                                                         <property name="rowspan">1</property>
-                                                        <object class="wxGridBagSizer" expanded="0">
+                                                        <object class="wxGridBagSizer" expanded="1">
                                                             <property name="empty_cell_size"></property>
                                                             <property name="flexible_direction">wxBOTH</property>
                                                             <property name="growablecols"></property>
@@ -3035,7 +3035,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -3326,7 +3326,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -3617,7 +3617,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -3873,7 +3873,7 @@
                                                             <property name="minimize_button">0</property>
                                                             <property name="minimum_size"></property>
                                                             <property name="moveable">1</property>
-                                                            <property name="name">specular_color_file_picker</property>
+                                                            <property name="name">specular_file_picker</property>
                                                             <property name="pane_border">1</property>
                                                             <property name="pane_position"></property>
                                                             <property name="pane_size"></property>
@@ -4016,7 +4016,7 @@
                                             <property name="flag">wxALL</property>
                                             <property name="row">7</property>
                                             <property name="rowspan">1</property>
-                                            <object class="wxPanel" expanded="0">
+                                            <object class="wxPanel" expanded="1">
                                                 <property name="BottomDockable">1</property>
                                                 <property name="LeftDockable">1</property>
                                                 <property name="RightDockable">1</property>
@@ -4051,7 +4051,7 @@
                                                 <property name="minimize_button">0</property>
                                                 <property name="minimum_size"></property>
                                                 <property name="moveable">1</property>
-                                                <property name="name">roughness_panel</property>
+                                                <property name="name">smoothness_panel</property>
                                                 <property name="pane_border">1</property>
                                                 <property name="pane_position"></property>
                                                 <property name="pane_size"></property>
@@ -4090,7 +4090,7 @@
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
                                                 <event name="OnUpdateUI"></event>
-                                                <object class="wxGridBagSizer" expanded="0">
+                                                <object class="wxGridBagSizer" expanded="1">
                                                     <property name="empty_cell_size"></property>
                                                     <property name="flexible_direction">wxVERTICAL</property>
                                                     <property name="growablecols"></property>
@@ -4355,14 +4355,14 @@
                                                             <event name="OnUpdateUI"></event>
                                                         </object>
                                                     </object>
-                                                    <object class="gbsizeritem" expanded="0">
+                                                    <object class="gbsizeritem" expanded="1">
                                                         <property name="border">5</property>
                                                         <property name="colspan">1</property>
                                                         <property name="column">0</property>
                                                         <property name="flag">wxEXPAND</property>
                                                         <property name="row">3</property>
                                                         <property name="rowspan">1</property>
-                                                        <object class="wxGridBagSizer" expanded="0">
+                                                        <object class="wxGridBagSizer" expanded="1">
                                                             <property name="empty_cell_size"></property>
                                                             <property name="flexible_direction">wxBOTH</property>
                                                             <property name="growablecols"></property>
@@ -4417,7 +4417,7 @@
                                                                     <property name="minimize_button">0</property>
                                                                     <property name="minimum_size"></property>
                                                                     <property name="moveable">1</property>
-                                                                    <property name="name">rougness_slider</property>
+                                                                    <property name="name">smoothness_slider</property>
                                                                     <property name="pane_border">1</property>
                                                                     <property name="pane_position"></property>
                                                                     <property name="pane_size"></property>
@@ -4527,7 +4527,7 @@
                                                                     <property name="minimize_button">0</property>
                                                                     <property name="minimum_size"></property>
                                                                     <property name="moveable">1</property>
-                                                                    <property name="name">roughness_input</property>
+                                                                    <property name="name">smoothness_input</property>
                                                                     <property name="pane_border">1</property>
                                                                     <property name="pane_position"></property>
                                                                     <property name="pane_size"></property>
@@ -4537,7 +4537,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -4936,7 +4936,7 @@
                                             <property name="flag">wxALL</property>
                                             <property name="row">9</property>
                                             <property name="rowspan">1</property>
-                                            <object class="wxPanel" expanded="0">
+                                            <object class="wxPanel" expanded="1">
                                                 <property name="BottomDockable">1</property>
                                                 <property name="LeftDockable">1</property>
                                                 <property name="RightDockable">1</property>
@@ -5010,7 +5010,7 @@
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
                                                 <event name="OnUpdateUI"></event>
-                                                <object class="wxGridBagSizer" expanded="0">
+                                                <object class="wxGridBagSizer" expanded="1">
                                                     <property name="empty_cell_size"></property>
                                                     <property name="flexible_direction">wxVERTICAL</property>
                                                     <property name="growablecols"></property>
@@ -5275,14 +5275,14 @@
                                                             <event name="OnUpdateUI"></event>
                                                         </object>
                                                     </object>
-                                                    <object class="gbsizeritem" expanded="0">
+                                                    <object class="gbsizeritem" expanded="1">
                                                         <property name="border">5</property>
                                                         <property name="colspan">1</property>
                                                         <property name="column">0</property>
                                                         <property name="flag">wxEXPAND</property>
                                                         <property name="row">3</property>
                                                         <property name="rowspan">1</property>
-                                                        <object class="wxGridBagSizer" expanded="0">
+                                                        <object class="wxGridBagSizer" expanded="1">
                                                             <property name="empty_cell_size"></property>
                                                             <property name="flexible_direction">wxBOTH</property>
                                                             <property name="growablecols"></property>
@@ -5457,7 +5457,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -5856,7 +5856,7 @@
                                             <property name="flag">wxALL</property>
                                             <property name="row">11</property>
                                             <property name="rowspan">1</property>
-                                            <object class="wxPanel" expanded="0">
+                                            <object class="wxPanel" expanded="1">
                                                 <property name="BottomDockable">1</property>
                                                 <property name="LeftDockable">1</property>
                                                 <property name="RightDockable">1</property>
@@ -5930,7 +5930,7 @@
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
                                                 <event name="OnUpdateUI"></event>
-                                                <object class="wxGridBagSizer" expanded="0">
+                                                <object class="wxGridBagSizer" expanded="1">
                                                     <property name="empty_cell_size"></property>
                                                     <property name="flexible_direction">wxVERTICAL</property>
                                                     <property name="growablecols"></property>
@@ -6195,14 +6195,14 @@
                                                             <event name="OnUpdateUI"></event>
                                                         </object>
                                                     </object>
-                                                    <object class="gbsizeritem" expanded="0">
+                                                    <object class="gbsizeritem" expanded="1">
                                                         <property name="border">5</property>
                                                         <property name="colspan">1</property>
                                                         <property name="column">0</property>
                                                         <property name="flag">wxEXPAND</property>
                                                         <property name="row">3</property>
                                                         <property name="rowspan">1</property>
-                                                        <object class="wxGridBagSizer" expanded="0">
+                                                        <object class="wxGridBagSizer" expanded="1">
                                                             <property name="empty_cell_size"></property>
                                                             <property name="flexible_direction">wxBOTH</property>
                                                             <property name="growablecols"></property>
@@ -6377,7 +6377,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -6776,7 +6776,7 @@
                                             <property name="flag">wxALL</property>
                                             <property name="row">13</property>
                                             <property name="rowspan">1</property>
-                                            <object class="wxPanel" expanded="0">
+                                            <object class="wxPanel" expanded="1">
                                                 <property name="BottomDockable">1</property>
                                                 <property name="LeftDockable">1</property>
                                                 <property name="RightDockable">1</property>
@@ -6850,7 +6850,7 @@
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
                                                 <event name="OnUpdateUI"></event>
-                                                <object class="wxGridBagSizer" expanded="0">
+                                                <object class="wxGridBagSizer" expanded="1">
                                                     <property name="empty_cell_size"></property>
                                                     <property name="flexible_direction">wxVERTICAL</property>
                                                     <property name="growablecols"></property>
@@ -7115,14 +7115,14 @@
                                                             <event name="OnUpdateUI"></event>
                                                         </object>
                                                     </object>
-                                                    <object class="gbsizeritem" expanded="0">
+                                                    <object class="gbsizeritem" expanded="1">
                                                         <property name="border">5</property>
                                                         <property name="colspan">1</property>
                                                         <property name="column">0</property>
                                                         <property name="flag">wxEXPAND</property>
                                                         <property name="row">3</property>
                                                         <property name="rowspan">1</property>
-                                                        <object class="wxGridBagSizer" expanded="0">
+                                                        <object class="wxGridBagSizer" expanded="1">
                                                             <property name="empty_cell_size"></property>
                                                             <property name="flexible_direction">wxBOTH</property>
                                                             <property name="growablecols"></property>
@@ -7297,7 +7297,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -7696,7 +7696,7 @@
                                             <property name="flag">wxALL</property>
                                             <property name="row">15</property>
                                             <property name="rowspan">1</property>
-                                            <object class="wxPanel" expanded="0">
+                                            <object class="wxPanel" expanded="1">
                                                 <property name="BottomDockable">1</property>
                                                 <property name="LeftDockable">1</property>
                                                 <property name="RightDockable">1</property>
@@ -7770,7 +7770,7 @@
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
                                                 <event name="OnUpdateUI"></event>
-                                                <object class="wxGridBagSizer" expanded="0">
+                                                <object class="wxGridBagSizer" expanded="1">
                                                     <property name="empty_cell_size"></property>
                                                     <property name="flexible_direction">wxVERTICAL</property>
                                                     <property name="growablecols"></property>
@@ -8035,14 +8035,14 @@
                                                             <event name="OnUpdateUI"></event>
                                                         </object>
                                                     </object>
-                                                    <object class="gbsizeritem" expanded="0">
+                                                    <object class="gbsizeritem" expanded="1">
                                                         <property name="border">5</property>
                                                         <property name="colspan">1</property>
                                                         <property name="column">0</property>
                                                         <property name="flag">wxEXPAND</property>
                                                         <property name="row">3</property>
                                                         <property name="rowspan">1</property>
-                                                        <object class="wxGridBagSizer" expanded="0">
+                                                        <object class="wxGridBagSizer" expanded="1">
                                                             <property name="empty_cell_size"></property>
                                                             <property name="flexible_direction">wxBOTH</property>
                                                             <property name="growablecols"></property>
@@ -8217,7 +8217,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
@@ -8616,7 +8616,7 @@
                                             <property name="flag">wxALL</property>
                                             <property name="row">17</property>
                                             <property name="rowspan">1</property>
-                                            <object class="wxPanel" expanded="0">
+                                            <object class="wxPanel" expanded="1">
                                                 <property name="BottomDockable">1</property>
                                                 <property name="LeftDockable">1</property>
                                                 <property name="RightDockable">1</property>
@@ -8690,7 +8690,7 @@
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
                                                 <event name="OnUpdateUI"></event>
-                                                <object class="wxGridBagSizer" expanded="0">
+                                                <object class="wxGridBagSizer" expanded="1">
                                                     <property name="empty_cell_size"></property>
                                                     <property name="flexible_direction">wxVERTICAL</property>
                                                     <property name="growablecols"></property>
@@ -8955,14 +8955,14 @@
                                                             <event name="OnUpdateUI"></event>
                                                         </object>
                                                     </object>
-                                                    <object class="gbsizeritem" expanded="0">
+                                                    <object class="gbsizeritem" expanded="1">
                                                         <property name="border">5</property>
                                                         <property name="colspan">1</property>
                                                         <property name="column">0</property>
                                                         <property name="flag">wxEXPAND</property>
                                                         <property name="row">3</property>
                                                         <property name="rowspan">1</property>
-                                                        <object class="wxGridBagSizer" expanded="0">
+                                                        <object class="wxGridBagSizer" expanded="1">
                                                             <property name="empty_cell_size"></property>
                                                             <property name="flexible_direction">wxBOTH</property>
                                                             <property name="growablecols"></property>
@@ -9137,7 +9137,7 @@
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
                                                                     <property name="size">40,-1</property>
-                                                                    <property name="style"></property>
+                                                                    <property name="style">wxTE_PROCESS_ENTER</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
