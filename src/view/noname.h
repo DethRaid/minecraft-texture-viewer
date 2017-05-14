@@ -31,6 +31,7 @@
 #include <wx/sizer.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
+#include <wx/combobox.h>
 #include <wx/button.h>
 #include <wx/dialog.h>
 
@@ -184,7 +185,7 @@ class _export_options_dialogue : public wxDialog
 		wxStaticText* m_staticText29;
 		wxStaticText* data_tex_name_output;
 		wxStaticText* m_staticText34;
-		wxTextCtrl* export_resolution_input;
+		wxComboBox* export_resolution_combobox;
 		wxButton* export_button;
 	
 	public:

@@ -604,8 +604,17 @@ _export_options_dialogue::_export_options_dialogue( wxWindow* parent, wxWindowID
 	m_staticText34->Wrap( -1 );
 	fgSizer2->Add( m_staticText34, 0, wxALL, 5 );
 	
-	export_resolution_input = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer2->Add( export_resolution_input, 0, wxALL, 5 );
+	export_resolution_combobox = new wxComboBox( this, wxID_ANY, wxT("128"), wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
+	export_resolution_combobox->Append( wxT("16") );
+	export_resolution_combobox->Append( wxT("32") );
+	export_resolution_combobox->Append( wxT("64") );
+	export_resolution_combobox->Append( wxT("128") );
+	export_resolution_combobox->Append( wxT("256") );
+	export_resolution_combobox->Append( wxT("512") );
+	export_resolution_combobox->Append( wxT("1024") );
+	export_resolution_combobox->Append( wxT("2048") );
+	export_resolution_combobox->Append( wxT("4096") );
+	fgSizer2->Add( export_resolution_combobox, 0, wxALL, 5 );
 	
 	
 	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );

@@ -12,6 +12,7 @@ public:
 
 private:
 	textures_struct textures;
+	int texture_size;
 
 	std::string export_folder;
 	std::string export_filename;

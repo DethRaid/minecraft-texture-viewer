@@ -14,6 +14,12 @@ export_options_dialogue::export_options_dialogue(wxWindow* parent, textures_stru
 		export_filename = export_filename_input->GetValue().ToStdString();
 	});
 
+	export_resolution_combobox->Bind(wxEVT_COMBOBOX, [&](wxCommandEvent& event) {
+		auto resolution = std::atoi(export_resolution_combobox->GetValue().ToStdString().c_str());
+		LOG(DEBUG) << "Set output resolution to " << resolution;
+		texture_size = resolution;
+	});
+
 	export_button->Bind(wxEVT_BUTTON, [&](wxCommandEvent& event) {
 		LOG(INFO) << "Building textures";
 	});

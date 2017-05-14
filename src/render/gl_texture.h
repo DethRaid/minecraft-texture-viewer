@@ -6,6 +6,8 @@
 #include <string>
 #include <memory>
 
+#include <glm/glm.hpp>
+
 #define ALBEDO_BINDING			3
 #define OPACITY_BINDING			4
 #define NORMAL_BINDING			5
@@ -17,7 +19,7 @@
 #define F0_BINDING				11
 #define AO_BINDING				12
 
-class gl_texture {
+class texture {
 public:
 	/*!
 	* \brief Initializes a new gl_texture and sets its binding to the given binding location, initializing it to the 
@@ -28,7 +30,7 @@ public:
 	* \param green The amount of green to be in the texture
 	* \param blue The amount of blue to be in the texture
 	*/
-	gl_texture(int binding, int red, int green, int blue);
+	texture(int binding, int red, int green, int blue);
 
 	/*!
 	 * \brief Initializes a new gl_texture and sets its binding to the given binding location, initializing it to 
@@ -37,7 +39,7 @@ public:
 	 * \param binding The location to bind this texture to
 	 * \param grayscale The gray value of the texture
 	 */
-	gl_texture(int binding, int grayscale);
+	texture(int binding, int grayscale);
 
 	/*!
 	 * \brief Initializes a new gl_texture and sets its binding to the given binding location, initializing it from the 
@@ -46,16 +48,27 @@ public:
 	 * \param binding The location to bind this texture to
 	 * \param filename The full filename of the file to load the file from. Should be a PNG, JPEG, or TIFF file
 	 */
-	gl_texture(int binding, std::string& filename);
+	texture(int binding, std::string& filename);
 
-	gl_texture(gl_texture&& other);
+	texture(texture&& other);
 
 	/*!
 	* \brief Destructor. Deletes the texture data and deletes the GPU texture object
 	*/
-	~gl_texture();
+	~texture();
 
 	GLuint get_gl_name();
+
+	/*!
+	 * \brief Gets the value of the texture at the specified UV coordinates
+	 *
+	 * If the texture has fewer than four channels, the missing components wil be set to 0
+	 *
+	 * \param uv The UV coordinate to get the value of
+	 * \prarm bilinear If true, use bilinear filtering. If false, use point filtering
+	 * \return The texel at the given UV coordinate
+	 */
+	glm::vec4 at(glm::vec2 uv, bool bilinear = false);
 
 private:
 	unsigned char* data = nullptr;
@@ -68,19 +81,25 @@ private:
 
 	void create(int binding);
 	void upload_texture_data();
+
+	glm::vec4 at_point(glm::vec2 uv);
+	glm::vec4 at_bilinear(glm::vec2 uv);
+	glm::vec4 texel_fetch(int x, int y);
 };
 
 struct textures_struct {
-	std::shared_ptr<gl_texture> albedo_tex;
-	std::shared_ptr<gl_texture> opacity_tex;
-	std::shared_ptr<gl_texture> normal_tex;
-	std::shared_ptr<gl_texture> f0_tex;
-	std::shared_ptr<gl_texture> smoothness_tex;
-	std::shared_ptr<gl_texture> emission_tex;
-	std::shared_ptr<gl_texture> height_tex;
-	std::shared_ptr<gl_texture> porosity_tex;
-	std::shared_ptr<gl_texture> translucence_tex;
-	std::shared_ptr<gl_texture> ao_tex;
+	std::shared_ptr<texture> albedo_tex;
+	std::shared_ptr<texture> opacity_tex;
+	std::shared_ptr<texture> normal_tex;
+	std::shared_ptr<texture> f0_tex;
+	std::shared_ptr<texture> smoothness_tex;
+	std::shared_ptr<texture> emission_tex;
+	std::shared_ptr<texture> height_tex;
+	std::shared_ptr<texture> porosity_tex;
+	std::shared_ptr<texture> translucence_tex;
+	std::shared_ptr<texture> ao_tex;
 };
+
+glm::vec4 operator*(glm::vec4 vec, float f);
 
 #endif

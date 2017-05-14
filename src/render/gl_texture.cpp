@@ -4,7 +4,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
-gl_texture::gl_texture(int binding, int red, int green, int blue) {
+texture::texture(int binding, int red, int green, int blue) {
 	create(binding);
 
 	data = new unsigned char[3];
@@ -18,7 +18,7 @@ gl_texture::gl_texture(int binding, int red, int green, int blue) {
 	upload_texture_data();
 }
 
-gl_texture::gl_texture(int binding, int grayscale) {
+texture::texture(int binding, int grayscale) {
 	create(binding);
 
 	data = new unsigned char[1];
@@ -29,14 +29,14 @@ gl_texture::gl_texture(int binding, int grayscale) {
 	upload_texture_data();
 }
 
-gl_texture::gl_texture(int binding, std::string& filename) {
+texture::texture(int binding, std::string& filename) {
 	create(binding);
 
 	data = stbi_load(filename.c_str(), &width, &height, &num_components, 0);
 	upload_texture_data();
 }
 
-gl_texture::gl_texture(gl_texture&& other) {
+texture::texture(texture&& other) {
 	this->data = other.data;
 	this->width = other.width;
 	this->height = other.height;
@@ -47,23 +47,23 @@ gl_texture::gl_texture(gl_texture&& other) {
 	other.gl_name = 0;
 }
 
-gl_texture::~gl_texture() {
+texture::~texture() {
 	glDeleteTextures(1, &gl_name);
 	if(data != nullptr) {
 		delete[] data;
 	}
 }
 
-void gl_texture::create(int binding) {
+void texture::create(int binding) {
 	glCreateTextures(GL_TEXTURE_2D, 1, &gl_name);
 	glBindTextureUnit(binding, gl_name);
 }
 
-GLuint gl_texture::get_gl_name() {
+GLuint texture::get_gl_name() {
 	return gl_name;
 }
 
-void gl_texture::upload_texture_data() {
+void texture::upload_texture_data() {
 	GLenum format;
 	GLenum internal_format;
 	switch(num_components) {
@@ -104,4 +104,56 @@ void gl_texture::upload_texture_data() {
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glBindTexture(GL_TEXTURE_2D, (GLuint)previous_texture);
+}
+
+glm::vec4 texture::at(glm::vec2 uv, bool bilinear) {
+	if(bilinear) {
+		return at_bilinear(uv);
+	} else {
+		return at_point(uv);
+	}
+}
+
+glm::vec4 texture::at_point(glm::vec2 uv) {
+	int x_coord = uv.x * width;
+	int y_coord = uv.y * height;
+
+	return texel_fetch(x_coord, y_coord);
+}
+
+glm::vec4 texture::at_bilinear(glm::vec2 uv) {
+	float u = uv.s * width - 0.5;
+	float v = uv.t * height - 0.5;
+	int x = floor(u);
+	int y = floor(v);
+	double u_ratio = u - x;
+	double v_ratio = v - y;
+	double u_opposite = 1 - u_ratio;
+	double v_opposite = 1 - v_ratio;
+
+	glm::vec4 result = (texel_fetch(x,     y)		* u_opposite 
+					  + texel_fetch(x + 1, y)		* u_ratio)		* v_opposite 
+					 + (texel_fetch(x,     y + 1)	* u_opposite
+					  + texel_fetch(x + 1, y + 1)	* u_ratio)		* v_ratio;
+	return result;
+}
+
+glm::vec4 texture::texel_fetch(int x, int y) {
+	int index = x + y * width;
+	index *= num_components;
+
+	glm::vec4 ret_val;
+
+	switch(num_components) {
+	case 4: ret_val.w = data[index + 3];
+	case 3: ret_val.z = data[index + 2];
+	case 2: ret_val.y = data[index + 1];
+	case 1: ret_val.x = data[index];
+	}
+
+	return ret_val;
+}
+
+glm::vec4 operator*(glm::vec4 vec, float f) {
+	return f * vec;
 }
