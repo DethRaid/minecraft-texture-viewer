@@ -31,7 +31,7 @@ private:
 	void hook_up_normal_controls();
 
 	void hook_up_specular_color_controls();
-	void set_specular_color(int red, int green, int blue);
+	void set_f0(int f0);
 
 	void hook_up_smoothness_controls();
 	void set_smoothness(int smoothness);

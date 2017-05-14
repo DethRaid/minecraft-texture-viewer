@@ -74,7 +74,7 @@ struct textures_struct {
 	std::shared_ptr<gl_texture> albedo_tex;
 	std::shared_ptr<gl_texture> opacity_tex;
 	std::shared_ptr<gl_texture> normal_tex;
-	std::shared_ptr<gl_texture> specular_tex;
+	std::shared_ptr<gl_texture> f0_tex;
 	std::shared_ptr<gl_texture> smoothness_tex;
 	std::shared_ptr<gl_texture> emission_tex;
 	std::shared_ptr<gl_texture> height_tex;

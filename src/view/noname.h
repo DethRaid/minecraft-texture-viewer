@@ -93,12 +93,6 @@ class _main_window : public wxFrame
 		wxSlider* specular_red_slider;
 		wxTextCtrl* specular_red_input;
 		wxStaticText* red_label11;
-		wxSlider* specular_green_slider;
-		wxTextCtrl* specular_green_input;
-		wxStaticText* green_label1;
-		wxSlider* specular_blue_slider;
-		wxTextCtrl* specular_blue_input;
-		wxStaticText* blue_label1;
 		wxStaticLine* m_staticline211;
 		wxFilePickerCtrl* specular_file_picker;
 		wxStaticLine* m_staticline33111;

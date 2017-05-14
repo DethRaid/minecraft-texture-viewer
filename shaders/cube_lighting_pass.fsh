@@ -15,7 +15,7 @@ layout(binding = 11) uniform sampler2D f0;
 layout(binding = 12) uniform sampler2D AO;
 
 in vec2 texcoord;
-in vec3 color;
+in vec3 normal;
 
 layout(location = 0) out vec4 diffuseColor;
 layout(location = 1) out vec4 diffuse;

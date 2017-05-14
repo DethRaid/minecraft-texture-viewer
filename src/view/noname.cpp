@@ -196,7 +196,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer32->SetFlexibleDirection( wxVERTICAL );
 	gbSizer32->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	texture_name_label12 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("Specular"), wxDefaultPosition, wxDefaultSize, 0 );
+	texture_name_label12 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("F0"), wxDefaultPosition, wxDefaultSize, 0 );
 	texture_name_label12->Wrap( -1 );
 	gbSizer32->Add( texture_name_label12, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
@@ -220,26 +220,6 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	red_label11 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("red"), wxDefaultPosition, wxSize( -1,20 ), 0 );
 	red_label11->Wrap( -1 );
 	gbSizer21->Add( red_label11, wxGBPosition( 0, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
-	
-	specular_green_slider = new wxSlider( specular_color_panel, specular_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
-	gbSizer21->Add( specular_green_slider, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
-	
-	specular_green_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
-	gbSizer21->Add( specular_green_input, wxGBPosition( 1, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
-	
-	green_label1 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("green"), wxDefaultPosition, wxSize( -1,20 ), 0 );
-	green_label1->Wrap( -1 );
-	gbSizer21->Add( green_label1, wxGBPosition( 1, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
-	
-	specular_blue_slider = new wxSlider( specular_color_panel, specular_slider, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
-	gbSizer21->Add( specular_blue_slider, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
-	
-	specular_blue_input = new wxTextCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
-	gbSizer21->Add( specular_blue_input, wxGBPosition( 2, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
-	
-	blue_label1 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("blue"), wxDefaultPosition, wxSize( -1,20 ), 0 );
-	blue_label1->Wrap( -1 );
-	gbSizer21->Add( blue_label1, wxGBPosition( 2, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	
 	gbSizer32->Add( gbSizer21, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );

@@ -12,6 +12,10 @@ layout(location = 0) out vec4 final_color;
 
 void main() {
 	vec3 color_sample = texture(diffuse_color_tex, uv).rgb;
+	vec3 diffuse_light = texture(diffuse_light_tex, uv).rgb;
+	vec3 specular_light = texture(specular_light_tex, uv).rgb;
 
-	final_color = vec4(color_sample, 1);
+	vec3 normal_sample = texture(normal_tex, uv).rgb * 2.0 - 1.0;
+
+	final_color = vec4(color_sample * diffuse_light + specular_light, 1);
 }

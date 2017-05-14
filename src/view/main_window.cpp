@@ -147,32 +147,24 @@ void main_window::hook_up_normal_controls() {
 
 void main_window::hook_up_specular_color_controls() {
 	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto red = specular_red_slider->GetValue();
-		auto green = specular_green_slider->GetValue();
-		auto blue = specular_blue_slider->GetValue();
+		auto f0 = specular_red_slider->GetValue();
 
-		set_specular_color(red, green, blue);
+		set_f0(f0);
 	};
 
 	specular_red_slider->Bind(wxEVT_SLIDER, slider_update_function);
-	specular_green_slider->Bind(wxEVT_SLIDER, slider_update_function);
-	specular_blue_slider->Bind(wxEVT_SLIDER, slider_update_function);
 
 	auto input_update = [&](wxCommandEvent& event) {
-		auto red = std::atoi(specular_red_input->GetValue());
-		auto green = std::atoi(specular_green_input->GetValue());
-		auto blue = std::atoi(specular_blue_input->GetValue());
+		auto f0 = std::atoi(specular_red_input->GetValue());
 
-		set_specular_color(red, green, blue);
+		set_f0(f0);
 	};
 
 	specular_red_input->Bind(wxEVT_TEXT_ENTER, input_update);
-	specular_green_input->Bind(wxEVT_TEXT_ENTER, input_update);
-	specular_blue_input->Bind(wxEVT_TEXT_ENTER, input_update);
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.specular_tex = std::make_shared<gl_texture>(F0_BINDING, event.GetPath().ToStdString());
+		textures.f0_tex = std::make_shared<gl_texture>(F0_BINDING, event.GetPath().ToStdString());
 	};
 
 	specular_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -180,19 +172,15 @@ void main_window::hook_up_specular_color_controls() {
 	slider_update_function(wxCommandEvent());
 }
 
-void main_window::set_specular_color(int red, int green, int blue) {
-	set_text_input_value(specular_red_input, red);
-	set_text_input_value(specular_green_input, green);
-	set_text_input_value(specular_blue_input, blue);
+void main_window::set_f0(int f0) {
+	set_text_input_value(specular_red_input, f0);
 
-	specular_red_slider->SetValue(red);
-	specular_green_slider->SetValue(green);
-	specular_blue_slider->SetValue(blue);
+	specular_red_slider->SetValue(f0);
 
 
-	LOG(DEBUG) << "Updating specular color to (" << red << ", " << green << ", " << blue << ")";
+	LOG(DEBUG) << "Updating F0 to " << f0;
 
-	textures.specular_tex = std::make_shared<gl_texture>(F0_BINDING, red, green, blue);
+	textures.f0_tex = std::make_shared<gl_texture>(F0_BINDING, f0);
 }
 
 void main_window::hook_up_smoothness_controls() {

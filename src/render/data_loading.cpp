@@ -6,10 +6,10 @@
 
 #define MATERIAL_DIRECTORY "shaders/"
 
-renderable load_cube() {
+std::shared_ptr<renderable> load_cube() {
 	auto cube = renderable{};
 
-	auto vertices = std::vector<vertex>{
+	static auto vertices = std::vector<vertex>{
 		// Front face
 		{
 			{ -0.5, -0.5, 0.5 },
@@ -167,7 +167,7 @@ renderable load_cube() {
 		},
 	};
 
-	auto indices = std::vector<int>{
+	static auto indices = std::vector<int>{
 		0, 1, 2, 1, 2, 3,
 		4, 5, 6, 5, 6, 7,
 		8, 9, 10, 9, 10, 11,
@@ -178,7 +178,45 @@ renderable load_cube() {
 
 	cube.set_vertex_data(vertices, indices);
 
-	return cube;
+	return std::make_shared<renderable>(cube);
+}
+
+std::shared_ptr<renderable> load_fullscreen_quad() {
+	static auto vertices = std::vector<vertex>{
+		{
+			{-1, -1, 0.5},
+			{0, 0, 1},
+			{1, 0, 0},
+			{0, 0}
+		},
+		{
+			{ -1, 1, 0.5 },
+			{ 0, 0, 1 },
+			{ 1, 0, 0 },
+			{ 0, 1 }
+		},
+		{
+			{ 1, -1, 0.5 },
+			{ 0, 0, 1 },
+			{ 1, 0, 0 },
+			{ 1, 0 }
+		},
+		{
+			{ 1, 1, 0.5 },
+			{ 0, 0, 1 },
+			{ 1, 0, 0 },
+			{ 1, 1 }
+		},
+	};
+
+	static auto indices = std::vector<int>{
+		0, 1, 2, 1, 2, 3
+	};
+
+	renderable fullscreen_quad;
+	fullscreen_quad.set_vertex_data(vertices, indices);
+
+	return std::make_shared<renderable>(fullscreen_quad);
 }
 
 std::shared_ptr<material> load_material(std::string material_name) {

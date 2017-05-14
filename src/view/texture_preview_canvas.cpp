@@ -2,6 +2,7 @@
 
 #include <easylogging++.h>
 #include <stdexcept>
+#include <glm/gtc/matrix_transform.hpp>
 
 render_timer::render_timer(texture_preview_canvas* pane) : wxTimer(), pane(pane) {}
 
@@ -53,6 +54,7 @@ void texture_preview_canvas::on_size_change(wxSize& size) {
 		render_framebuffer.reset();
 	}
 	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
+	main_camera.aspect_ratio = (float)window_width / (float)window_height;
 }
 
 void texture_preview_canvas::on_paint(wxPaintEvent& evt) {
@@ -83,25 +85,42 @@ void texture_preview_canvas::init_opengl() {
 }
 
 void texture_preview_canvas::init_resources() {
-	cube = std::make_shared<renderable>(load_cube());
+	cube = load_cube();
 
 	test_mat = load_material("test");
-	cube_lighting = load_material("cube_lighting_pass");
+	//cube_lighting = load_material("cube_lighting_pass");
 	cube_combine = load_material("cube_combine_pass");
 
-	skybox_geometry = std::make_shared<renderable>(load_cube());
+	skybox_geometry = load_cube();
+	fullscreen_quad = load_fullscreen_quad();
+	fullscreen_quad->set_material(cube_combine);
 
 	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
+
+	mvp_ubo = std::make_unique<uniform_buffer<mvp_buffer>>("MVP");
+
+	mvp_ubo->link_to_material(test_mat);
+	//mvp_ubo->link_to_material(cube_lighting);
+	mvp_ubo->link_to_material(cube_combine);
+
+	camera_transform.set_position({ 0, -0.75f, -2 });
+	camera_transform.look_at({ 0, -0.75f, 0 });
+
+	main_camera.fov = 60;
+	main_camera.aspect_ratio = (float) window_width / (float) window_height;
+	main_camera.near = 0.1;
+	main_camera.far = 100;
 }
 
 void texture_preview_canvas::do_tick() {
-	cube_transform.rotate_by(CUBE_ROTATE_SPEED * delta_time, glm::vec3(0, 1, 0));
+	cube_transform.set_rotation(CUBE_ROTATE_SPEED * elapsed_time, glm::vec3(0, 1, 0));
 
 	render();
 
 	auto cur_time = clock();
 	delta_time = double(cur_time - last_frame_end) / CLOCKS_PER_SEC;
 	last_frame_end = cur_time;
+	elapsed_time += delta_time;
 }
 
 void texture_preview_canvas::render() {
@@ -113,6 +132,12 @@ void texture_preview_canvas::render() {
 	render_framebuffer->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	mvp_buffer& cur_mvp_buffer = mvp_ubo->get_data();
+	cur_mvp_buffer.model_matrix = cube_transform.get_transform_matrix();
+	cur_mvp_buffer.view_matrix = camera_transform.get_transform_matrix();
+	cur_mvp_buffer.projection_matrix = glm::perspective(glm::radians(main_camera.fov), main_camera.aspect_ratio, main_camera.near, main_camera.far);
+	mvp_ubo->send_data();
+
 	cube->set_material(test_mat);
 	cube->draw();
 
@@ -120,8 +145,7 @@ void texture_preview_canvas::render() {
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	cube->set_material(cube_combine);
-	cube->draw();
+	fullscreen_quad->draw();
 	
 	glFlush();
 	SwapBuffers();

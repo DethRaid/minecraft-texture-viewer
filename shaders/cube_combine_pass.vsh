@@ -5,6 +5,12 @@ layout(location = 1) in vec3 normal_in;
 layout(location = 2) in vec3 tangent_in;
 layout(location = 3) in vec2 uv_in;
 
+layout(binding = 0, std140) uniform MVP {
+	mat4 model_matrix;
+	mat4 view_matrix;
+	mat4 projection_matrix;
+};
+
 out vec2 uv;
 out vec3 normal;
 

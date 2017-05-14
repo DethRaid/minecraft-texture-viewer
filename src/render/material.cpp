@@ -24,6 +24,10 @@ void material::bind() {
 	glUseProgram(program_id);
 }
 
+GLuint material::get_program_id() {
+	return program_id;
+}
+
 GLuint create_program(GLuint vertex_id, GLuint fragment_id) {
 	GLuint program_id = glCreateProgram();
 	LOG(TRACE) << "Created shader program " << program_id;

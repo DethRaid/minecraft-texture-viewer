@@ -15,6 +15,8 @@ public:
 
 	void bind();
 	GLuint get_uniform_location(std::string uniform_name);
+
+	GLuint get_program_id();
 private:
 	std::unordered_map<std::string, GLuint> uniform_locations;
 	GLuint program_id;
