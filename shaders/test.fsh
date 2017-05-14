@@ -3,7 +3,7 @@
 in vec2 uv;
 in vec3 normal;
 
-layout(binding = 3) uniform sampler2D albedo_tex;
+layout(binding = 12) uniform sampler2D albedo_tex;
 
 layout(location = 0) out vec3 color_out;
 layout(location = 1) out vec3 diffuse_out;

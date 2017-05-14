@@ -104,6 +104,55 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline331 = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
 	gbSizer1->Add( m_staticline331, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
+	opacity_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxGridBagSizer* gbSizer331;
+	gbSizer331 = new wxGridBagSizer( 0, 0 );
+	gbSizer331->SetFlexibleDirection( wxVERTICAL );
+	gbSizer331->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	roughness_texture_name_labell1 = new wxStaticText( opacity_panel, wxID_ANY, wxT("Opacity"), wxDefaultPosition, wxDefaultSize, 0 );
+	roughness_texture_name_labell1->Wrap( -1 );
+	gbSizer331->Add( roughness_texture_name_labell1, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
+	
+	opacity_color_preview = new wxStaticBitmap( opacity_panel, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, 0 );
+	gbSizer331->Add( opacity_color_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
+	
+	m_staticline1131 = new wxStaticLine( opacity_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
+	gbSizer331->Add( m_staticline1131, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	
+	wxGridBagSizer* gbSizer221;
+	gbSizer221 = new wxGridBagSizer( 0, 0 );
+	gbSizer221->SetFlexibleDirection( wxBOTH );
+	gbSizer221->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	opacity_slider = new wxSlider( opacity_panel, wxID_ANY, 255, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	gbSizer221->Add( opacity_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	
+	opacity_input = new wxTextCtrl( opacity_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
+	gbSizer221->Add( opacity_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	
+	red_label121 = new wxStaticText( opacity_panel, wxID_ANY, wxT("opacity"), wxDefaultPosition, wxSize( -1,20 ), 0 );
+	red_label121->Wrap( -1 );
+	gbSizer221->Add( red_label121, wxGBPosition( 0, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	
+	
+	gbSizer331->Add( gbSizer221, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	
+	m_staticline2121 = new wxStaticLine( opacity_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	gbSizer331->Add( m_staticline2121, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	
+	opacity_file_picker = new wxFilePickerCtrl( opacity_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer331->Add( opacity_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
+	
+	
+	opacity_panel->SetSizer( gbSizer331 );
+	opacity_panel->Layout();
+	gbSizer331->Fit( opacity_panel );
+	gbSizer1->Add( opacity_panel, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	
+	m_staticline3312 = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
+	gbSizer1->Add( m_staticline3312, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	
 	normal_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer31;
 	gbSizer31 = new wxGridBagSizer( 0, 0 );
@@ -120,17 +169,17 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline111 = new wxStaticLine( normal_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
 	gbSizer31->Add( m_staticline111, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
-	normal_file_picker = new wxFilePickerCtrl( normal_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	normal_file_picker = new wxFilePickerCtrl( normal_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	gbSizer31->Add( normal_file_picker, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	normal_panel->SetSizer( gbSizer31 );
 	normal_panel->Layout();
 	gbSizer31->Fit( normal_panel );
-	gbSizer1->Add( normal_panel, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	gbSizer1->Add( normal_panel, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	m_staticline3311 = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
-	gbSizer1->Add( m_staticline3311, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	gbSizer1->Add( m_staticline3311, wxGBPosition( 6, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	specular_color_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer32;
@@ -189,17 +238,17 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline211 = new wxStaticLine( specular_color_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer32->Add( m_staticline211, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	specular_file_picker = new wxFilePickerCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	specular_file_picker = new wxFilePickerCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	gbSizer32->Add( specular_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	specular_color_panel->SetSizer( gbSizer32 );
 	specular_color_panel->Layout();
 	gbSizer32->Fit( specular_color_panel );
-	gbSizer1->Add( specular_color_panel, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	gbSizer1->Add( specular_color_panel, wxGBPosition( 7, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	m_staticline33111 = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
-	gbSizer1->Add( m_staticline33111, wxGBPosition( 6, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	gbSizer1->Add( m_staticline33111, wxGBPosition( 8, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	smoothness_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer33;
@@ -238,17 +287,17 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline212 = new wxStaticLine( smoothness_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer33->Add( m_staticline212, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	smoothness_file_picker = new wxFilePickerCtrl( smoothness_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	smoothness_file_picker = new wxFilePickerCtrl( smoothness_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	gbSizer33->Add( smoothness_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	smoothness_panel->SetSizer( gbSizer33 );
 	smoothness_panel->Layout();
 	gbSizer33->Fit( smoothness_panel );
-	gbSizer1->Add( smoothness_panel, wxGBPosition( 7, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	gbSizer1->Add( smoothness_panel, wxGBPosition( 9, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	ao_ = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
-	gbSizer1->Add( ao_, wxGBPosition( 8, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	gbSizer1->Add( ao_, wxGBPosition( 10, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	emission_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer34;
@@ -271,7 +320,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer24->SetFlexibleDirection( wxBOTH );
 	gbSizer24->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	emission_slider = new wxSlider( emission_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	emission_slider = new wxSlider( emission_panel, wxID_ANY, 0, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer24->Add( emission_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	emission_input = new wxTextCtrl( emission_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
@@ -287,17 +336,17 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline213 = new wxStaticLine( emission_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer34->Add( m_staticline213, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	emission_file_picker = new wxFilePickerCtrl( emission_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	emission_file_picker = new wxFilePickerCtrl( emission_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	gbSizer34->Add( emission_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	emission_panel->SetSizer( gbSizer34 );
 	emission_panel->Layout();
 	gbSizer34->Fit( emission_panel );
-	gbSizer1->Add( emission_panel, wxGBPosition( 9, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	gbSizer1->Add( emission_panel, wxGBPosition( 11, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	m_staticline332 = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
-	gbSizer1->Add( m_staticline332, wxGBPosition( 10, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	gbSizer1->Add( m_staticline332, wxGBPosition( 12, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	height_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer35;
@@ -320,7 +369,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer25->SetFlexibleDirection( wxBOTH );
 	gbSizer25->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	height_slider = new wxSlider( height_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	height_slider = new wxSlider( height_panel, wxID_ANY, 255, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer25->Add( height_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	height_input = new wxTextCtrl( height_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
@@ -336,17 +385,17 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline214 = new wxStaticLine( height_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer35->Add( m_staticline214, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	heightmap_file_picker = new wxFilePickerCtrl( height_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	gbSizer35->Add( heightmap_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
+	height_file_picker = new wxFilePickerCtrl( height_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer35->Add( height_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	height_panel->SetSizer( gbSizer35 );
 	height_panel->Layout();
 	gbSizer35->Fit( height_panel );
-	gbSizer1->Add( height_panel, wxGBPosition( 11, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	gbSizer1->Add( height_panel, wxGBPosition( 13, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	m_staticline333 = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
-	gbSizer1->Add( m_staticline333, wxGBPosition( 12, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	gbSizer1->Add( m_staticline333, wxGBPosition( 14, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	porosity_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer36;
@@ -385,17 +434,17 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline215 = new wxStaticLine( porosity_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer36->Add( m_staticline215, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	porosity_file_picker = new wxFilePickerCtrl( porosity_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	porosity_file_picker = new wxFilePickerCtrl( porosity_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	gbSizer36->Add( porosity_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	porosity_panel->SetSizer( gbSizer36 );
 	porosity_panel->Layout();
 	gbSizer36->Fit( porosity_panel );
-	gbSizer1->Add( porosity_panel, wxGBPosition( 13, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	gbSizer1->Add( porosity_panel, wxGBPosition( 15, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	m_staticline334 = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
-	gbSizer1->Add( m_staticline334, wxGBPosition( 14, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	gbSizer1->Add( m_staticline334, wxGBPosition( 16, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	translucense_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer38;
@@ -418,11 +467,11 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer28->SetFlexibleDirection( wxBOTH );
 	gbSizer28->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	translucence_slider = new wxSlider( translucense_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	translucence_slider = new wxSlider( translucense_panel, wxID_ANY, 0, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer28->Add( translucence_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
-	translucence_red_input = new wxTextCtrl( translucense_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
-	gbSizer28->Add( translucence_red_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	translucence_input = new wxTextCtrl( translucense_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
+	gbSizer28->Add( translucence_input, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	red_label17 = new wxStaticText( translucense_panel, wxID_ANY, wxT("translucense"), wxDefaultPosition, wxSize( -1,20 ), 0 );
 	red_label17->Wrap( -1 );
@@ -434,17 +483,17 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline217 = new wxStaticLine( translucense_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer38->Add( m_staticline217, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	translucense_file_picker = new wxFilePickerCtrl( translucense_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	gbSizer38->Add( translucense_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
+	translucence_file_picker = new wxFilePickerCtrl( translucense_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	gbSizer38->Add( translucence_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	translucense_panel->SetSizer( gbSizer38 );
 	translucense_panel->Layout();
 	gbSizer38->Fit( translucense_panel );
-	gbSizer1->Add( translucense_panel, wxGBPosition( 15, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	gbSizer1->Add( translucense_panel, wxGBPosition( 17, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	m_staticline3341 = new wxStaticLine( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxSize( -1,8 ), wxLI_HORIZONTAL );
-	gbSizer1->Add( m_staticline3341, wxGBPosition( 16, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
+	gbSizer1->Add( m_staticline3341, wxGBPosition( 18, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	ao_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer37;
@@ -467,7 +516,7 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer27->SetFlexibleDirection( wxBOTH );
 	gbSizer27->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	ao_slider = new wxSlider( ao_panel, wxID_ANY, 128, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
+	ao_slider = new wxSlider( ao_panel, wxID_ANY, 0, 0, 255, wxDefaultPosition, wxSize( 140,20 ), wxSL_HORIZONTAL );
 	gbSizer27->Add( ao_slider, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	ao_input = new wxTextCtrl( ao_panel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 40,-1 ), wxTE_PROCESS_ENTER );
@@ -483,14 +532,14 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	m_staticline216 = new wxStaticLine( ao_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	gbSizer37->Add( m_staticline216, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
-	ao_file_picker = new wxFilePickerCtrl( ao_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.png,*.jpg,*.jpeg,*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	ao_file_picker = new wxFilePickerCtrl( ao_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	gbSizer37->Add( ao_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	ao_panel->SetSizer( gbSizer37 );
 	ao_panel->Layout();
 	gbSizer37->Fit( ao_panel );
-	gbSizer1->Add( ao_panel, wxGBPosition( 17, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	gbSizer1->Add( ao_panel, wxGBPosition( 19, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	
 	texture_selector_scroll->SetSizer( gbSizer1 );

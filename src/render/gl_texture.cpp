@@ -25,6 +25,7 @@ gl_texture::gl_texture(int binding, int grayscale) {
 	data[0] = grayscale;
 	width = 1;
 	height = 1;
+	num_components = 1;
 	upload_texture_data();
 }
 

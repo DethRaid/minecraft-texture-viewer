@@ -65,6 +65,16 @@ class _main_window : public wxFrame
 		wxStaticLine* m_staticline21;
 		wxFilePickerCtrl* albedo_file_picker;
 		wxStaticLine* m_staticline331;
+		wxPanel* opacity_panel;
+		wxStaticText* roughness_texture_name_labell1;
+		wxStaticBitmap* opacity_color_preview;
+		wxStaticLine* m_staticline1131;
+		wxSlider* opacity_slider;
+		wxTextCtrl* opacity_input;
+		wxStaticText* red_label121;
+		wxStaticLine* m_staticline2121;
+		wxFilePickerCtrl* opacity_file_picker;
+		wxStaticLine* m_staticline3312;
 		wxPanel* normal_panel;
 		wxStaticText* texture_name_label11;
 		wxStaticBitmap* normal_preview;
@@ -115,7 +125,7 @@ class _main_window : public wxFrame
 		wxTextCtrl* height_input;
 		wxStaticText* red_label14;
 		wxStaticLine* m_staticline214;
-		wxFilePickerCtrl* heightmap_file_picker;
+		wxFilePickerCtrl* height_file_picker;
 		wxStaticLine* m_staticline333;
 		wxPanel* porosity_panel;
 		wxStaticText* texture_name_label15;
@@ -132,10 +142,10 @@ class _main_window : public wxFrame
 		wxStaticBitmap* translucence_color_preview;
 		wxStaticLine* m_staticline118;
 		wxSlider* translucence_slider;
-		wxTextCtrl* translucence_red_input;
+		wxTextCtrl* translucence_input;
 		wxStaticText* red_label17;
 		wxStaticLine* m_staticline217;
-		wxFilePickerCtrl* translucense_file_picker;
+		wxFilePickerCtrl* translucence_file_picker;
 		wxStaticLine* m_staticline3341;
 		wxPanel* ao_panel;
 		wxStaticText* texture_name_label16;

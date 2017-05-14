@@ -21,32 +21,44 @@ private:
 	std::unique_ptr<texture_preview_canvas> gl_canvas;
 
 	std::shared_ptr<gl_texture> albedo_tex;
+	std::shared_ptr<gl_texture> opacity_tex;
 	std::shared_ptr<gl_texture> normal_tex;
 	std::shared_ptr<gl_texture> specular_tex;
 	std::shared_ptr<gl_texture> smoothness_tex;
 	std::shared_ptr<gl_texture> emission_tex;
+	std::shared_ptr<gl_texture> height_tex;
+	std::shared_ptr<gl_texture> porosity_tex;
+	std::shared_ptr<gl_texture> translucence_tex;
+	std::shared_ptr<gl_texture> ao_tex;
 
 	void hook_up_albedo_controls();
-	void set_albedo_inputs(int red, int green, int blue);
+	void set_albedo(int red, int green, int blue);
+
+	void hook_up_opacity_controls();
+	void set_opacity(int opacity);
 
 	void hook_up_normal_controls();
 
 	void hook_up_specular_color_controls();
-	void set_specular_inputs(int red, int green, int blue);
+	void set_specular_color(int red, int green, int blue);
 
 	void hook_up_smoothness_controls();
-	void set_smoothness_inputs(int smoothness);
+	void set_smoothness(int smoothness);
 
 	void hook_up_emission_controls();
-	void set_emission_inputs(int emission);
+	void set_emission(int emission);
 
-	void hook_up_height_controle();
+	void hook_up_height_controls();
+	void set_height(int height);
 
 	void hook_up_porosity_controls();
+	void set_porosity(int porosity);
 
-	void hook_up_transluscence_controls();
+	void hook_up_translucence_controls();
+	void set_translucence(int translucence);
 
 	void hook_up_ao_controls();
+	void set_ao(int ao);
 };
 
 void set_text_input_value(wxTextCtrl* input, int value);
