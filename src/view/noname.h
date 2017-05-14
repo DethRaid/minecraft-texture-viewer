@@ -10,17 +10,17 @@
 
 #include <wx/artprov.h>
 #include <wx/xrc/xmlres.h>
-#include <wx/statusbr.h>
+#include <wx/string.h>
+#include <wx/bitmap.h>
+#include <wx/image.h>
+#include <wx/icon.h>
+#include <wx/menu.h>
 #include <wx/gdicmn.h>
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
-#include <wx/string.h>
 #include <wx/stattext.h>
 #include <wx/statline.h>
-#include <wx/bitmap.h>
-#include <wx/image.h>
-#include <wx/icon.h>
 #include <wx/statbmp.h>
 #include <wx/slider.h>
 #include <wx/textctrl.h>
@@ -29,12 +29,16 @@
 #include <wx/panel.h>
 #include <wx/scrolwin.h>
 #include <wx/sizer.h>
+#include <wx/statusbr.h>
 #include <wx/frame.h>
+#include <wx/button.h>
+#include <wx/dialog.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
-#define albedo_slider 1000
-#define specular_slider 1001
+#define ID_EXPORT_PULCHRA 1000
+#define albedo_slider 1001
+#define specular_slider 1002
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _main_window
@@ -44,7 +48,8 @@ class _main_window : public wxFrame
 	private:
 	
 	protected:
-		wxStatusBar* m_statusBar1;
+		wxMenuBar* m_menubar1;
+		wxMenu* export_menu;
 		wxPanel* options_panel;
 		wxStaticText* m_staticText1;
 		wxScrolledWindow* texture_selector_scroll;
@@ -156,12 +161,42 @@ class _main_window : public wxFrame
 		wxStaticText* red_label16;
 		wxStaticLine* m_staticline216;
 		wxFilePickerCtrl* ao_file_picker;
+		wxStatusBar* m_statusBar1;
 	
 	public:
 		
 		_main_window( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1498,1149 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~_main_window();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class _export_options_dialogue
+///////////////////////////////////////////////////////////////////////////////
+class _export_options_dialogue : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText26;
+		wxFilePickerCtrl* export_folder_picker;
+		wxStaticText* m_staticText27;
+		wxTextCtrl* export_filename_input;
+		wxStaticText* m_staticText28;
+		wxStaticText* color_tex_name_output;
+		wxStaticText* m_staticText32;
+		wxStaticText* normal_tex_name_output;
+		wxStaticText* m_staticText29;
+		wxStaticText* data_tex_name_output;
+		wxStaticText* m_staticText34;
+		wxTextCtrl* export_resolution_input;
+		wxButton* export_button;
+	
+	public:
+		
+		_export_options_dialogue( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Export Options"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~_export_options_dialogue();
 	
 };
 

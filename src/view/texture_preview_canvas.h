@@ -7,6 +7,7 @@
 #include "../render/material.h"
 #include "../render/data_loading.h"
 #include "../render/framebuffer.h"
+#include "../render/transform.h"
 
 #include <wx/wxprec.h>
 
@@ -15,6 +16,10 @@
 #endif
 #include <wx/glcanvas.h>
 #include <wx/timer.h>
+
+#include <glm/glm.hpp>
+
+#define CUBE_ROTATE_SPEED 45
 
 class texture_preview_canvas;
 
@@ -40,19 +45,31 @@ private:
 	int window_height = 200;
 	int window_width = 200;
 
+	double delta_time;
+	clock_t last_frame_end = 0;
+
 	bool render_available = false;
 
 	std::unique_ptr<render_timer> timer;
-
+	
 	std::unique_ptr<framebuffer> render_framebuffer;
+
+	transform cube_transform;
 	std::shared_ptr<renderable> cube;
+
 	std::shared_ptr<material> cube_lighting;
 	std::shared_ptr<material> cube_combine;
+
+	std::shared_ptr<renderable> skybox_geometry;
+	std::shared_ptr<material> skybox_mat;
+	std::shared_ptr<material> post_processing_mat;
 
 	std::shared_ptr<material> test_mat;
 
 	void init_opengl();
 	void init_resources();
+
+	void do_tick();
 };
 
 

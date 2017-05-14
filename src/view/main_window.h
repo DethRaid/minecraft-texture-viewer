@@ -20,16 +20,7 @@ protected:
 private:
 	std::unique_ptr<texture_preview_canvas> gl_canvas;
 
-	std::shared_ptr<gl_texture> albedo_tex;
-	std::shared_ptr<gl_texture> opacity_tex;
-	std::shared_ptr<gl_texture> normal_tex;
-	std::shared_ptr<gl_texture> specular_tex;
-	std::shared_ptr<gl_texture> smoothness_tex;
-	std::shared_ptr<gl_texture> emission_tex;
-	std::shared_ptr<gl_texture> height_tex;
-	std::shared_ptr<gl_texture> porosity_tex;
-	std::shared_ptr<gl_texture> translucence_tex;
-	std::shared_ptr<gl_texture> ao_tex;
+	textures_struct textures;
 
 	void hook_up_albedo_controls();
 	void set_albedo(int red, int green, int blue);
@@ -59,6 +50,8 @@ private:
 
 	void hook_up_ao_controls();
 	void set_ao(int ao);
+
+	void hook_up_menu_items();
 };
 
 void set_text_input_value(wxTextCtrl* input, int value);

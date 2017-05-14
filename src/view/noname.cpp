@@ -13,7 +13,16 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	m_statusBar1 = this->CreateStatusBar( 1, wxST_SIZEGRIP, wxID_ANY );
+	m_menubar1 = new wxMenuBar( 0 );
+	export_menu = new wxMenu();
+	wxMenuItem* export_pulchra_menuitem;
+	export_pulchra_menuitem = new wxMenuItem( export_menu, ID_EXPORT_PULCHRA, wxString( wxT("To Pulchra Format") ) + wxT('\t') + wxT("CTRL+e"), wxEmptyString, wxITEM_NORMAL );
+	export_menu->Append( export_pulchra_menuitem );
+	
+	m_menubar1->Append( export_menu, wxT("Export") ); 
+	
+	this->SetMenuBar( m_menubar1 );
+	
 	wxBoxSizer* bSizer15;
 	bSizer15 = new wxBoxSizer( wxVERTICAL );
 	
@@ -555,10 +564,83 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	
 	this->SetSizer( bSizer15 );
 	this->Layout();
+	m_statusBar1 = this->CreateStatusBar( 1, wxST_SIZEGRIP, wxID_ANY );
 	
 	this->Centre( wxBOTH );
 }
 
 _main_window::~_main_window()
+{
+}
+
+_export_options_dialogue::_export_options_dialogue( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxFlexGridSizer* fgSizer2;
+	fgSizer2 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer2->SetFlexibleDirection( wxBOTH );
+	fgSizer2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText26 = new wxStaticText( this, wxID_ANY, wxT("Select output directory:"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+	m_staticText26->Wrap( -1 );
+	fgSizer2->Add( m_staticText26, 0, wxALL, 5 );
+	
+	export_folder_picker = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxSize( 300,-1 ), wxFLP_DEFAULT_STYLE );
+	fgSizer2->Add( export_folder_picker, 0, wxALL, 5 );
+	
+	m_staticText27 = new wxStaticText( this, wxID_ANY, wxT("Filename base:"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+	m_staticText27->Wrap( -1 );
+	fgSizer2->Add( m_staticText27, 0, wxALL, 5 );
+	
+	export_filename_input = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer2->Add( export_filename_input, 0, wxALL, 5 );
+	
+	m_staticText28 = new wxStaticText( this, wxID_ANY, wxT("Color texure name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText28->Wrap( -1 );
+	fgSizer2->Add( m_staticText28, 0, wxALL, 5 );
+	
+	color_tex_name_output = new wxStaticText( this, wxID_ANY, wxT(".png"), wxDefaultPosition, wxDefaultSize, 0 );
+	color_tex_name_output->Wrap( -1 );
+	fgSizer2->Add( color_tex_name_output, 0, wxALL, 5 );
+	
+	m_staticText32 = new wxStaticText( this, wxID_ANY, wxT("Normal texture name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText32->Wrap( -1 );
+	fgSizer2->Add( m_staticText32, 0, wxALL, 5 );
+	
+	normal_tex_name_output = new wxStaticText( this, wxID_ANY, wxT("_n.png"), wxDefaultPosition, wxDefaultSize, 0 );
+	normal_tex_name_output->Wrap( -1 );
+	fgSizer2->Add( normal_tex_name_output, 0, wxALL, 5 );
+	
+	m_staticText29 = new wxStaticText( this, wxID_ANY, wxT("Data texture name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText29->Wrap( -1 );
+	fgSizer2->Add( m_staticText29, 0, wxALL, 5 );
+	
+	data_tex_name_output = new wxStaticText( this, wxID_ANY, wxT("_s.png"), wxDefaultPosition, wxDefaultSize, 0 );
+	data_tex_name_output->Wrap( -1 );
+	fgSizer2->Add( data_tex_name_output, 0, wxALL, 5 );
+	
+	m_staticText34 = new wxStaticText( this, wxID_ANY, wxT("Output resolution"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText34->Wrap( -1 );
+	fgSizer2->Add( m_staticText34, 0, wxALL, 5 );
+	
+	export_resolution_input = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer2->Add( export_resolution_input, 0, wxALL, 5 );
+	
+	
+	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	export_button = new wxButton( this, wxID_ANY, wxT("Export"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer2->Add( export_button, 0, wxALL, 5 );
+	
+	
+	this->SetSizer( fgSizer2 );
+	this->Layout();
+	fgSizer2->Fit( this );
+	
+	this->Centre( wxBOTH );
+}
+
+_export_options_dialogue::~_export_options_dialogue()
 {
 }

@@ -41,6 +41,7 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 	hook_up_translucence_controls();
 	hook_up_ao_controls();
 	hook_up_emission_controls();
+	hook_up_menu_items();
 }
 
 void main_window::on_size_change(wxSizeEvent& event) {
@@ -76,7 +77,7 @@ void main_window::hook_up_albedo_controls() {
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		albedo_tex = std::make_shared<gl_texture>(3, event.GetPath().ToStdString());
+		textures.albedo_tex = std::make_shared<gl_texture>(3, event.GetPath().ToStdString());
 	};
 
 	albedo_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -95,7 +96,7 @@ void main_window::set_albedo(int red, int green, int blue) {
 
 	LOG(DEBUG) << "Updating albedo color to (" << red << ", " << green << ", " << blue << ")";
 
-	albedo_tex = std::make_shared<gl_texture>(ALBEDO_BINDING, red, green, blue);
+	textures.albedo_tex = std::make_shared<gl_texture>(ALBEDO_BINDING, red, green, blue);
 }
 
 void main_window::hook_up_opacity_controls() {
@@ -117,7 +118,7 @@ void main_window::hook_up_opacity_controls() {
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		opacity_tex = std::make_shared<gl_texture>(OPACITY_BINDING, event.GetPath().ToStdString());
+		textures.opacity_tex = std::make_shared<gl_texture>(OPACITY_BINDING, event.GetPath().ToStdString());
 	};
 
 	opacity_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -132,13 +133,13 @@ void main_window::set_opacity(int opacity) {
 
 	LOG(DEBUG) << "Updating opacity to " << opacity;
 
-	opacity_tex = std::make_shared<gl_texture>(OPACITY_BINDING, opacity);
+	textures.opacity_tex = std::make_shared<gl_texture>(OPACITY_BINDING, opacity);
 }
 
 void main_window::hook_up_normal_controls() {
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		normal_tex = std::make_shared<gl_texture>(NORMAL_BINDING, event.GetPath().ToStdString());
+		textures.normal_tex = std::make_shared<gl_texture>(NORMAL_BINDING, event.GetPath().ToStdString());
 	};
 
 	normal_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -171,7 +172,7 @@ void main_window::hook_up_specular_color_controls() {
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		specular_tex = std::make_shared<gl_texture>(F0_BINDING, event.GetPath().ToStdString());
+		textures.specular_tex = std::make_shared<gl_texture>(F0_BINDING, event.GetPath().ToStdString());
 	};
 
 	specular_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -191,7 +192,7 @@ void main_window::set_specular_color(int red, int green, int blue) {
 
 	LOG(DEBUG) << "Updating specular color to (" << red << ", " << green << ", " << blue << ")";
 
-	specular_tex = std::make_shared<gl_texture>(F0_BINDING, red, green, blue);
+	textures.specular_tex = std::make_shared<gl_texture>(F0_BINDING, red, green, blue);
 }
 
 void main_window::hook_up_smoothness_controls() {
@@ -213,7 +214,7 @@ void main_window::hook_up_smoothness_controls() {
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		smoothness_tex = std::make_shared<gl_texture>(SMOOTHNESS_BINDING, event.GetPath().ToStdString());
+		textures.smoothness_tex = std::make_shared<gl_texture>(SMOOTHNESS_BINDING, event.GetPath().ToStdString());
 	};
 
 	smoothness_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -228,7 +229,7 @@ void main_window::set_smoothness(int smoothness) {
 
 	LOG(DEBUG) << "Updating smoothness to " << smoothness;
 
-	smoothness_tex = std::make_shared<gl_texture>(SMOOTHNESS_BINDING, smoothness);
+	textures.smoothness_tex = std::make_shared<gl_texture>(SMOOTHNESS_BINDING, smoothness);
 }
 
 void main_window::hook_up_emission_controls() {
@@ -250,7 +251,7 @@ void main_window::hook_up_emission_controls() {
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		emission_tex = std::make_shared<gl_texture>(EMISSION_BINDING, event.GetPath().ToStdString());
+		textures.emission_tex = std::make_shared<gl_texture>(EMISSION_BINDING, event.GetPath().ToStdString());
 	};
 
 	emission_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -265,7 +266,7 @@ void main_window::set_emission(int emission) {
 
 	LOG(DEBUG) << "Updating emission to " << emission;
 
-	emission_tex = std::make_shared<gl_texture>(EMISSION_BINDING, emission);
+	textures.emission_tex = std::make_shared<gl_texture>(EMISSION_BINDING, emission);
 }
 
 void main_window::hook_up_height_controls() {
@@ -287,7 +288,7 @@ void main_window::hook_up_height_controls() {
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		height_tex = std::make_shared<gl_texture>(HEIGHT_BINDING, event.GetPath().ToStdString());
+		textures.height_tex = std::make_shared<gl_texture>(HEIGHT_BINDING, event.GetPath().ToStdString());
 	};
 
 	height_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -302,7 +303,7 @@ void main_window::set_height(int height) {
 
 	LOG(DEBUG) << "Updating height to " << height;
 
-	height_tex = std::make_shared<gl_texture>(HEIGHT_BINDING, height);
+	textures.height_tex = std::make_shared<gl_texture>(HEIGHT_BINDING, height);
 }
 
 void main_window::hook_up_porosity_controls() {
@@ -324,7 +325,7 @@ void main_window::hook_up_porosity_controls() {
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		porosity_tex = std::make_shared<gl_texture>(POROSITY_BINDING, event.GetPath().ToStdString());
+		textures.porosity_tex = std::make_shared<gl_texture>(POROSITY_BINDING, event.GetPath().ToStdString());
 	};
 
 	porosity_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -339,7 +340,7 @@ void main_window::set_porosity(int porosity) {
 
 	LOG(DEBUG) << "Updating porosity to " << porosity;
 
-	porosity_tex = std::make_shared<gl_texture>(POROSITY_BINDING, porosity);
+	textures.porosity_tex = std::make_shared<gl_texture>(POROSITY_BINDING, porosity);
 }
 
 void main_window::hook_up_translucence_controls() {
@@ -361,7 +362,7 @@ void main_window::hook_up_translucence_controls() {
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		translucence_tex = std::make_shared<gl_texture>(TRANSLUCENCE_BINDING, event.GetPath().ToStdString());
+		textures.translucence_tex = std::make_shared<gl_texture>(TRANSLUCENCE_BINDING, event.GetPath().ToStdString());
 	};
 
 	translucence_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -376,7 +377,7 @@ void main_window::set_translucence(int translucence) {
 
 	LOG(DEBUG) << "Updating translucence to " << translucence;
 
-	translucence_tex = std::make_shared<gl_texture>(TRANSLUCENCE_BINDING, translucence);
+	textures.translucence_tex = std::make_shared<gl_texture>(TRANSLUCENCE_BINDING, translucence);
 }
 
 void main_window::hook_up_ao_controls() {
@@ -398,7 +399,7 @@ void main_window::hook_up_ao_controls() {
 
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
-		ao_tex = std::make_shared<gl_texture>(AO_BINDING, event.GetPath().ToStdString());
+		textures.ao_tex = std::make_shared<gl_texture>(AO_BINDING, event.GetPath().ToStdString());
 	};
 
 	ao_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
@@ -413,7 +414,11 @@ void main_window::set_ao(int ao) {
 
 	LOG(DEBUG) << "Updating ao to " << ao;
 
-	ao_tex = std::make_shared<gl_texture>(AO_BINDING, ao);
+	textures.ao_tex = std::make_shared<gl_texture>(AO_BINDING, ao);
+}
+
+void main_window::hook_up_menu_items() {
+
 }
 
 wxBEGIN_EVENT_TABLE(main_window, _main_window)

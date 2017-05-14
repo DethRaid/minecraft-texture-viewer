@@ -4,6 +4,7 @@
 #include "glad.h"
 
 #include <string>
+#include <memory>
 
 #define ALBEDO_BINDING			3
 #define OPACITY_BINDING			4
@@ -67,6 +68,19 @@ private:
 
 	void create(int binding);
 	void upload_texture_data();
+};
+
+struct textures_struct {
+	std::shared_ptr<gl_texture> albedo_tex;
+	std::shared_ptr<gl_texture> opacity_tex;
+	std::shared_ptr<gl_texture> normal_tex;
+	std::shared_ptr<gl_texture> specular_tex;
+	std::shared_ptr<gl_texture> smoothness_tex;
+	std::shared_ptr<gl_texture> emission_tex;
+	std::shared_ptr<gl_texture> height_tex;
+	std::shared_ptr<gl_texture> porosity_tex;
+	std::shared_ptr<gl_texture> translucence_tex;
+	std::shared_ptr<gl_texture> ao_tex;
 };
 
 #endif

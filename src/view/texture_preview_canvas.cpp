@@ -56,7 +56,7 @@ void texture_preview_canvas::on_size_change(wxSize& size) {
 }
 
 void texture_preview_canvas::on_paint(wxPaintEvent& evt) {
-	render();
+	do_tick();
 }
 
 void texture_preview_canvas::on_idle(wxIdleEvent& evt) {
@@ -86,9 +86,22 @@ void texture_preview_canvas::init_resources() {
 	cube = std::make_shared<renderable>(load_cube());
 
 	test_mat = load_material("test");
+	cube_lighting = load_material("cube_lighting_pass");
 	cube_combine = load_material("cube_combine_pass");
 
+	skybox_geometry = std::make_shared<renderable>(load_cube());
+
 	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
+}
+
+void texture_preview_canvas::do_tick() {
+	cube_transform.rotate_by(CUBE_ROTATE_SPEED * delta_time, glm::vec3(0, 1, 0));
+
+	render();
+
+	auto cur_time = clock();
+	delta_time = double(cur_time - last_frame_end) / CLOCKS_PER_SEC;
+	last_frame_end = cur_time;
 }
 
 void texture_preview_canvas::render() {
