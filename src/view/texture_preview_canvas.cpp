@@ -85,23 +85,30 @@ void texture_preview_canvas::init_opengl() {
 }
 
 void texture_preview_canvas::init_resources() {
-	cube = load_cube();
-
 	test_mat = load_material("test");
 	//cube_lighting = load_material("cube_lighting_pass");
 	cube_combine = load_material("cube_combine_pass");
+	skybox_mat = load_material("skybox");
 
-	skybox_geometry = load_cube();
-	fullscreen_quad = load_fullscreen_quad();
+	cube = std::make_unique<entity>();
+	cube->set_geometry(load_cube());
+	cube->set_material(test_mat);
+
+	skybox = std::make_unique<entity>();
+	skybox->set_geometry(load_cube());
+	skybox->set_material(skybox_mat);
+
+	fullscreen_quad = std::make_unique<entity>();
+	fullscreen_quad->set_geometry(load_fullscreen_quad());
 	fullscreen_quad->set_material(cube_combine);
 
 	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
 
-	mvp_ubo = std::make_unique<uniform_buffer<mvp_buffer>>("MVP");
+	camera_mats = std::make_unique<uniform_buffer<camera_matrices>>("VP");
 
-	mvp_ubo->link_to_material(test_mat);
+	camera_mats->link_to_material(test_mat);
 	//mvp_ubo->link_to_material(cube_lighting);
-	mvp_ubo->link_to_material(cube_combine);
+	camera_mats->link_to_material(cube_combine);
 
 	camera_transform.set_position({ 0, -0.75f, -2 });
 	camera_transform.look_at({ 0, -0.75f, 0 });
@@ -113,7 +120,7 @@ void texture_preview_canvas::init_resources() {
 }
 
 void texture_preview_canvas::do_tick() {
-	cube_transform.set_rotation(CUBE_ROTATE_SPEED * elapsed_time, glm::vec3(0, 1, 0));
+	cube->get_transform().set_rotation(CUBE_ROTATE_SPEED * elapsed_time, glm::vec3(0, 1, 0));
 
 	render();
 
@@ -132,20 +139,18 @@ void texture_preview_canvas::render() {
 	render_framebuffer->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	mvp_buffer& cur_mvp_buffer = mvp_ubo->get_data();
-	cur_mvp_buffer.model_matrix = cube_transform.get_transform_matrix();
-	cur_mvp_buffer.view_matrix = camera_transform.get_transform_matrix();
-	cur_mvp_buffer.projection_matrix = glm::perspective(glm::radians(main_camera.fov), main_camera.aspect_ratio, main_camera.near, main_camera.far);
-	mvp_ubo->send_data();
+	camera_matrices& camera_matrices_buffer = camera_mats->get_data();
+	camera_matrices_buffer.view_matrix = camera_transform.get_transform_matrix();
+	camera_matrices_buffer.projection_matrix = glm::perspective(glm::radians(main_camera.fov), main_camera.aspect_ratio, main_camera.near, main_camera.far);
+	camera_mats->send_data();
 
-	cube->set_material(test_mat);
-	cube->draw();
+	cube->render(camera_matrices_buffer);
 
 	render_framebuffer->generate_mipmaps();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	fullscreen_quad->draw();
+	fullscreen_quad->render(camera_matrices_buffer);
 	
 	glFlush();
 	SwapBuffers();

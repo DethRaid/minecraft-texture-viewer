@@ -26,9 +26,7 @@ public:
 	void draw();
 
 	void set_vertex_data(std::vector<vertex> vertices, std::vector<int> indices);
-	void set_material(std::shared_ptr<material> new_material);
 private:
-	std::shared_ptr<material> mat;
 	int num_indices;
 
 	GLuint vao = -1;

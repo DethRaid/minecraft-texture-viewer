@@ -3,7 +3,7 @@
 
 #include <glm\glm.hpp>
 
-class transform {
+class transform_data {
 public:
 	void rotate_by(float angle, glm::vec3 axis);
 	void translate_by(glm::vec3 translation);

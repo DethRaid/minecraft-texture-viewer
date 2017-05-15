@@ -220,6 +220,7 @@ std::shared_ptr<renderable> load_fullscreen_quad() {
 }
 
 std::shared_ptr<material> load_material(std::string material_name) {
+	LOG(INFO) << "Loading material " << material_name;
 	auto vertex_shader_filename = MATERIAL_DIRECTORY + material_name + ".vsh";
 	auto vertex_shader_file = std::ifstream(vertex_shader_filename, std::ios_base::in);
 	if(!vertex_shader_file) {

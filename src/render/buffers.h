@@ -7,8 +7,7 @@
 
 #include <glm/glm.hpp>
 
-struct mvp_buffer {
-	glm::mat4 model_matrix;
+struct camera_matrices {
 	glm::mat4 view_matrix;
 	glm::mat4 projection_matrix;
 };

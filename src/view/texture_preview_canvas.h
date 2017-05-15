@@ -10,6 +10,7 @@
 #include "../render/transform.h"
 #include "../render/uniform_buffer.h"
 #include "../render/buffers.h"
+#include "../render/entity.h"
 
 #include <wx/wxprec.h>
 
@@ -65,23 +66,22 @@ private:
 
 	std::unique_ptr<render_timer> timer;
 	
-	std::unique_ptr<uniform_buffer<mvp_buffer>> mvp_ubo;
+	std::unique_ptr<uniform_buffer<camera_matrices>> camera_mats;
 	std::unique_ptr<framebuffer> render_framebuffer;
 
-	transform cube_transform;
-	std::shared_ptr<renderable> cube;
+	std::unique_ptr<entity> cube;
 	std::shared_ptr<material> cube_lighting;
 	std::shared_ptr<material> cube_combine;
 
-	std::shared_ptr<renderable> skybox_geometry;
+	std::unique_ptr<entity> skybox;
 	std::shared_ptr<material> skybox_mat;
 
-	std::shared_ptr<renderable> fullscreen_quad;
+	std::unique_ptr<entity> fullscreen_quad;
 	std::shared_ptr<material> post_processing_mat;
 
 	std::shared_ptr<material> test_mat;
 
-	transform camera_transform;
+	transform_data camera_transform;
 	camera main_camera;
 
 	void init_opengl();

@@ -25,9 +25,6 @@ vertex::vertex(glm::vec3 position, glm::vec3 normal, glm::vec3 tangent, glm::vec
 	: position(position), normal(normal), tangent(tangent), uv(uv) {}
 
 void renderable::draw() {
-	if(mat) {
-		mat->bind();
-	}
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, 0);
 }
@@ -59,8 +56,4 @@ void renderable::set_vertex_data(std::vector<vertex> vertices, std::vector<int> 
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(GLfloat), (void *)(6 * sizeof(GLfloat)));
 	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(GLfloat), (void *)(9 * sizeof(GLfloat)));
-}
-
-void renderable::set_material(std::shared_ptr<material> new_material) {
-	mat = new_material;
 }
