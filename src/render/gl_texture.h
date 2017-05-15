@@ -70,17 +70,18 @@ public:
 	 */
 	glm::vec4 at(glm::vec2 uv, bool bilinear = false);
 
-private:
+protected:
 	unsigned char* data = nullptr;
 	int width;
 	int height;
 	int num_components;
 
 	GLuint gl_name;
-	bool storage_allocated = false;
+
+	texture();
 
 	void create(int binding);
-	void upload_texture_data();
+	virtual void upload_texture_data();
 
 	glm::vec4 at_point(glm::vec2 uv);
 	glm::vec4 at_bilinear(glm::vec2 uv);

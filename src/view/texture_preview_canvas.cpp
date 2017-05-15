@@ -1,5 +1,7 @@
 #include "texture_preview_canvas.h"
 
+#include "../render/hdr_texture.h"
+
 #include <easylogging++.h>
 #include <stdexcept>
 #include <glm/gtc/matrix_transform.hpp>
@@ -110,7 +112,7 @@ void texture_preview_canvas::init_resources() {
 
 	camera_mats.projection_matrix = glm::perspective(glm::radians(main_camera.fov), main_camera.aspect_ratio, main_camera.near_plane, main_camera.far_plane);
 
-	skybox_tex = std::make_shared<texture>(1, std::string{ "textures/golden_autumn_road.hdr" });
+	skybox_tex = std::make_shared<hdr_texture>(1, "textures/golden_autumn_road.hdr");
 }
 
 void texture_preview_canvas::do_tick() {
@@ -134,7 +136,7 @@ void texture_preview_canvas::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glDepthMask(false);
 	fullscreen_quad->set_material(skybox_mat);
-	fullscreen_quad->render(camera_mats);
+	fullscreen_quad->render();
 	glDepthMask(true);
 
 	camera_mats.view_matrix = camera_transform.get_transform_matrix();
@@ -146,7 +148,7 @@ void texture_preview_canvas::render() {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	fullscreen_quad->set_material(cube_combine);
-	fullscreen_quad->render(camera_mats);
+	fullscreen_quad->render();
 
 	glFlush();
 	SwapBuffers();

@@ -15,8 +15,6 @@ public:
 private:
 	GLuint framebuffer_id;
 
-	GLuint attachments[5];
-
 	enum texture_index {
 		DEPTH = 0,
 		DIFFUSE_COLOR,
@@ -25,6 +23,8 @@ private:
 		NORMALS,
 		NUM_ATTACHMENTS,
 	};
+
+	GLuint attachments[NUM_ATTACHMENTS];
 };
 
 #endif

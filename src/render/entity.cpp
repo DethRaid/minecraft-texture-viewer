@@ -25,5 +25,10 @@ void entity::render(camera_matrices& camera_mats) {
 	auto projection_matrix_location = mat->get_uniform_location("projection_matrix");
 	glUniformMatrix4fv(projection_matrix_location, 1, false, &camera_mats.projection_matrix[0][0]);
 
-	geometry->draw();
+	geometry->render();
+}
+
+void entity::render() {
+	mat->bind();
+	geometry->render();
 }

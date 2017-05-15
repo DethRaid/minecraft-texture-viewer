@@ -24,7 +24,7 @@ void check_all_errors() {
 vertex::vertex(glm::vec3 position, glm::vec3 normal, glm::vec3 tangent, glm::vec2 uv) 
 	: position(position), normal(normal), tangent(tangent), uv(uv) {}
 
-void renderable::draw() {
+void renderable::render() {
 	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, 0);
 }

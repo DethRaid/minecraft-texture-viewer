@@ -5,7 +5,7 @@
 framebuffer::framebuffer(int width, int height) {
 	glCreateFramebuffers(1, &framebuffer_id);
 
-	glCreateTextures(GL_TEXTURE_2D, 5, attachments);
+	glCreateTextures(GL_TEXTURE_2D, NUM_ATTACHMENTS, attachments);
 
 	glTextureStorage2D(attachments[DEPTH], 1, GL_DEPTH_COMPONENT16, width, height);
 	glNamedFramebufferTexture(framebuffer_id, GL_DEPTH_ATTACHMENT, attachments[DEPTH], 0);
@@ -58,7 +58,7 @@ framebuffer::framebuffer(framebuffer&& other) {
 
 framebuffer::~framebuffer() {
 	LOG(TRACE) << "Deleting framebuffer " << framebuffer_id;
-	glDeleteTextures(5, attachments);
+	glDeleteTextures(NUM_ATTACHMENTS, attachments);
 	glDeleteFramebuffers(1, &framebuffer_id);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

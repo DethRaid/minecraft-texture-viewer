@@ -23,7 +23,7 @@ struct vertex {
  */
 class renderable {
 public:
-	void draw();
+	void render();
 
 	void set_vertex_data(std::vector<vertex> vertices, std::vector<int> indices);
 private:

@@ -4,6 +4,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+texture::texture() {}
+
 texture::texture(int binding, int red, int green, int blue) {
 	create(binding);
 
@@ -84,15 +86,11 @@ void texture::upload_texture_data() {
 		format = GL_RGBA;
 		break;
 	default:
-		LOG(ERROR) << "Unsupported number of components. You have " << num_components
-			<< " components "
-			<< ", but I need a number in [1,4]";
+		LOG(ERROR) << "Unsupported number of components. You have " << num_components << " components, but I need a "
+				   << "number in [1,4]";
 	}
 
-	if(!storage_allocated) {
-		glTextureStorage2D(gl_name, 1, internal_format, width, height);
-		storage_allocated = true;
-	}
+	glTextureStorage2D(gl_name, 1, internal_format, width, height);
 	
 	GLint previous_texture;
 	glGetIntegerv(GL_TEXTURE_BINDING_2D, &previous_texture);

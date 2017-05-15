@@ -16,6 +16,7 @@ public:
 	transform_data& get_transform();
 
 	void render(camera_matrices& camera_mats);
+	void render();
 private:
 	transform_data transform;
 	std::shared_ptr<material> mat;
