@@ -26,6 +26,10 @@ void transform_data::look_at(glm::vec3 look_at_point) {
 	rotation = glm::lookAt(look_at_point - position, position, glm::vec3(0, 1, 0));
 }
 
+glm::vec3 transform_data::get_position() {
+	return position;
+}
+
 glm::mat4 transform_data::get_transform_matrix() {
 	glm::mat4 matrix = glm::translate(glm::mat4(), position);
 	matrix *= rotation;

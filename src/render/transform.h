@@ -14,6 +14,8 @@ public:
 
 	void look_at(glm::vec3 look_at_point);
 
+	glm::vec3 get_position();
+
 	glm::mat4 get_transform_matrix();
 
 private:

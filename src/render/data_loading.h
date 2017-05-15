@@ -2,6 +2,7 @@
 #define DATA_LOADING_H
 
 #include "renderable.h"
+#include "gl_texture.h"
 
 std::shared_ptr<renderable> load_cube();
 std::shared_ptr<renderable> load_fullscreen_quad();

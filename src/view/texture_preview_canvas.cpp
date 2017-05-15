@@ -93,30 +93,24 @@ void texture_preview_canvas::init_resources() {
 	cube = std::make_unique<entity>();
 	cube->set_geometry(load_cube());
 	cube->set_material(test_mat);
-
-	skybox = std::make_unique<entity>();
-	skybox->set_geometry(load_cube());
-	skybox->set_material(skybox_mat);
-
+	
 	fullscreen_quad = std::make_unique<entity>();
 	fullscreen_quad->set_geometry(load_fullscreen_quad());
 	fullscreen_quad->set_material(cube_combine);
 
 	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
 
-	camera_mats = std::make_unique<uniform_buffer<camera_matrices>>("VP");
-
-	camera_mats->link_to_material(test_mat);
-	//mvp_ubo->link_to_material(cube_lighting);
-	camera_mats->link_to_material(cube_combine);
-
 	camera_transform.set_position({ 0, -0.75f, -2 });
 	camera_transform.look_at({ 0, -0.75f, 0 });
 
 	main_camera.fov = 60;
 	main_camera.aspect_ratio = (float) window_width / (float) window_height;
-	main_camera.near = 0.1;
-	main_camera.far = 100;
+	main_camera.near_plane = 0.1f;
+	main_camera.far_plane = 100;
+
+	camera_mats.projection_matrix = glm::perspective(glm::radians(main_camera.fov), main_camera.aspect_ratio, main_camera.near_plane, main_camera.far_plane);
+
+	skybox_tex = std::make_shared<texture>(1, std::string{ "textures/golden_autumn_road.hdr" });
 }
 
 void texture_preview_canvas::do_tick() {
@@ -138,20 +132,22 @@ void texture_preview_canvas::render() {
 
 	render_framebuffer->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glDepthMask(false);
+	fullscreen_quad->set_material(skybox_mat);
+	fullscreen_quad->render(camera_mats);
+	glDepthMask(true);
 
-	camera_matrices& camera_matrices_buffer = camera_mats->get_data();
-	camera_matrices_buffer.view_matrix = camera_transform.get_transform_matrix();
-	camera_matrices_buffer.projection_matrix = glm::perspective(glm::radians(main_camera.fov), main_camera.aspect_ratio, main_camera.near, main_camera.far);
-	camera_mats->send_data();
+	camera_mats.view_matrix = camera_transform.get_transform_matrix();
 
-	cube->render(camera_matrices_buffer);
+	cube->render(camera_mats);
 
 	render_framebuffer->generate_mipmaps();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	fullscreen_quad->render(camera_matrices_buffer);
-	
+	fullscreen_quad->set_material(cube_combine);
+	fullscreen_quad->render(camera_mats);
+
 	glFlush();
 	SwapBuffers();
 }

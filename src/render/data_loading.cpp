@@ -3,8 +3,10 @@
 #include <fstream>
 
 #include <easylogging++.h>
+#include <stb_image.h>
 
-#define MATERIAL_DIRECTORY "shaders/"
+#define MATERIAL_DIRECTORY	"shaders/"
+#define TEXTURES_DIRECTORY	"textures/"
 
 std::shared_ptr<renderable> load_cube() {
 	auto cube = renderable{};

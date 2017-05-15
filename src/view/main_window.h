@@ -7,8 +7,8 @@
 
 #include "../render/gl_texture.h"
 
-#include "texture_preview_canvas.h"
 #include "noname.h"
+#include "texture_preview_canvas.h"
 
 
 class main_window : public _main_window {

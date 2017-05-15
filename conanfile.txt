@@ -2,6 +2,7 @@
 easyloggingpp/9.94.1@memsharded/testing
 glm/0.9.7.6@dlarudgus20/stable
 stb_image/2.12@dsobczyk/testing
+OpenEXR/2.2.0@Mikayex/stable
 
 [generators]
 cmake

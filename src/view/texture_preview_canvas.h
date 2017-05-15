@@ -8,9 +8,9 @@
 #include "../render/data_loading.h"
 #include "../render/framebuffer.h"
 #include "../render/transform.h"
-#include "../render/uniform_buffer.h"
 #include "../render/buffers.h"
 #include "../render/entity.h"
+#include "../render/gl_texture.h"
 
 #include <wx/wxprec.h>
 
@@ -24,14 +24,11 @@
 
 #define CUBE_ROTATE_SPEED 1
 
-#undef near
-#undef far
-
 struct camera {
 	float fov;
 	float aspect_ratio;
-	float near;
-	float far;
+	float near_plane;
+	float far_plane;
 };
 
 class texture_preview_canvas;
@@ -66,17 +63,16 @@ private:
 
 	std::unique_ptr<render_timer> timer;
 	
-	std::unique_ptr<uniform_buffer<camera_matrices>> camera_mats;
+	camera_matrices camera_mats;
 	std::unique_ptr<framebuffer> render_framebuffer;
 
 	std::unique_ptr<entity> cube;
 	std::shared_ptr<material> cube_lighting;
 	std::shared_ptr<material> cube_combine;
 
-	std::unique_ptr<entity> skybox;
-	std::shared_ptr<material> skybox_mat;
-
 	std::unique_ptr<entity> fullscreen_quad;
+	std::shared_ptr<texture> skybox_tex;
+	std::shared_ptr<material> skybox_mat;
 	std::shared_ptr<material> post_processing_mat;
 
 	std::shared_ptr<material> test_mat;

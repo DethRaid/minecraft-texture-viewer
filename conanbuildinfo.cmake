@@ -1,3 +1,21 @@
+set(CONAN_OPENEXR_ROOT "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0")
+set(CONAN_INCLUDE_DIRS_OPENEXR "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/include"
+			"C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/include/OpenEXR")
+set(CONAN_LIB_DIRS_OPENEXR "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/lib")
+set(CONAN_BIN_DIRS_OPENEXR "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/bin")
+set(CONAN_RES_DIRS_OPENEXR "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/res")
+set(CONAN_BUILD_DIRS_OPENEXR "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/")
+set(CONAN_LIBS_OPENEXR IlmImf-2_2 IlmImfUtil-2_2)
+set(CONAN_DEFINES_OPENEXR -DOPENEXR_DLL)
+# COMPILE_DEFINITIONS are equal to CONAN_DEFINES without -D, for targets
+set(CONAN_COMPILE_DEFINITIONS_OPENEXR OPENEXR_DLL)
+
+set(CONAN_C_FLAGS_OPENEXR "")
+set(CONAN_CXX_FLAGS_OPENEXR "")
+set(CONAN_SHARED_LINKER_FLAGS_OPENEXR "")
+set(CONAN_EXE_LINKER_FLAGS_OPENEXR "")
+
+
 set(CONAN_EASYLOGGINGPP_ROOT "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9")
 set(CONAN_INCLUDE_DIRS_EASYLOGGINGPP "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include")
 set(CONAN_LIB_DIRS_EASYLOGGINGPP "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib")
@@ -49,13 +67,48 @@ set(CONAN_SHARED_LINKER_FLAGS_STB_IMAGE "")
 set(CONAN_EXE_LINKER_FLAGS_STB_IMAGE "")
 
 
+set(CONAN_ILMBASE_ROOT "C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c")
+set(CONAN_INCLUDE_DIRS_ILMBASE "C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/include"
+			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/include/OpenEXR")
+set(CONAN_LIB_DIRS_ILMBASE "C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/lib")
+set(CONAN_BIN_DIRS_ILMBASE "C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/bin")
+set(CONAN_RES_DIRS_ILMBASE "C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/res")
+set(CONAN_BUILD_DIRS_ILMBASE "C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/")
+set(CONAN_LIBS_ILMBASE Imath-2_2 IexMath-2_2 Half Iex-2_2 IlmThread-2_2)
+set(CONAN_DEFINES_ILMBASE -DOPENEXR_DLL)
+# COMPILE_DEFINITIONS are equal to CONAN_DEFINES without -D, for targets
+set(CONAN_COMPILE_DEFINITIONS_ILMBASE OPENEXR_DLL)
+
+set(CONAN_C_FLAGS_ILMBASE "")
+set(CONAN_CXX_FLAGS_ILMBASE "")
+set(CONAN_SHARED_LINKER_FLAGS_ILMBASE "")
+set(CONAN_EXE_LINKER_FLAGS_ILMBASE "")
+
+
+set(CONAN_ZLIB_ROOT "C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7")
+set(CONAN_INCLUDE_DIRS_ZLIB "C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/include")
+set(CONAN_LIB_DIRS_ZLIB "C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/lib")
+set(CONAN_BIN_DIRS_ZLIB "C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/bin")
+set(CONAN_RES_DIRS_ZLIB "C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/res")
+set(CONAN_BUILD_DIRS_ZLIB "C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/")
+set(CONAN_LIBS_ZLIB zlibstatic)
+set(CONAN_DEFINES_ZLIB )
+# COMPILE_DEFINITIONS are equal to CONAN_DEFINES without -D, for targets
+set(CONAN_COMPILE_DEFINITIONS_ZLIB )
+
+set(CONAN_C_FLAGS_ZLIB "")
+set(CONAN_CXX_FLAGS_ZLIB "")
+set(CONAN_SHARED_LINKER_FLAGS_ZLIB "")
+set(CONAN_EXE_LINKER_FLAGS_ZLIB "")
+
+
 
 ### Definition of global aggregated variables ###
 
 set(CONAN_PACKAGE_NAME None)
 set(CONAN_PACKAGE_VERSION None)
 
-set(CONAN_DEPENDENCIES easyloggingpp glm stb_image)
+set(CONAN_DEPENDENCIES OpenEXR easyloggingpp glm stb_image IlmBase zlib)
 # Storing original command line args (CMake helper) flags
 set(CONAN_CMD_CXX_FLAGS ${CONAN_CXX_FLAGS})
 
@@ -63,23 +116,40 @@ set(CONAN_CMD_SHARED_LINKER_FLAGS ${CONAN_SHARED_LINKER_FLAGS})
 set(CONAN_CMD_C_FLAGS ${CONAN_C_FLAGS})
 # Defining accumulated conan variables for all deps
 
-set(CONAN_INCLUDE_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
+set(CONAN_INCLUDE_DIRS "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/include"
+			"C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/include/OpenEXR"
+			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
-			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include" ${CONAN_INCLUDE_DIRS})
-set(CONAN_LIB_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib"
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
+			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/include"
+			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/include/OpenEXR"
+			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/include" ${CONAN_INCLUDE_DIRS})
+set(CONAN_LIB_DIRS "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/lib"
+			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib"
-			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib" ${CONAN_LIB_DIRS})
-set(CONAN_BIN_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin"
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib"
+			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/lib"
+			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/lib" ${CONAN_LIB_DIRS})
+set(CONAN_BIN_DIRS "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/bin"
+			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin"
-			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin" ${CONAN_BIN_DIRS})
-set(CONAN_RES_DIRS "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res"
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin"
+			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/bin"
+			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/bin" ${CONAN_BIN_DIRS})
+set(CONAN_RES_DIRS "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/res"
+			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res"
-			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res" ${CONAN_RES_DIRS})
-set(CONAN_LIBS  ${CONAN_LIBS})
-set(CONAN_DEFINES  ${CONAN_DEFINES})
-set(CONAN_CMAKE_MODULE_PATH "C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/"
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res"
+			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/res"
+			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/res" ${CONAN_RES_DIRS})
+set(CONAN_LIBS IlmImf-2_2 IlmImfUtil-2_2 Imath-2_2 IexMath-2_2 Half Iex-2_2 IlmThread-2_2 zlibstatic ${CONAN_LIBS})
+set(CONAN_DEFINES -DOPENEXR_DLL ${CONAN_DEFINES})
+set(CONAN_CMAKE_MODULE_PATH "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/"
+			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/"
-			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/" ${CONAN_CMAKE_MODULE_PATH})
+			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/"
+			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/"
+			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/" ${CONAN_CMAKE_MODULE_PATH})
 
 set(CONAN_CXX_FLAGS " ${CONAN_CXX_FLAGS}")
 set(CONAN_SHARED_LINKER_FLAGS " ${CONAN_SHARED_LINKER_FLAGS}")
@@ -97,6 +167,37 @@ macro(conan_define_targets)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CONAN_CMD_C_FLAGS}")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${CONAN_CMD_SHARED_LINKER_FLAGS}")
 
+
+    conan_find_libraries_abs_path("${CONAN_LIBS_OPENEXR}" "${CONAN_LIB_DIRS_OPENEXR}"
+                                  CONAN_FULLPATH_LIBS_OPENEXR)
+    conan_find_libraries_abs_path("${CONAN_LIBS_OPENEXR_DEBUG}" "${CONAN_LIB_DIRS_OPENEXR_DEBUG}"
+                                  CONAN_FULLPATH_LIBS_OPENEXR_DEBUG)
+    conan_find_libraries_abs_path("${CONAN_LIBS_OPENEXR_RELEASE}" "${CONAN_LIB_DIRS_OPENEXR_RELEASE}"
+                                  CONAN_FULLPATH_LIBS_OPENEXR_RELEASE)
+
+    add_library(CONAN_PKG::OpenEXR INTERFACE IMPORTED)
+    foreach(build_type "" "_DEBUG" "_RELEASE")
+        string(REPLACE " " ";" "CONAN_C_FLAGS_OPENEXR${build_type}"     "${CONAN_C_FLAGS_OPENEXR${build_type}}")
+        string(REPLACE " " ";" "CONAN_CXX_FLAGS_OPENEXR${build_type}"   "${CONAN_CXX_FLAGS_OPENEXR${build_type}}")
+        string(REPLACE " " ";" "CONAN_SHARED_LINKER_FLAGS_OPENEXR${build_type}" "${CONAN_SHARED_LINKER_FLAGS_OPENEXR${build_type}}")
+        string(REPLACE " " ";" "CONAN_EXE_LINKER_FLAGS_OPENEXR${build_type}"    "${CONAN_EXE_LINKER_FLAGS_OPENEXR${build_type}}")
+    endforeach()
+
+    # Property INTERFACE_LINK_FLAGS do not work, necessary to add to INTERFACE_LINK_LIBRARIES
+    set_property(TARGET CONAN_PKG::OpenEXR PROPERTY INTERFACE_LINK_LIBRARIES ${CONAN_FULLPATH_LIBS_OPENEXR} ${CONAN_SHARED_LINKER_FLAGS_OPENEXR} ${CONAN_EXE_LINKER_FLAGS_OPENEXR}
+                                                                 $<$<CONFIG:Release>:${CONAN_FULLPATH_LIBS_OPENEXR_RELEASE} ${CONAN_SHARED_LINKER_FLAGS_OPENEXR_RELEASE} ${CONAN_EXE_LINKER_FLAGS_OPENEXR_RELEASE}>
+                                                                 $<$<CONFIG:Debug>:${CONAN_FULLPATH_LIBS_OPENEXR_DEBUG} ${CONAN_SHARED_LINKER_FLAGS_OPENEXR_DEBUG} ${CONAN_EXE_LINKER_FLAGS_OPENEXR_DEBUG}>
+                                                                 CONAN_PKG::IlmBase CONAN_PKG::zlib)
+    set_property(TARGET CONAN_PKG::OpenEXR PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CONAN_INCLUDE_DIRS_OPENEXR}
+                                                                      $<$<CONFIG:Release>:${CONAN_INCLUDE_DIRS_OPENEXR_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_INCLUDE_DIRS_OPENEXR_DEBUG}>)
+    set_property(TARGET CONAN_PKG::OpenEXR PROPERTY INTERFACE_COMPILE_DEFINITIONS ${CONAN_COMPILE_DEFINITIONS_OPENEXR}
+                                                                      $<$<CONFIG:Release>:${CONAN_COMPILE_DEFINITIONS_OPENEXR_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_COMPILE_DEFINITIONS_OPENEXR_DEBUG}>)
+    set_property(TARGET CONAN_PKG::OpenEXR PROPERTY INTERFACE_COMPILE_OPTIONS ${CONAN_C_FLAGS_OPENEXR} ${CONAN_CXX_FLAGS_OPENEXR}
+                                                                  $<$<CONFIG:Release>:${CONAN_C_FLAGS_OPENEXR_RELEASE} ${CONAN_CXX_FLAGS_OPENEXR_RELEASE}>
+                                                                  $<$<CONFIG:Debug>:${CONAN_C_FLAGS_OPENEXR_DEBUG}  ${CONAN_CXX_FLAGS_OPENEXR_DEBUG}>)
+ 
 
     conan_find_libraries_abs_path("${CONAN_LIBS_EASYLOGGINGPP}" "${CONAN_LIB_DIRS_EASYLOGGINGPP}"
                                   CONAN_FULLPATH_LIBS_EASYLOGGINGPP)
@@ -190,7 +291,69 @@ macro(conan_define_targets)
                                                                   $<$<CONFIG:Release>:${CONAN_C_FLAGS_STB_IMAGE_RELEASE} ${CONAN_CXX_FLAGS_STB_IMAGE_RELEASE}>
                                                                   $<$<CONFIG:Debug>:${CONAN_C_FLAGS_STB_IMAGE_DEBUG}  ${CONAN_CXX_FLAGS_STB_IMAGE_DEBUG}>)
  
-    set(CONAN_TARGETS CONAN_PKG::easyloggingpp CONAN_PKG::glm CONAN_PKG::stb_image)
+
+    conan_find_libraries_abs_path("${CONAN_LIBS_ILMBASE}" "${CONAN_LIB_DIRS_ILMBASE}"
+                                  CONAN_FULLPATH_LIBS_ILMBASE)
+    conan_find_libraries_abs_path("${CONAN_LIBS_ILMBASE_DEBUG}" "${CONAN_LIB_DIRS_ILMBASE_DEBUG}"
+                                  CONAN_FULLPATH_LIBS_ILMBASE_DEBUG)
+    conan_find_libraries_abs_path("${CONAN_LIBS_ILMBASE_RELEASE}" "${CONAN_LIB_DIRS_ILMBASE_RELEASE}"
+                                  CONAN_FULLPATH_LIBS_ILMBASE_RELEASE)
+
+    add_library(CONAN_PKG::IlmBase INTERFACE IMPORTED)
+    foreach(build_type "" "_DEBUG" "_RELEASE")
+        string(REPLACE " " ";" "CONAN_C_FLAGS_ILMBASE${build_type}"     "${CONAN_C_FLAGS_ILMBASE${build_type}}")
+        string(REPLACE " " ";" "CONAN_CXX_FLAGS_ILMBASE${build_type}"   "${CONAN_CXX_FLAGS_ILMBASE${build_type}}")
+        string(REPLACE " " ";" "CONAN_SHARED_LINKER_FLAGS_ILMBASE${build_type}" "${CONAN_SHARED_LINKER_FLAGS_ILMBASE${build_type}}")
+        string(REPLACE " " ";" "CONAN_EXE_LINKER_FLAGS_ILMBASE${build_type}"    "${CONAN_EXE_LINKER_FLAGS_ILMBASE${build_type}}")
+    endforeach()
+
+    # Property INTERFACE_LINK_FLAGS do not work, necessary to add to INTERFACE_LINK_LIBRARIES
+    set_property(TARGET CONAN_PKG::IlmBase PROPERTY INTERFACE_LINK_LIBRARIES ${CONAN_FULLPATH_LIBS_ILMBASE} ${CONAN_SHARED_LINKER_FLAGS_ILMBASE} ${CONAN_EXE_LINKER_FLAGS_ILMBASE}
+                                                                 $<$<CONFIG:Release>:${CONAN_FULLPATH_LIBS_ILMBASE_RELEASE} ${CONAN_SHARED_LINKER_FLAGS_ILMBASE_RELEASE} ${CONAN_EXE_LINKER_FLAGS_ILMBASE_RELEASE}>
+                                                                 $<$<CONFIG:Debug>:${CONAN_FULLPATH_LIBS_ILMBASE_DEBUG} ${CONAN_SHARED_LINKER_FLAGS_ILMBASE_DEBUG} ${CONAN_EXE_LINKER_FLAGS_ILMBASE_DEBUG}>
+                                                                 )
+    set_property(TARGET CONAN_PKG::IlmBase PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CONAN_INCLUDE_DIRS_ILMBASE}
+                                                                      $<$<CONFIG:Release>:${CONAN_INCLUDE_DIRS_ILMBASE_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_INCLUDE_DIRS_ILMBASE_DEBUG}>)
+    set_property(TARGET CONAN_PKG::IlmBase PROPERTY INTERFACE_COMPILE_DEFINITIONS ${CONAN_COMPILE_DEFINITIONS_ILMBASE}
+                                                                      $<$<CONFIG:Release>:${CONAN_COMPILE_DEFINITIONS_ILMBASE_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_COMPILE_DEFINITIONS_ILMBASE_DEBUG}>)
+    set_property(TARGET CONAN_PKG::IlmBase PROPERTY INTERFACE_COMPILE_OPTIONS ${CONAN_C_FLAGS_ILMBASE} ${CONAN_CXX_FLAGS_ILMBASE}
+                                                                  $<$<CONFIG:Release>:${CONAN_C_FLAGS_ILMBASE_RELEASE} ${CONAN_CXX_FLAGS_ILMBASE_RELEASE}>
+                                                                  $<$<CONFIG:Debug>:${CONAN_C_FLAGS_ILMBASE_DEBUG}  ${CONAN_CXX_FLAGS_ILMBASE_DEBUG}>)
+ 
+
+    conan_find_libraries_abs_path("${CONAN_LIBS_ZLIB}" "${CONAN_LIB_DIRS_ZLIB}"
+                                  CONAN_FULLPATH_LIBS_ZLIB)
+    conan_find_libraries_abs_path("${CONAN_LIBS_ZLIB_DEBUG}" "${CONAN_LIB_DIRS_ZLIB_DEBUG}"
+                                  CONAN_FULLPATH_LIBS_ZLIB_DEBUG)
+    conan_find_libraries_abs_path("${CONAN_LIBS_ZLIB_RELEASE}" "${CONAN_LIB_DIRS_ZLIB_RELEASE}"
+                                  CONAN_FULLPATH_LIBS_ZLIB_RELEASE)
+
+    add_library(CONAN_PKG::zlib INTERFACE IMPORTED)
+    foreach(build_type "" "_DEBUG" "_RELEASE")
+        string(REPLACE " " ";" "CONAN_C_FLAGS_ZLIB${build_type}"     "${CONAN_C_FLAGS_ZLIB${build_type}}")
+        string(REPLACE " " ";" "CONAN_CXX_FLAGS_ZLIB${build_type}"   "${CONAN_CXX_FLAGS_ZLIB${build_type}}")
+        string(REPLACE " " ";" "CONAN_SHARED_LINKER_FLAGS_ZLIB${build_type}" "${CONAN_SHARED_LINKER_FLAGS_ZLIB${build_type}}")
+        string(REPLACE " " ";" "CONAN_EXE_LINKER_FLAGS_ZLIB${build_type}"    "${CONAN_EXE_LINKER_FLAGS_ZLIB${build_type}}")
+    endforeach()
+
+    # Property INTERFACE_LINK_FLAGS do not work, necessary to add to INTERFACE_LINK_LIBRARIES
+    set_property(TARGET CONAN_PKG::zlib PROPERTY INTERFACE_LINK_LIBRARIES ${CONAN_FULLPATH_LIBS_ZLIB} ${CONAN_SHARED_LINKER_FLAGS_ZLIB} ${CONAN_EXE_LINKER_FLAGS_ZLIB}
+                                                                 $<$<CONFIG:Release>:${CONAN_FULLPATH_LIBS_ZLIB_RELEASE} ${CONAN_SHARED_LINKER_FLAGS_ZLIB_RELEASE} ${CONAN_EXE_LINKER_FLAGS_ZLIB_RELEASE}>
+                                                                 $<$<CONFIG:Debug>:${CONAN_FULLPATH_LIBS_ZLIB_DEBUG} ${CONAN_SHARED_LINKER_FLAGS_ZLIB_DEBUG} ${CONAN_EXE_LINKER_FLAGS_ZLIB_DEBUG}>
+                                                                 )
+    set_property(TARGET CONAN_PKG::zlib PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CONAN_INCLUDE_DIRS_ZLIB}
+                                                                      $<$<CONFIG:Release>:${CONAN_INCLUDE_DIRS_ZLIB_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_INCLUDE_DIRS_ZLIB_DEBUG}>)
+    set_property(TARGET CONAN_PKG::zlib PROPERTY INTERFACE_COMPILE_DEFINITIONS ${CONAN_COMPILE_DEFINITIONS_ZLIB}
+                                                                      $<$<CONFIG:Release>:${CONAN_COMPILE_DEFINITIONS_ZLIB_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_COMPILE_DEFINITIONS_ZLIB_DEBUG}>)
+    set_property(TARGET CONAN_PKG::zlib PROPERTY INTERFACE_COMPILE_OPTIONS ${CONAN_C_FLAGS_ZLIB} ${CONAN_CXX_FLAGS_ZLIB}
+                                                                  $<$<CONFIG:Release>:${CONAN_C_FLAGS_ZLIB_RELEASE} ${CONAN_CXX_FLAGS_ZLIB_RELEASE}>
+                                                                  $<$<CONFIG:Debug>:${CONAN_C_FLAGS_ZLIB_DEBUG}  ${CONAN_CXX_FLAGS_ZLIB_DEBUG}>)
+ 
+    set(CONAN_TARGETS CONAN_PKG::OpenEXR CONAN_PKG::easyloggingpp CONAN_PKG::glm CONAN_PKG::stb_image CONAN_PKG::IlmBase CONAN_PKG::zlib)
 
 endmacro()
 
