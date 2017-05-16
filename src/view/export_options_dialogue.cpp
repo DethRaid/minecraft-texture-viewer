@@ -2,7 +2,7 @@
 
 #include <easylogging++.h>
 
-export_options_dialogue::export_options_dialogue(wxWindow* parent, textures_struct textures) :
+export_options_dialogue::export_options_dialogue(wxWindow* parent, textures_struct& textures) :
 	_export_options_dialogue(parent), textures(textures) {
 	export_folder_picker->Bind(wxEVT_FILEPICKER_CHANGED, [&](wxFileDirPickerEvent& event) {
 		LOG(DEBUG) << "Set output file path to " << event.GetPath();
@@ -22,5 +22,9 @@ export_options_dialogue::export_options_dialogue(wxWindow* parent, textures_stru
 
 	export_button->Bind(wxEVT_BUTTON, [&](wxCommandEvent& event) {
 		LOG(INFO) << "Building textures";
+		//output_pbr_color_texture();
+		//output_pbr_normal_texture();
+		//output_pbr_data_texture();
 	});
 }
+

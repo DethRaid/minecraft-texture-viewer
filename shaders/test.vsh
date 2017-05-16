@@ -26,5 +26,5 @@ void main() {
 
 	tbn_matrix = mat3(view_matrix * model_matrix);
 
-	view_vector = vec3(0, 0.75, 0) - (view_matrix * model_matrix * vec4(position_in, 1.0)).xyz;
+	view_vector = normalize(vec3(0, 0.75, 0) - (view_matrix * model_matrix * vec4(position_in, 1.0)).xyz);
 }

@@ -8,14 +8,18 @@
 
 class export_options_dialogue : public _export_options_dialogue {
 public:
-	export_options_dialogue(wxWindow* parent, textures_struct textures);
+	export_options_dialogue(wxWindow* parent, textures_struct& textures);
 
 private:
-	textures_struct textures;
+	textures_struct& textures;
 	int texture_size;
 
 	std::string export_folder;
 	std::string export_filename;
+
+	//void output_pbr_color_texture();
+	//void output_pbr_normal_texture();
+	//void output_pbr_data_texture();
 };
 
 #endif

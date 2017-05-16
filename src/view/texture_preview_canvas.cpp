@@ -112,7 +112,7 @@ void texture_preview_canvas::init_resources() {
 
 	camera_mats.projection_matrix = glm::perspective(glm::radians(main_camera.fov), main_camera.aspect_ratio, main_camera.near_plane, main_camera.far_plane);
 
-	skybox_tex = std::make_shared<hdr_texture>(1, "textures/golden_autumn_road.hdr");
+	skybox_tex = std::make_shared<hdr_texture>(1, "textures/golden_autumn_road_small.hdr");
 }
 
 void texture_preview_canvas::do_tick() {
@@ -136,7 +136,7 @@ void texture_preview_canvas::render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glDepthMask(false);
 	fullscreen_quad->set_material(skybox_mat);
-	fullscreen_quad->render();
+	fullscreen_quad->render(camera_mats);
 	glDepthMask(true);
 
 	camera_mats.view_matrix = camera_transform.get_transform_matrix();
