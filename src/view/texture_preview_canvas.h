@@ -43,6 +43,7 @@ public:
 	void on_size_change(wxSize& size);
 	void on_paint(wxPaintEvent& evt);
 	void on_idle(wxIdleEvent& evt);
+	void on_mouse_event(wxMouseEvent& event);
 	void render();
 protected:
 	wxDECLARE_EVENT_TABLE();
@@ -56,6 +57,9 @@ private:
 	clock_t last_frame_end = 0;
 
 	bool render_available = false;
+
+	bool dragging = false;
+	glm::vec2 last_mouse_pos;
 
 	std::unique_ptr<render_timer> timer;
 	
@@ -73,7 +77,6 @@ private:
 	
 	transform_data camera_transform;
 	camera main_camera;
-	std::unique_ptr<mouse_events_manager> mouse;
 
 	void init_opengl();
 	void init_resources();

@@ -41,8 +41,6 @@ texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& 
 
 	timer = std::make_unique<render_timer>(this);
 	timer->start();
-
-	mouse = std::make_unique<mouse_events_manager>(this, main_camera);
 }
 
 void texture_preview_canvas::on_size_change(wxSize& size) {
@@ -66,6 +64,20 @@ void texture_preview_canvas::on_paint(wxPaintEvent& evt) {
 
 void texture_preview_canvas::on_idle(wxIdleEvent& evt) {
 	Refresh();
+}
+
+void texture_preview_canvas::on_mouse_event(wxMouseEvent& event) {
+	event.Skip();
+
+	if(event.LeftIsDown()) {
+		auto mouse_pos = glm::vec2{ event.GetX(), event.GetY() };
+		if(!dragging) {
+			dragging = true;
+		} else {
+			// Update the camera
+		}
+		last_mouse_pos = mouse_pos;
+	}
 }
 
 void texture_preview_canvas::init_opengl() {
