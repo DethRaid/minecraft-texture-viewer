@@ -17,7 +17,7 @@ private:
 	std::string export_folder;
 	std::string export_filename;
 
-	//void output_pbr_color_texture();
+	void output_pbr_color_texture();
 	//void output_pbr_normal_texture();
 	//void output_pbr_data_texture();
 };

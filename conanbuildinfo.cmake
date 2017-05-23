@@ -67,6 +67,23 @@ set(CONAN_SHARED_LINKER_FLAGS_STB_IMAGE "")
 set(CONAN_EXE_LINKER_FLAGS_STB_IMAGE "")
 
 
+set(CONAN_STB_IMAGE_WRITE_ROOT "C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7")
+set(CONAN_INCLUDE_DIRS_STB_IMAGE_WRITE "C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/include")
+set(CONAN_LIB_DIRS_STB_IMAGE_WRITE "C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/lib")
+set(CONAN_BIN_DIRS_STB_IMAGE_WRITE "C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/bin")
+set(CONAN_RES_DIRS_STB_IMAGE_WRITE "C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/res")
+set(CONAN_BUILD_DIRS_STB_IMAGE_WRITE "C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/")
+set(CONAN_LIBS_STB_IMAGE_WRITE )
+set(CONAN_DEFINES_STB_IMAGE_WRITE )
+# COMPILE_DEFINITIONS are equal to CONAN_DEFINES without -D, for targets
+set(CONAN_COMPILE_DEFINITIONS_STB_IMAGE_WRITE )
+
+set(CONAN_C_FLAGS_STB_IMAGE_WRITE "")
+set(CONAN_CXX_FLAGS_STB_IMAGE_WRITE "")
+set(CONAN_SHARED_LINKER_FLAGS_STB_IMAGE_WRITE "")
+set(CONAN_EXE_LINKER_FLAGS_STB_IMAGE_WRITE "")
+
+
 set(CONAN_ILMBASE_ROOT "C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c")
 set(CONAN_INCLUDE_DIRS_ILMBASE "C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/include"
 			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/include/OpenEXR")
@@ -108,7 +125,7 @@ set(CONAN_EXE_LINKER_FLAGS_ZLIB "")
 set(CONAN_PACKAGE_NAME None)
 set(CONAN_PACKAGE_VERSION None)
 
-set(CONAN_DEPENDENCIES OpenEXR easyloggingpp glm stb_image IlmBase zlib)
+set(CONAN_DEPENDENCIES OpenEXR easyloggingpp glm stb_image stb_image_write IlmBase zlib)
 # Storing original command line args (CMake helper) flags
 set(CONAN_CMD_CXX_FLAGS ${CONAN_CXX_FLAGS})
 
@@ -121,6 +138,7 @@ set(CONAN_INCLUDE_DIRS "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/
 			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
 			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include"
+			"C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/include"
 			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/include"
 			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/include/OpenEXR"
 			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/include" ${CONAN_INCLUDE_DIRS})
@@ -128,18 +146,21 @@ set(CONAN_LIB_DIRS "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/pack
 			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib"
 			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/lib"
+			"C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/lib"
 			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/lib"
 			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/lib" ${CONAN_LIB_DIRS})
 set(CONAN_BIN_DIRS "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/bin"
 			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin"
 			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/bin"
+			"C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/bin"
 			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/bin"
 			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/bin" ${CONAN_BIN_DIRS})
 set(CONAN_RES_DIRS "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/stable/package/e0f08fe7bbeb27a26044febb401b117af5c0eff0/res"
 			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res"
 			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/res"
+			"C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/res"
 			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/res"
 			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/res" ${CONAN_RES_DIRS})
 set(CONAN_LIBS IlmImf-2_2 IlmImfUtil-2_2 Imath-2_2 IexMath-2_2 Half Iex-2_2 IlmThread-2_2 zlibstatic ${CONAN_LIBS})
@@ -148,6 +169,7 @@ set(CONAN_CMAKE_MODULE_PATH "C:/Users/gold1/.conan/data/OpenEXR/2.2.0/Mikayex/st
 			"C:/Users/gold1/.conan/data/easyloggingpp/9.94.1/memsharded/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/"
 			"C:/Users/gold1/.conan/data/glm/0.9.7.6/dlarudgus20/stable/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/"
 			"C:/Users/gold1/.conan/data/stb_image/2.12/dsobczyk/testing/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/"
+			"C:/Users/gold1/.conan/data/stb_image_write/1.02/fr00b0/testing/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/"
 			"C:/Users/gold1/.conan/data/IlmBase/2.2.0/Mikayex/stable/package/4258a05c6d0cc781f358ce875c59ba548eccac1c/"
 			"C:/Users/gold1/.conan/data/zlib/1.2.8/lasote/stable/package/6cc50b139b9c3d27b3e9042d5f5372d327b3a9f7/" ${CONAN_CMAKE_MODULE_PATH})
 
@@ -292,6 +314,37 @@ macro(conan_define_targets)
                                                                   $<$<CONFIG:Debug>:${CONAN_C_FLAGS_STB_IMAGE_DEBUG}  ${CONAN_CXX_FLAGS_STB_IMAGE_DEBUG}>)
  
 
+    conan_find_libraries_abs_path("${CONAN_LIBS_STB_IMAGE_WRITE}" "${CONAN_LIB_DIRS_STB_IMAGE_WRITE}"
+                                  CONAN_FULLPATH_LIBS_STB_IMAGE_WRITE)
+    conan_find_libraries_abs_path("${CONAN_LIBS_STB_IMAGE_WRITE_DEBUG}" "${CONAN_LIB_DIRS_STB_IMAGE_WRITE_DEBUG}"
+                                  CONAN_FULLPATH_LIBS_STB_IMAGE_WRITE_DEBUG)
+    conan_find_libraries_abs_path("${CONAN_LIBS_STB_IMAGE_WRITE_RELEASE}" "${CONAN_LIB_DIRS_STB_IMAGE_WRITE_RELEASE}"
+                                  CONAN_FULLPATH_LIBS_STB_IMAGE_WRITE_RELEASE)
+
+    add_library(CONAN_PKG::stb_image_write INTERFACE IMPORTED)
+    foreach(build_type "" "_DEBUG" "_RELEASE")
+        string(REPLACE " " ";" "CONAN_C_FLAGS_STB_IMAGE_WRITE${build_type}"     "${CONAN_C_FLAGS_STB_IMAGE_WRITE${build_type}}")
+        string(REPLACE " " ";" "CONAN_CXX_FLAGS_STB_IMAGE_WRITE${build_type}"   "${CONAN_CXX_FLAGS_STB_IMAGE_WRITE${build_type}}")
+        string(REPLACE " " ";" "CONAN_SHARED_LINKER_FLAGS_STB_IMAGE_WRITE${build_type}" "${CONAN_SHARED_LINKER_FLAGS_STB_IMAGE_WRITE${build_type}}")
+        string(REPLACE " " ";" "CONAN_EXE_LINKER_FLAGS_STB_IMAGE_WRITE${build_type}"    "${CONAN_EXE_LINKER_FLAGS_STB_IMAGE_WRITE${build_type}}")
+    endforeach()
+
+    # Property INTERFACE_LINK_FLAGS do not work, necessary to add to INTERFACE_LINK_LIBRARIES
+    set_property(TARGET CONAN_PKG::stb_image_write PROPERTY INTERFACE_LINK_LIBRARIES ${CONAN_FULLPATH_LIBS_STB_IMAGE_WRITE} ${CONAN_SHARED_LINKER_FLAGS_STB_IMAGE_WRITE} ${CONAN_EXE_LINKER_FLAGS_STB_IMAGE_WRITE}
+                                                                 $<$<CONFIG:Release>:${CONAN_FULLPATH_LIBS_STB_IMAGE_WRITE_RELEASE} ${CONAN_SHARED_LINKER_FLAGS_STB_IMAGE_WRITE_RELEASE} ${CONAN_EXE_LINKER_FLAGS_STB_IMAGE_WRITE_RELEASE}>
+                                                                 $<$<CONFIG:Debug>:${CONAN_FULLPATH_LIBS_STB_IMAGE_WRITE_DEBUG} ${CONAN_SHARED_LINKER_FLAGS_STB_IMAGE_WRITE_DEBUG} ${CONAN_EXE_LINKER_FLAGS_STB_IMAGE_WRITE_DEBUG}>
+                                                                 )
+    set_property(TARGET CONAN_PKG::stb_image_write PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CONAN_INCLUDE_DIRS_STB_IMAGE_WRITE}
+                                                                      $<$<CONFIG:Release>:${CONAN_INCLUDE_DIRS_STB_IMAGE_WRITE_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_INCLUDE_DIRS_STB_IMAGE_WRITE_DEBUG}>)
+    set_property(TARGET CONAN_PKG::stb_image_write PROPERTY INTERFACE_COMPILE_DEFINITIONS ${CONAN_COMPILE_DEFINITIONS_STB_IMAGE_WRITE}
+                                                                      $<$<CONFIG:Release>:${CONAN_COMPILE_DEFINITIONS_STB_IMAGE_WRITE_RELEASE}>
+                                                                      $<$<CONFIG:Debug>:${CONAN_COMPILE_DEFINITIONS_STB_IMAGE_WRITE_DEBUG}>)
+    set_property(TARGET CONAN_PKG::stb_image_write PROPERTY INTERFACE_COMPILE_OPTIONS ${CONAN_C_FLAGS_STB_IMAGE_WRITE} ${CONAN_CXX_FLAGS_STB_IMAGE_WRITE}
+                                                                  $<$<CONFIG:Release>:${CONAN_C_FLAGS_STB_IMAGE_WRITE_RELEASE} ${CONAN_CXX_FLAGS_STB_IMAGE_WRITE_RELEASE}>
+                                                                  $<$<CONFIG:Debug>:${CONAN_C_FLAGS_STB_IMAGE_WRITE_DEBUG}  ${CONAN_CXX_FLAGS_STB_IMAGE_WRITE_DEBUG}>)
+ 
+
     conan_find_libraries_abs_path("${CONAN_LIBS_ILMBASE}" "${CONAN_LIB_DIRS_ILMBASE}"
                                   CONAN_FULLPATH_LIBS_ILMBASE)
     conan_find_libraries_abs_path("${CONAN_LIBS_ILMBASE_DEBUG}" "${CONAN_LIB_DIRS_ILMBASE_DEBUG}"
@@ -353,7 +406,7 @@ macro(conan_define_targets)
                                                                   $<$<CONFIG:Release>:${CONAN_C_FLAGS_ZLIB_RELEASE} ${CONAN_CXX_FLAGS_ZLIB_RELEASE}>
                                                                   $<$<CONFIG:Debug>:${CONAN_C_FLAGS_ZLIB_DEBUG}  ${CONAN_CXX_FLAGS_ZLIB_DEBUG}>)
  
-    set(CONAN_TARGETS CONAN_PKG::OpenEXR CONAN_PKG::easyloggingpp CONAN_PKG::glm CONAN_PKG::stb_image CONAN_PKG::IlmBase CONAN_PKG::zlib)
+    set(CONAN_TARGETS CONAN_PKG::OpenEXR CONAN_PKG::easyloggingpp CONAN_PKG::glm CONAN_PKG::stb_image CONAN_PKG::stb_image_write CONAN_PKG::IlmBase CONAN_PKG::zlib)
 
 endmacro()
 

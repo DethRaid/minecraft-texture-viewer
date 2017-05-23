@@ -17,6 +17,7 @@ void main() {
 
 	vec3 normal_sample = texture(normal_tex, uv).rgb * 2.0 - 1.0;
 
-	vec4 combined_color = vec4(color_sample * diffuse_light + specular_light, 1);
-	final_color = combined_color / (1.0 + combined_color);
+	vec3 combined_color = /*color_sample * diffuse_light +*/ specular_light;
+	vec3 tonemapped_color = combined_color.rgb / (1.0 + combined_color.rgb);
+	final_color = vec4(pow(tonemapped_color, vec3(1.0 / 2.2)), 1.0);
 }

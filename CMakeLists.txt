@@ -16,10 +16,11 @@ add_definitions(-D_UNICODE -D_CRT_SECURE_NO_WARNINGS)
 
 file(GLOB VIEW_FILES src/view/*.cpp)
 file(GLOB RENDER_FILES src/render/*.cpp)
+file(GLOB MOUSE_FILES src/input/*.cpp)
 
 file(GLOB RENDER_HEADERS src/render/*.h)
 
-set(SOURCE_FILES ${VIEW_FILES} ${RENDER_FILES} src/render/glad.c)
+set(SOURCE_FILES ${VIEW_FILES} ${RENDER_FILES} ${MOUSE_FILES} src/render/glad.c)
 add_executable(TexturePreviewer ${SOURCE_FILES})
 
 target_link_libraries(TexturePreviewer wxbase31ud wxmsw31ud_core wxmsw31ud_gl)

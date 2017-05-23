@@ -1,56 +1,52 @@
 #version 450
 
-layout(binding = 0)  uniform sampler2D main;
-layout(binding = 1)  uniform sampler2D enviorment;
-layout(binding = 2)  uniform sampler2D depthtex;
-layout(binding = 3)  uniform sampler2D albedo;
-layout(binding = 4)  uniform sampler2D opacity;
-layout(binding = 5)  uniform sampler2D normal;
-layout(binding = 6)  uniform sampler2D height;
-layout(binding = 7)  uniform sampler2D emission;
-layout(binding = 8)  uniform sampler2D transmission;
-layout(binding = 9)  uniform sampler2D smoothness;
-layout(binding = 10) uniform sampler2D porosity;
-layout(binding = 11) uniform sampler2D f0;
-layout(binding = 12) uniform sampler2D AO;
-
-in vec2 texcoord;
+in vec2 uv;
 in vec3 normal;
 
-layout(location = 0) out vec4 diffuseColor;
-layout(location = 1) out vec4 diffuse;
-layout(location = 2) out vec4 specular;
-layout(location = 3) out vec3 normal;
+in mat3 tbn_matrix;
 
-struct matData {
-    vec3 albedo;
-    float opacity;
-    vec3 normal;
-    float height;
-    float emission;
-    float transmission;
-    float smoothness;
-    float porosity;
-    float f0;
-    float AO;
-} mat;
+in vec3 view_vector;
 
-matData fillMatData() {
-    matData mat;
+layout(binding = 1) uniform sampler2D environment;
+layout(binding = 3) uniform sampler2D albedo_tex;
 
-    mat.albedo       = texture(albedoSample, texcoord).rgb;
-    mat.opacity      = texture(opacitySample, texcoord).r;
-    mat.normal       = texture(normalSample, texcoord).xyz;
-    mat.height       = texture(heightSample, texcoord).r;
-    mat.emission     = texture(emissionSample, texcoord).r;
-    mat.transmission = texture(transmissionSample, texcoord).r;
-    mat.smoothness   = texture(smoothnessSample, texcoord).r;
-    mat.porosity     = texture(porositySample, texcoord).r;
-    mat.f0           = texture(f0Sample, texcoord).r;
-    mat.AO           = texture(AOSample, texcoord).r;
+layout(location = 0) out vec3 color_out;
+layout(location = 1) out vec3 diffuse_out;
+layout(location = 2) out vec3 specular_out;
+layout(location = 3) out vec3 normal_out;
 
-    return mat;
+#define PI 3.14159265
+
+vec2 get_sky_coord(in vec3 direction) {
+    float lon = atan(direction.z, direction.x);
+    if(direction.z < 0) {
+        lon = 2 * PI - atan(-direction.z, direction.x);
+    }
+
+    float lat = acos(direction.y);
+
+    const vec2 rads = vec2(1.0 / (PI * 2.0), 1.0 / PI);
+    vec2 sphereCoords = vec2(lon, lat) * rads;
+    sphereCoords.y = 1.0 - sphereCoords.y;
+
+    return sphereCoords;
 }
 
 void main() {
+	vec3 light_direction = vec3(1, 1, 1);
+	vec3 normal_viewspace = normalize(tbn_matrix * normal);
+	
+    color_out = texture(albedo_tex, uv).rgb;
+	diffuse_out = texture(environment, get_sky_coord(normal_viewspace), 7).rgb;
+	
+	vec3 reflection_direction = reflect(-view_vector, normal_viewspace);
+
+	// Phong specularity
+	vec3 h = (view_vector + normal_viewspace) * 0.5;
+	vec3 r = reflect(reflection_direction, h);
+	float ndoth = max(0, dot(normal_viewspace, h));
+
+	specular_out = texture(environment, get_sky_coord(reflection_direction), 7).rgb;
+
+	normal_out = normal_viewspace * 0.5 + 0.5;
 }

@@ -11,6 +11,9 @@
 #include "../render/buffers.h"
 #include "../render/entity.h"
 #include "../render/gl_texture.h"
+#include "../render/camera.h"
+
+#include "../input/mouse_events_manager.h"
 
 #include <wx/wxprec.h>
 
@@ -23,13 +26,6 @@
 #include <glm/glm.hpp>
 
 #define CUBE_ROTATE_SPEED 1
-
-struct camera {
-	float fov;
-	float aspect_ratio;
-	float near_plane;
-	float far_plane;
-};
 
 class texture_preview_canvas;
 
@@ -74,11 +70,10 @@ private:
 	std::shared_ptr<texture> skybox_tex;
 	std::shared_ptr<material> skybox_mat;
 	std::shared_ptr<material> post_processing_mat;
-
-	std::shared_ptr<material> test_mat;
-
+	
 	transform_data camera_transform;
 	camera main_camera;
+	std::unique_ptr<mouse_events_manager> mouse;
 
 	void init_opengl();
 	void init_resources();

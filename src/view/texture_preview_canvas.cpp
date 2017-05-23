@@ -35,13 +35,14 @@ texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& 
 	SetCurrent(*context);
 
 	init_opengl();
-	glViewport(0, 0, window_width, window_height);
 	SwapBuffers();
 
 	init_resources();
 
 	timer = std::make_unique<render_timer>(this);
 	timer->start();
+
+	mouse = std::make_unique<mouse_events_manager>(this, main_camera);
 }
 
 void texture_preview_canvas::on_size_change(wxSize& size) {
@@ -74,6 +75,7 @@ void texture_preview_canvas::init_opengl() {
 	
 		//throw std::runtime_error("Could not initialize OpenGL");
 	}
+	LOG(DEBUG) << "OpenGL functions loaded";
 
 	glDebugMessageCallback(error_callback, nullptr);
 
@@ -82,19 +84,17 @@ void texture_preview_canvas::init_opengl() {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glClearDepth(1.0);
-
-	LOG(INFO) << "OpenGL functions loaded";
+	glViewport(0, 0, window_width, window_height);
 }
 
 void texture_preview_canvas::init_resources() {
-	test_mat = load_material("test");
-	//cube_lighting = load_material("cube_lighting_pass");
+	cube_lighting = load_material("cube_lighting_pass");
 	cube_combine = load_material("cube_combine_pass");
 	skybox_mat = load_material("skybox");
 
 	cube = std::make_unique<entity>();
 	cube->set_geometry(load_cube());
-	cube->set_material(test_mat);
+	cube->set_material(cube_lighting);
 	
 	fullscreen_quad = std::make_unique<entity>();
 	fullscreen_quad->set_geometry(load_fullscreen_quad());

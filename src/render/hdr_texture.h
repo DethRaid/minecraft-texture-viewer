@@ -5,7 +5,7 @@
 
 class hdr_texture : public texture {
 public:
-	hdr_texture(int binding, std::string filename);
+	hdr_texture(int binding, std::string filename, bool make_mipmaps = true);
 private:
 	void upload_texture_data();
 };

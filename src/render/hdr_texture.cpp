@@ -3,11 +3,15 @@
 #include <stb_image.h>
 #include <easylogging++.h>
 
-hdr_texture::hdr_texture(int binding, std::string filename) {
+hdr_texture::hdr_texture(int binding, std::string filename, bool make_mipmaps) {
 	create(binding);
 
 	data = (unsigned char*) stbi_loadf(filename.c_str(), &width, &height, &num_components, 0);
 	upload_texture_data();
+
+	if(make_mipmaps) {
+		glGenerateTextureMipmap(gl_name);
+	}
 }
 
 void hdr_texture::upload_texture_data() {
