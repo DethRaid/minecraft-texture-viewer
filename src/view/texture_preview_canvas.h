@@ -13,8 +13,6 @@
 #include "../render/gl_texture.h"
 #include "../render/camera.h"
 
-#include "../input/mouse_events_manager.h"
-
 #include <wx/wxprec.h>
 
 #ifndef WX_PRECOMP
@@ -52,7 +50,7 @@ private:
 	int window_height = 200;
 	int window_width = 200;
 
-	double delta_time;
+	double delta_time = 0;
 	double elapsed_time = 0;
 	clock_t last_frame_end = 0;
 
@@ -60,6 +58,7 @@ private:
 
 	bool dragging = false;
 	glm::vec2 last_mouse_pos;
+	glm::vec2 mouse_delta;
 
 	std::unique_ptr<render_timer> timer;
 	
@@ -75,7 +74,6 @@ private:
 	std::shared_ptr<material> skybox_mat;
 	std::shared_ptr<material> post_processing_mat;
 	
-	transform_data camera_transform;
 	camera main_camera;
 
 	void init_opengl();

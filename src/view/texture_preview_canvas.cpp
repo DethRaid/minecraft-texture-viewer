@@ -41,6 +41,8 @@ texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& 
 
 	timer = std::make_unique<render_timer>(this);
 	timer->start();
+
+	last_frame_end = clock();
 }
 
 void texture_preview_canvas::on_size_change(wxSize& size) {
@@ -74,7 +76,7 @@ void texture_preview_canvas::on_mouse_event(wxMouseEvent& event) {
 		if(!dragging) {
 			dragging = true;
 		} else {
-			// Update the camera
+			mouse_delta = mouse_pos - last_mouse_pos;
 		}
 		last_mouse_pos = mouse_pos;
 	}
@@ -114,21 +116,22 @@ void texture_preview_canvas::init_resources() {
 
 	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
 
-	camera_transform.set_position({ 0, -0.75f, -2 });
-	camera_transform.look_at({ 0, -0.75f, 0 });
+	main_camera.transform.set_position({ 0, -0.75f, -2 });
+	main_camera.transform.look_at({ 0, -0.75f, 0 });
 
 	main_camera.fov = 60;
 	main_camera.aspect_ratio = (float) window_width / (float) window_height;
 	main_camera.near_plane = 0.1f;
 	main_camera.far_plane = 100;
 
-	camera_mats.projection_matrix = glm::perspective(glm::radians(main_camera.fov), main_camera.aspect_ratio, main_camera.near_plane, main_camera.far_plane);
+	camera_mats.projection_matrix = main_camera.get_projection_matrix();
 
 	skybox_tex = std::make_shared<hdr_texture>(1, "textures/golden_autumn_road_small.hdr");
 }
 
 void texture_preview_canvas::do_tick() {
 	cube->get_transform().set_rotation(CUBE_ROTATE_SPEED * elapsed_time, glm::vec3(0, 1, 0));
+	main_camera.respond_to_mouse_move(mouse_delta, delta_time);
 
 	render();
 
@@ -151,7 +154,7 @@ void texture_preview_canvas::render() {
 	fullscreen_quad->render(camera_mats);
 	glDepthMask(true);
 
-	camera_mats.view_matrix = camera_transform.get_transform_matrix();
+	camera_mats.view_matrix = main_camera.transform.get_transform_matrix();
 
 	cube->render(camera_mats);
 
@@ -169,4 +172,5 @@ void texture_preview_canvas::render() {
 wxBEGIN_EVENT_TABLE(texture_preview_canvas, wxGLCanvas)
 	EVT_PAINT(texture_preview_canvas::on_paint)
 	EVT_IDLE(texture_preview_canvas::on_idle)
+	EVT_MOUSE_EVENTS(texture_preview_canvas::on_mouse_event)
 wxEND_EVENT_TABLE()
