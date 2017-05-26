@@ -617,6 +617,13 @@ _export_options_dialogue::_export_options_dialogue( wxWindow* parent, wxWindowID
 	export_resolution_combobox->SetSelection( 3 );
 	fgSizer2->Add( export_resolution_combobox, 0, wxALL, 5 );
 	
+	m_staticText321 = new wxStaticText( this, wxID_ANY, wxT("Is leaf?"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText321->Wrap( -1 );
+	fgSizer2->Add( m_staticText321, 0, wxALL, 5 );
+	
+	leaf_checkbox = new wxCheckBox( this, wxID_ANY, wxT("Leaf"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer2->Add( leaf_checkbox, 0, wxALL, 5 );
+	
 	
 	fgSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
 	

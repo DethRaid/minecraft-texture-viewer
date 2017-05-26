@@ -32,6 +32,7 @@
 #include <wx/statusbr.h>
 #include <wx/frame.h>
 #include <wx/combobox.h>
+#include <wx/checkbox.h>
 #include <wx/button.h>
 #include <wx/dialog.h>
 
@@ -186,6 +187,8 @@ class _export_options_dialogue : public wxDialog
 		wxStaticText* data_tex_name_output;
 		wxStaticText* m_staticText34;
 		wxComboBox* export_resolution_combobox;
+		wxStaticText* m_staticText321;
+		wxCheckBox* leaf_checkbox;
 		wxButton* export_button;
 	
 	public:

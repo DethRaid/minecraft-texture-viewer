@@ -21,7 +21,7 @@ private:
 
 	void output_pbr_color_texture();
 	void output_pbr_normal_texture();
-	//void output_pbr_data_texture();
+	void output_pbr_data_texture();
 };
 
 #endif

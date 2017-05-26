@@ -43,7 +43,7 @@ export_options_dialogue::export_options_dialogue(wxWindow* parent, textures_stru
 
 		output_pbr_color_texture();
 		output_pbr_normal_texture();
-		//output_pbr_data_texture();
+		output_pbr_data_texture();
 	});
 }
 
@@ -65,10 +65,10 @@ void export_options_dialogue::output_pbr_color_texture() {
 			auto color_sample = textures.albedo_tex->at({ u, v });
 			auto opacity_sample = textures.opacity_tex->at({ u, v });
 
-			data[idx] = color_sample.r;
-			data[idx + 1] = color_sample.g;
-			data[idx + 2] = color_sample.b;
-			data[idx + 3] = opacity_sample.r;
+			data[idx]		= color_sample.r;
+			data[idx + 1]	= color_sample.g;
+			data[idx + 2]	= color_sample.b;
+			data[idx + 3]	= opacity_sample.r;
 
 			idx += 4;
 		}
@@ -91,16 +91,13 @@ void export_options_dialogue::output_pbr_normal_texture() {
 		for(float u = 0; u <= 1; u += pixel_size) {
 			auto sample_pos = glm::vec2{ u, v };
 			auto normal_sample = textures.normal_tex->at(sample_pos);
-			auto ao_sample = textures.ao_tex->at(sample_pos);
-			auto emission_sample = textures.emission_tex->at(sample_pos);
-			auto translucence_sample = textures.translucence_tex->at(sample_pos);
-			auto color_sample = textures.albedo_tex->at(glm::vec2(u, v));
-			auto opacity_sample = textures.opacity_tex->at(glm::vec2(u, v));
-
-			data[idx] = color_sample.r;
-			data[idx + 1] = color_sample.g;
-			data[idx + 2] = color_sample.b;
-			data[idx + 3] = opacity_sample.r;
+			auto ao_sample = textures.ao_tex->at(sample_pos).r;
+			auto height_sample = textures.height_tex->at(sample_pos).r;
+			
+			data[idx]		= normal_sample.r * ao_sample;
+			data[idx + 1]	= normal_sample.g * ao_sample;
+			data[idx + 2]	= normal_sample.b * ao_sample;
+			data[idx + 3]	= height_sample;
 
 			idx += 4;
 		}
@@ -114,3 +111,34 @@ void export_options_dialogue::output_pbr_normal_texture() {
 	}
 }
 
+void export_options_dialogue::output_pbr_data_texture() {
+	float pixel_size = 1.0f / texture_size;
+	char * data = new char[texture_size * texture_size * 4];
+	int idx = 0;
+	bool is_leaf = leaf_checkbox->GetValue();
+
+	for(float v = 0; v <= 1; v += pixel_size) {
+		for(float u = 0; u <= 1; u += pixel_size) {
+			auto sample_pos = glm::vec2{ u, v };
+			auto f0_sample = textures.f0_tex->at(sample_pos).r;
+			auto porosity_sample = textures.porosity_tex->at(sample_pos).r;
+			auto smoothness_sample = textures.smoothness_tex->at(sample_pos).r;
+			auto emission_sample = textures.emission_tex->at(sample_pos).r;
+			auto translucence_sample = textures.translucence_tex->at(sample_pos).r;
+
+			data[idx]		= f0_sample;
+			data[idx + 1]	= porosity_sample;
+			data[idx + 2]	= smoothness_sample;
+			data[idx + 3]	= is_leaf ? translucence_sample : emission_sample;
+
+			idx += 4;
+		}
+	}
+
+	auto data_texture_path = output_directory + filename_base + "_s.png";
+	auto err = stbi_write_png(data_texture_path.c_str(), texture_size, texture_size, 4, data, 0);
+	if(err) {
+		LOG(ERROR) << "Could not write data texture " << data_texture_path;
+		wxMessageBox("Could not write data texture " + data_texture_path, "Error", wxOK | wxICON_ERROR, this);
+	}
+}
