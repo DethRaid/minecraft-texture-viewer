@@ -15,5 +15,5 @@ void camera::respond_to_mouse_move(glm::vec2 mouse_delta, float delta_time) {
 	auto translation_amount = up * mouse_delta.y + left * -mouse_delta.x;
 
 	transform.translate_by(translation_amount * CAMERA_MOVE_SPEED * delta_time);
-	transform.look_at(glm::vec3{ 0, 0, 0 });
+	transform.look_at({ 0, -0.75f, 0 });
 }

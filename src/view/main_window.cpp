@@ -41,13 +41,20 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 	hook_up_translucence_controls();
 	hook_up_ao_controls();
 	hook_up_emission_controls();
-	hook_up_menu_items();
 }
 
 void main_window::on_size_change(wxSizeEvent& event) {
 	auto size = event.GetSize();
 	size -= wxSize(options_panel->GetSize().GetWidth(), 0);
 	gl_canvas->on_size_change(size);
+}
+
+void main_window::on_export_textures_pbr(wxCommandEvent& event) {
+	LOG(INFO) << "Exporting textures...";
+
+	export_dialogue.reset();
+	export_dialogue = std::make_unique<export_options_dialogue>(this, textures);
+	export_dialogue->Show(true);
 }
 
 void main_window::hook_up_albedo_controls() {
@@ -405,12 +412,9 @@ void main_window::set_ao(int ao) {
 	textures.ao_tex = std::make_shared<texture>(AO_BINDING, ao);
 }
 
-void main_window::hook_up_menu_items() {
-
-}
-
 wxBEGIN_EVENT_TABLE(main_window, _main_window)
 	EVT_SIZE(main_window::on_size_change)
+	EVT_MENU(ID_EXPORT_PBR, main_window::on_export_textures_pbr)
 wxEND_EVENT_TABLE()
 
 void set_text_input_value(wxTextCtrl* input, int value) {

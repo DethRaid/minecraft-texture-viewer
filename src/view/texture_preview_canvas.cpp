@@ -79,6 +79,9 @@ void texture_preview_canvas::on_mouse_event(wxMouseEvent& event) {
 			mouse_delta = mouse_pos - last_mouse_pos;
 		}
 		last_mouse_pos = mouse_pos;
+	} else {
+		dragging = false;
+		mouse_delta = glm::vec2{ 0 };
 	}
 }
 

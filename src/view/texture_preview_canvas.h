@@ -23,7 +23,7 @@
 
 #include <glm/glm.hpp>
 
-#define CUBE_ROTATE_SPEED 1
+#define CUBE_ROTATE_SPEED 0.1f
 
 class texture_preview_canvas;
 

@@ -15,9 +15,9 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	
 	m_menubar1 = new wxMenuBar( 0 );
 	export_menu = new wxMenu();
-	wxMenuItem* export_pulchra_menuitem;
-	export_pulchra_menuitem = new wxMenuItem( export_menu, ID_EXPORT_PULCHRA, wxString( wxT("To Pulchra Format") ) + wxT('\t') + wxT("CTRL+e"), wxEmptyString, wxITEM_NORMAL );
-	export_menu->Append( export_pulchra_menuitem );
+	wxMenuItem* export_pbr_menuitem;
+	export_pbr_menuitem = new wxMenuItem( export_menu, ID_EXPORT_PBR, wxString( wxT("To PBR Format") ) + wxT('\t') + wxT("CTRL+e"), wxEmptyString, wxITEM_NORMAL );
+	export_menu->Append( export_pbr_menuitem );
 	
 	m_menubar1->Append( export_menu, wxT("Export") ); 
 	
@@ -566,14 +566,14 @@ _export_options_dialogue::_export_options_dialogue( wxWindow* parent, wxWindowID
 	m_staticText26->Wrap( -1 );
 	fgSizer2->Add( m_staticText26, 0, wxALL, 5 );
 	
-	export_folder_picker = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxSize( 300,-1 ), wxFLP_DEFAULT_STYLE );
+	export_folder_picker = new wxDirPickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a folder"), wxDefaultPosition, wxSize( 300,-1 ), wxDIRP_DEFAULT_STYLE );
 	fgSizer2->Add( export_folder_picker, 0, wxALL, 5 );
 	
 	m_staticText27 = new wxStaticText( this, wxID_ANY, wxT("Filename base:"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
 	m_staticText27->Wrap( -1 );
 	fgSizer2->Add( m_staticText27, 0, wxALL, 5 );
 	
-	export_filename_input = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	export_filename_input = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 300,-1 ), wxTE_PROCESS_ENTER );
 	fgSizer2->Add( export_filename_input, 0, wxALL, 5 );
 	
 	m_staticText28 = new wxStaticText( this, wxID_ANY, wxT("Color texure name:"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -604,7 +604,7 @@ _export_options_dialogue::_export_options_dialogue( wxWindow* parent, wxWindowID
 	m_staticText34->Wrap( -1 );
 	fgSizer2->Add( m_staticText34, 0, wxALL, 5 );
 	
-	export_resolution_combobox = new wxComboBox( this, wxID_ANY, wxT("128"), wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
+	export_resolution_combobox = new wxComboBox( this, wxID_ANY, wxT("128"), wxDefaultPosition, wxDefaultSize, 0, NULL, wxCB_DROPDOWN|wxCB_READONLY|wxTE_PROCESS_ENTER );
 	export_resolution_combobox->Append( wxT("16") );
 	export_resolution_combobox->Append( wxT("32") );
 	export_resolution_combobox->Append( wxT("64") );
@@ -614,6 +614,7 @@ _export_options_dialogue::_export_options_dialogue( wxWindow* parent, wxWindowID
 	export_resolution_combobox->Append( wxT("1024") );
 	export_resolution_combobox->Append( wxT("2048") );
 	export_resolution_combobox->Append( wxT("4096") );
+	export_resolution_combobox->SetSelection( 3 );
 	fgSizer2->Add( export_resolution_combobox, 0, wxALL, 5 );
 	
 	

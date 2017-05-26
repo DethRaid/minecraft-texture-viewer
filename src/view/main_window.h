@@ -5,10 +5,9 @@
 #ifndef TEXTUREPREVIEWER_MAIN_WINDOW_H
 #define TEXTUREPREVIEWER_MAIN_WINDOW_H
 
-#include "../render/gl_texture.h"
-
 #include "noname.h"
 #include "texture_preview_canvas.h"
+#include "export_options_dialogue.h"
 
 
 class main_window : public _main_window {
@@ -19,6 +18,7 @@ protected:
 	wxDECLARE_EVENT_TABLE();
 private:
 	std::unique_ptr<texture_preview_canvas> gl_canvas;
+	std::unique_ptr<export_options_dialogue> export_dialogue;
 
 	textures_struct textures;
 
@@ -51,7 +51,7 @@ private:
 	void hook_up_ao_controls();
 	void set_ao(int ao);
 
-	void hook_up_menu_items();
+	void on_export_textures_pbr(wxCommandEvent& event);
 };
 
 void set_text_input_value(wxTextCtrl* input, int value);

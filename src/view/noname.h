@@ -37,7 +37,7 @@
 
 ///////////////////////////////////////////////////////////////////////////
 
-#define ID_EXPORT_PULCHRA 1000
+#define ID_EXPORT_PBR 1000
 #define albedo_slider 1001
 #define specular_slider 1002
 
@@ -175,7 +175,7 @@ class _export_options_dialogue : public wxDialog
 	
 	protected:
 		wxStaticText* m_staticText26;
-		wxFilePickerCtrl* export_folder_picker;
+		wxDirPickerCtrl* export_folder_picker;
 		wxStaticText* m_staticText27;
 		wxTextCtrl* export_filename_input;
 		wxStaticText* m_staticText28;
