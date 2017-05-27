@@ -21,6 +21,13 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	
 	m_menubar1->Append( export_menu, wxT("Export") ); 
 	
+	m_menu2 = new wxMenu();
+	wxMenuItem* m_menuItem2;
+	m_menuItem2 = new wxMenuItem( m_menu2, ID_REFRESH_SHADERS, wxString( wxT("Refresh Shaders") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu2->Append( m_menuItem2 );
+	
+	m_menubar1->Append( m_menu2, wxT("Refresh") ); 
+	
 	this->SetMenuBar( m_menubar1 );
 	
 	wxBoxSizer* bSizer15;

@@ -153,6 +153,26 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
+                <object class="wxMenu" expanded="1">
+                    <property name="label">Refresh</property>
+                    <property name="name">m_menu2</property>
+                    <property name="permission">protected</property>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">ID_REFRESH_SHADERS</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Refresh Shaders</property>
+                        <property name="name">m_menuItem2</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut"></property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection"></event>
+                        <event name="OnUpdateUI"></event>
+                    </object>
+                </object>
             </object>
             <object class="wxBoxSizer" expanded="0">
                 <property name="minimum_size"></property>

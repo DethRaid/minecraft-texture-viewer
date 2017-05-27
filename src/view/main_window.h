@@ -52,6 +52,7 @@ private:
 	void set_ao(int ao);
 
 	void on_export_textures_pbr(wxCommandEvent& event);
+	void refresh_shaders(wxCommandEvent& event);
 };
 
 void set_text_input_value(wxTextCtrl* input, int value);

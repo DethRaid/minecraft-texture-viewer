@@ -39,8 +39,9 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #define ID_EXPORT_PBR 1000
-#define albedo_slider 1001
-#define specular_slider 1002
+#define ID_REFRESH_SHADERS 1001
+#define albedo_slider 1002
+#define specular_slider 1003
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class _main_window
@@ -52,6 +53,7 @@ class _main_window : public wxFrame
 	protected:
 		wxMenuBar* m_menubar1;
 		wxMenu* export_menu;
+		wxMenu* m_menu2;
 		wxPanel* options_panel;
 		wxStaticText* m_staticText1;
 		wxScrolledWindow* texture_selector_scroll;

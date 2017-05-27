@@ -6,14 +6,16 @@ glm::mat4 camera::get_projection_matrix() {
 	return glm::perspective(glm::radians(fov), aspect_ratio, near_plane, far_plane);
 }
 
-void camera::respond_to_mouse_move(glm::vec2 mouse_delta, float delta_time) {
-	static auto world_up = glm::vec3{ 0, 1, 0 };
-	auto forward = -transform.get_position();
-	auto left = glm::cross(world_up, forward);
-	auto up = glm::cross(-left, forward);
+glm::mat4 camera::get_view_matrix() {
+	glm::mat4 view_matrix;
+	view_matrix = glm::translate(view_matrix, { 0, 0, -dist_from_origin });
+	view_matrix = glm::rotate(view_matrix, glm::radians(rotation.y), { 1, 0, 0 });
+	view_matrix = glm::rotate(view_matrix, glm::radians(rotation.x), { 0, 1, 0 });
 
-	auto translation_amount = up * mouse_delta.y + left * -mouse_delta.x;
-
-	transform.translate_by(translation_amount * CAMERA_MOVE_SPEED * delta_time);
-	transform.look_at({ 0, -0.75f, 0 });
+	return view_matrix;
 }
+
+void camera::respond_to_mouse_move(glm::vec2 mouse_delta, float delta_time) {
+	rotation += mouse_delta * delta_time * CAMERA_MOVE_SPEED;
+}
+

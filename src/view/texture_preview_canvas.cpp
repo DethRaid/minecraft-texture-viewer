@@ -105,9 +105,7 @@ void texture_preview_canvas::init_opengl() {
 }
 
 void texture_preview_canvas::init_resources() {
-	cube_lighting = load_material("cube_lighting_pass");
-	cube_combine = load_material("cube_combine_pass");
-	skybox_mat = load_material("skybox");
+	load_shaders();
 
 	cube = std::make_unique<entity>();
 	cube->set_geometry(load_cube());
@@ -119,8 +117,8 @@ void texture_preview_canvas::init_resources() {
 
 	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
 
-	main_camera.transform.set_position({ 0, -0.75f, -2 });
-	main_camera.transform.look_at({ 0, -0.75f, 0 });
+	main_camera.rotation = { 0, 20 };
+	main_camera.dist_from_origin = 4;
 
 	main_camera.fov = 60;
 	main_camera.aspect_ratio = (float) window_width / (float) window_height;
@@ -130,6 +128,16 @@ void texture_preview_canvas::init_resources() {
 	camera_mats.projection_matrix = main_camera.get_projection_matrix();
 
 	skybox_tex = std::make_shared<hdr_texture>(1, "textures/golden_autumn_road_small.hdr");
+}
+
+void texture_preview_canvas::load_shaders() {
+	cube_lighting.reset();
+	cube_combine.reset();
+	skybox_mat.reset();
+
+	cube_lighting = load_material("cube_lighting_pass");
+	cube_combine = load_material("cube_combine_pass");
+	skybox_mat = load_material("skybox");
 }
 
 void texture_preview_canvas::do_tick() {
@@ -157,7 +165,7 @@ void texture_preview_canvas::render() {
 	fullscreen_quad->render(camera_mats);
 	glDepthMask(true);
 
-	camera_mats.view_matrix = main_camera.transform.get_transform_matrix();
+	camera_mats.view_matrix = main_camera.get_view_matrix();
 
 	cube->render(camera_mats);
 

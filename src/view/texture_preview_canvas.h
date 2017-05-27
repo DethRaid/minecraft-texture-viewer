@@ -43,6 +43,8 @@ public:
 	void on_idle(wxIdleEvent& evt);
 	void on_mouse_event(wxMouseEvent& event);
 	void render();
+
+	void load_shaders();
 protected:
 	wxDECLARE_EVENT_TABLE();
 private:

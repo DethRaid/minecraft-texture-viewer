@@ -412,9 +412,14 @@ void main_window::set_ao(int ao) {
 	textures.ao_tex = std::make_shared<texture>(AO_BINDING, ao);
 }
 
+void main_window::refresh_shaders(wxCommandEvent& event) {
+	gl_canvas->load_shaders();
+}
+
 wxBEGIN_EVENT_TABLE(main_window, _main_window)
 	EVT_SIZE(main_window::on_size_change)
 	EVT_MENU(ID_EXPORT_PBR, main_window::on_export_textures_pbr)
+	EVT_MENU(ID_REFRESH_SHADERS, main_window::refresh_shaders)
 wxEND_EVENT_TABLE()
 
 void set_text_input_value(wxTextCtrl* input, int value) {
