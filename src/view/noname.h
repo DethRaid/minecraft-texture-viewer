@@ -21,7 +21,6 @@
 #include <wx/settings.h>
 #include <wx/stattext.h>
 #include <wx/statline.h>
-#include <wx/button.h>
 #include <wx/statbmp.h>
 #include <wx/filepicker.h>
 #include <wx/gbsizer.h>
@@ -34,6 +33,7 @@
 #include <wx/frame.h>
 #include <wx/combobox.h>
 #include <wx/checkbox.h>
+#include <wx/button.h>
 #include <wx/dialog.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -63,7 +63,6 @@ class _main_window : public wxFrame
 		wxStaticLine* m_staticline33;
 		wxPanel* albedo_panel;
 		wxStaticText* texture_name_label1;
-		wxButton* albedo_collapse_button;
 		wxStaticBitmap* albedo_preview;
 		wxStaticLine* m_staticline11;
 		wxFilePickerCtrl* albedo_file_picker;
@@ -77,18 +76,15 @@ class _main_window : public wxFrame
 		wxStaticText* red_label121;
 		wxStaticLine* m_staticline2121;
 		wxFilePickerCtrl* opacity_file_picker;
-		wxButton* opacity_collapse_button;
 		wxStaticLine* m_staticline3312;
 		wxPanel* normal_panel;
 		wxStaticText* texture_name_label11;
-		wxButton* normal_collapse_button;
 		wxStaticBitmap* normal_preview;
 		wxStaticLine* m_staticline111;
 		wxFilePickerCtrl* normal_file_picker;
 		wxStaticLine* m_staticline3311;
 		wxPanel* specular_color_panel;
 		wxStaticText* texture_name_label12;
-		wxButton* f0_collapse_button;
 		wxStaticBitmap* specualr_color_preview;
 		wxStaticLine* m_staticline112;
 		wxSlider* specular_red_slider;
@@ -99,7 +95,6 @@ class _main_window : public wxFrame
 		wxStaticLine* m_staticline33111;
 		wxPanel* smoothness_panel;
 		wxStaticText* roughness_texture_name_labell;
-		wxButton* smoothness_collapse_button;
 		wxStaticBitmap* roughness_color_preview;
 		wxStaticLine* m_staticline113;
 		wxSlider* smoothness_slider;
@@ -161,7 +156,7 @@ class _main_window : public wxFrame
 	
 	public:
 		
-		_main_window( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1268,1196 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		_main_window( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1268,826 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~_main_window();
 	

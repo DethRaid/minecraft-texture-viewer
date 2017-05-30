@@ -48,14 +48,12 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	wxBoxSizer* bSizer15;
 	bSizer15 = new wxBoxSizer( wxVERTICAL );
 	
-	options_panel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxTAB_TRAVERSAL );
+	options_panel = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxSize( 350,-1 ), wxTAB_TRAVERSAL );
 	wxBoxSizer* bSizer2;
 	bSizer2 = new wxBoxSizer( wxVERTICAL );
 	
-	m_staticText1 = new wxStaticText( options_panel, wxID_ANY, wxT("Rendering Data Options"), wxDefaultPosition, wxSize( -1,-1 ), wxALIGN_CENTRE );
+	m_staticText1 = new wxStaticText( options_panel, wxID_ANY, wxT("Rendering Data Options"), wxDefaultPosition, wxSize( 291,-1 ), wxALIGN_CENTRE );
 	m_staticText1->Wrap( -1 );
-	m_staticText1->SetMinSize( wxSize( 295,-1 ) );
-	
 	bSizer2->Add( m_staticText1, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	texture_selector_scroll = new wxScrolledWindow( options_panel, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxVSCROLL );
@@ -71,26 +69,21 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	albedo_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer3;
 	gbSizer3 = new wxGridBagSizer( 0, 0 );
-	gbSizer3->SetFlexibleDirection( wxBOTH );
+	gbSizer3->SetFlexibleDirection( wxVERTICAL );
 	gbSizer3->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	texture_name_label1 = new wxStaticText( albedo_panel, wxID_ANY, wxT("Albedo"), wxDefaultPosition, wxSize( 160,-1 ), wxALIGN_CENTRE );
+	texture_name_label1 = new wxStaticText( albedo_panel, wxID_ANY, wxT("Albedo"), wxDefaultPosition, wxDefaultSize, 0 );
 	texture_name_label1->Wrap( -1 );
 	gbSizer3->Add( texture_name_label1, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
-	albedo_collapse_button = new wxButton( albedo_panel, wxID_ANY, wxT("Collapse"), wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer3->Add( albedo_collapse_button, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALIGN_RIGHT|wxALL, 5 );
-	
 	albedo_preview = new wxStaticBitmap( albedo_panel, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer3->Add( albedo_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 2 ), wxALIGN_CENTER|wxALL, 5 );
+	gbSizer3->Add( albedo_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
-	m_staticline11 = new wxStaticLine( albedo_panel, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxLI_HORIZONTAL );
-	m_staticline11->SetMinSize( wxSize( 261,-1 ) );
-	
-	gbSizer3->Add( m_staticline11, wxGBPosition( 2, 0 ), wxGBSpan( 1, 2 ), wxEXPAND | wxALL, 5 );
+	m_staticline11 = new wxStaticLine( albedo_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
+	gbSizer3->Add( m_staticline11, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	albedo_file_picker = new wxFilePickerCtrl( albedo_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	gbSizer3->Add( albedo_file_picker, wxGBPosition( 3, 0 ), wxGBSpan( 1, 2 ), wxALL|wxEXPAND, 5 );
+	gbSizer3->Add( albedo_file_picker, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	albedo_panel->SetSizer( gbSizer3 );
@@ -104,18 +97,18 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	opacity_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer331;
 	gbSizer331 = new wxGridBagSizer( 0, 0 );
-	gbSizer331->SetFlexibleDirection( wxBOTH );
+	gbSizer331->SetFlexibleDirection( wxVERTICAL );
 	gbSizer331->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	roughness_texture_name_labell1 = new wxStaticText( opacity_panel, wxID_ANY, wxT("Opacity"), wxDefaultPosition, wxSize( 160,-1 ), wxALIGN_CENTRE );
+	roughness_texture_name_labell1 = new wxStaticText( opacity_panel, wxID_ANY, wxT("Opacity"), wxDefaultPosition, wxDefaultSize, 0 );
 	roughness_texture_name_labell1->Wrap( -1 );
 	gbSizer331->Add( roughness_texture_name_labell1, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
 	opacity_color_preview = new wxStaticBitmap( opacity_panel, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer331->Add( opacity_color_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 2 ), wxALIGN_CENTER|wxALL, 5 );
+	gbSizer331->Add( opacity_color_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
 	m_staticline1131 = new wxStaticLine( opacity_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
-	gbSizer331->Add( m_staticline1131, wxGBPosition( 2, 0 ), wxGBSpan( 1, 2 ), wxEXPAND | wxALL, 5 );
+	gbSizer331->Add( m_staticline1131, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	wxGridBagSizer* gbSizer221;
 	gbSizer221 = new wxGridBagSizer( 0, 0 );
@@ -133,16 +126,13 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer221->Add( red_label121, wxGBPosition( 0, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	
-	gbSizer331->Add( gbSizer221, wxGBPosition( 3, 0 ), wxGBSpan( 1, 2 ), wxEXPAND, 5 );
+	gbSizer331->Add( gbSizer221, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
 	
 	m_staticline2121 = new wxStaticLine( opacity_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-	gbSizer331->Add( m_staticline2121, wxGBPosition( 4, 0 ), wxGBSpan( 1, 2 ), wxEXPAND | wxALL, 5 );
+	gbSizer331->Add( m_staticline2121, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	opacity_file_picker = new wxFilePickerCtrl( opacity_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	gbSizer331->Add( opacity_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 2 ), wxALL|wxEXPAND, 5 );
-	
-	opacity_collapse_button = new wxButton( opacity_panel, wxID_ANY, wxT("Collapse"), wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer331->Add( opacity_collapse_button, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALIGN_RIGHT|wxALL, 5 );
+	gbSizer331->Add( opacity_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	opacity_panel->SetSizer( gbSizer331 );
@@ -156,24 +146,21 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	normal_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer31;
 	gbSizer31 = new wxGridBagSizer( 0, 0 );
-	gbSizer31->SetFlexibleDirection( wxBOTH );
+	gbSizer31->SetFlexibleDirection( wxVERTICAL );
 	gbSizer31->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	texture_name_label11 = new wxStaticText( normal_panel, wxID_ANY, wxT("Normal"), wxDefaultPosition, wxSize( 160,-1 ), wxALIGN_CENTRE );
+	texture_name_label11 = new wxStaticText( normal_panel, wxID_ANY, wxT("Normal"), wxDefaultPosition, wxDefaultSize, 0 );
 	texture_name_label11->Wrap( -1 );
 	gbSizer31->Add( texture_name_label11, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
-	normal_collapse_button = new wxButton( normal_panel, wxID_ANY, wxT("Collapse"), wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer31->Add( normal_collapse_button, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALIGN_RIGHT|wxALL, 5 );
-	
 	normal_preview = new wxStaticBitmap( normal_panel, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer31->Add( normal_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 2 ), wxALIGN_CENTER|wxALL, 5 );
+	gbSizer31->Add( normal_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
 	m_staticline111 = new wxStaticLine( normal_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
-	gbSizer31->Add( m_staticline111, wxGBPosition( 2, 0 ), wxGBSpan( 1, 2 ), wxALL|wxEXPAND, 5 );
+	gbSizer31->Add( m_staticline111, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	normal_file_picker = new wxFilePickerCtrl( normal_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	gbSizer31->Add( normal_file_picker, wxGBPosition( 3, 0 ), wxGBSpan( 1, 2 ), wxALL|wxEXPAND, 5 );
+	gbSizer31->Add( normal_file_picker, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	normal_panel->SetSizer( gbSizer31 );
@@ -187,21 +174,18 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	specular_color_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer32;
 	gbSizer32 = new wxGridBagSizer( 0, 0 );
-	gbSizer32->SetFlexibleDirection( wxBOTH );
+	gbSizer32->SetFlexibleDirection( wxVERTICAL );
 	gbSizer32->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	texture_name_label12 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("F0"), wxDefaultPosition, wxSize( 160,-1 ), wxALIGN_CENTRE );
+	texture_name_label12 = new wxStaticText( specular_color_panel, wxID_ANY, wxT("F0"), wxDefaultPosition, wxDefaultSize, 0 );
 	texture_name_label12->Wrap( -1 );
 	gbSizer32->Add( texture_name_label12, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
-	f0_collapse_button = new wxButton( specular_color_panel, wxID_ANY, wxT("Collapse"), wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer32->Add( f0_collapse_button, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALL, 5 );
-	
 	specualr_color_preview = new wxStaticBitmap( specular_color_panel, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer32->Add( specualr_color_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 2 ), wxALIGN_CENTER|wxALL, 5 );
+	gbSizer32->Add( specualr_color_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
 	m_staticline112 = new wxStaticLine( specular_color_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
-	gbSizer32->Add( m_staticline112, wxGBPosition( 2, 0 ), wxGBSpan( 1, 2 ), wxEXPAND | wxALL, 5 );
+	gbSizer32->Add( m_staticline112, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	wxGridBagSizer* gbSizer21;
 	gbSizer21 = new wxGridBagSizer( 0, 0 );
@@ -219,13 +203,13 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer21->Add( red_label11, wxGBPosition( 0, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	
-	gbSizer32->Add( gbSizer21, wxGBPosition( 3, 0 ), wxGBSpan( 1, 2 ), wxEXPAND, 5 );
+	gbSizer32->Add( gbSizer21, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
 	
 	m_staticline211 = new wxStaticLine( specular_color_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-	gbSizer32->Add( m_staticline211, wxGBPosition( 4, 0 ), wxGBSpan( 1, 2 ), wxEXPAND | wxALL, 5 );
+	gbSizer32->Add( m_staticline211, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	specular_file_picker = new wxFilePickerCtrl( specular_color_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	gbSizer32->Add( specular_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 2 ), wxALL|wxEXPAND, 5 );
+	gbSizer32->Add( specular_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	specular_color_panel->SetSizer( gbSizer32 );
@@ -239,21 +223,18 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	smoothness_panel = new wxPanel( texture_selector_scroll, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxGridBagSizer* gbSizer33;
 	gbSizer33 = new wxGridBagSizer( 0, 0 );
-	gbSizer33->SetFlexibleDirection( wxBOTH );
+	gbSizer33->SetFlexibleDirection( wxVERTICAL );
 	gbSizer33->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	roughness_texture_name_labell = new wxStaticText( smoothness_panel, wxID_ANY, wxT("Smoothness"), wxDefaultPosition, wxSize( 160,-1 ), wxALIGN_CENTRE );
+	roughness_texture_name_labell = new wxStaticText( smoothness_panel, wxID_ANY, wxT("Smoothness"), wxDefaultPosition, wxDefaultSize, 0 );
 	roughness_texture_name_labell->Wrap( -1 );
 	gbSizer33->Add( roughness_texture_name_labell, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
-	smoothness_collapse_button = new wxButton( smoothness_panel, wxID_ANY, wxT("Collapse"), wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer33->Add( smoothness_collapse_button, wxGBPosition( 0, 1 ), wxGBSpan( 1, 1 ), wxALIGN_RIGHT|wxALL, 5 );
-	
 	roughness_color_preview = new wxStaticBitmap( smoothness_panel, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, 0 );
-	gbSizer33->Add( roughness_color_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 2 ), wxALIGN_CENTER|wxALL, 5 );
+	gbSizer33->Add( roughness_color_preview, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxALIGN_CENTER|wxALL, 5 );
 	
 	m_staticline113 = new wxStaticLine( smoothness_panel, wxID_ANY, wxDefaultPosition, wxSize( 264,-1 ), wxLI_HORIZONTAL );
-	gbSizer33->Add( m_staticline113, wxGBPosition( 2, 0 ), wxGBSpan( 1, 2 ), wxEXPAND | wxALL, 5 );
+	gbSizer33->Add( m_staticline113, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	wxGridBagSizer* gbSizer22;
 	gbSizer22 = new wxGridBagSizer( 0, 0 );
@@ -271,13 +252,13 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	gbSizer22->Add( red_label12, wxGBPosition( 0, 2 ), wxGBSpan( 1, 1 ), wxALL, 5 );
 	
 	
-	gbSizer33->Add( gbSizer22, wxGBPosition( 3, 0 ), wxGBSpan( 1, 2 ), wxEXPAND, 5 );
+	gbSizer33->Add( gbSizer22, wxGBPosition( 3, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
 	
 	m_staticline212 = new wxStaticLine( smoothness_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
-	gbSizer33->Add( m_staticline212, wxGBPosition( 4, 0 ), wxGBSpan( 1, 2 ), wxEXPAND | wxALL, 5 );
+	gbSizer33->Add( m_staticline212, wxGBPosition( 4, 0 ), wxGBSpan( 1, 1 ), wxEXPAND | wxALL, 5 );
 	
 	smoothness_file_picker = new wxFilePickerCtrl( smoothness_panel, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("Image files|*.png;*.jpg;*.jpeg;*.tiff"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	gbSizer33->Add( smoothness_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 2 ), wxALL|wxEXPAND, 5 );
+	gbSizer33->Add( smoothness_file_picker, wxGBPosition( 5, 0 ), wxGBSpan( 1, 1 ), wxALL|wxEXPAND, 5 );
 	
 	
 	smoothness_panel->SetSizer( gbSizer33 );
@@ -539,7 +520,6 @@ _main_window::_main_window( wxWindow* parent, wxWindowID id, const wxString& tit
 	
 	options_panel->SetSizer( bSizer2 );
 	options_panel->Layout();
-	bSizer2->Fit( options_panel );
 	bSizer15->Add( options_panel, 1, wxALIGN_RIGHT, 5 );
 	
 	
