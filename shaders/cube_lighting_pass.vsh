@@ -16,6 +16,8 @@ out vec3 normal;
 out mat3 tbn_matrix;
 
 out vec3 view_vector;
+out vec3 reflection_direction;
+out vec3 position_viewspace;
 
 void main() {
     uv = uv_in;
@@ -28,5 +30,8 @@ void main() {
 	    
     gl_Position = mvp * vec4(position_in, 1);
 	
-	view_vector = normalize((mv * vec4(position_in, 1.0)).xyz);
+	position_viewspace = (mv * vec4(position_in, 1)).xyz;
+	vec4 camera_position_viewspace = view_matrix * vec4(camera_position, 1);
+	view_vector = normalize(position_viewspace.xyz - camera_position_viewspace.xyz);
+	reflection_direction = reflect(view_vector, normal);
 }

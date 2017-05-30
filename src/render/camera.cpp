@@ -16,6 +16,9 @@ glm::mat4 camera::get_view_matrix() {
 }
 
 void camera::respond_to_mouse_move(glm::vec2 mouse_delta, float delta_time) {
-	rotation += mouse_delta * delta_time * CAMERA_MOVE_SPEED;
+	rotation += mouse_delta * CAMERA_MOVE_SPEED * delta_time;
 }
 
+void camera::respond_to_mouse_wheel(float wheel_delta) {
+	dist_from_origin += wheel_delta * CAMERA_ZOOM_SPEED;
+}

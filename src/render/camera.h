@@ -4,7 +4,8 @@
 #include <glm/glm.hpp>
 #include "transform.h"
 
-#define CAMERA_MOVE_SPEED	1.0f
+#define CAMERA_MOVE_SPEED	5.0f
+#define CAMERA_ZOOM_SPEED	-0.00001f
 
 struct camera {
 	float fov;
@@ -27,6 +28,8 @@ struct camera {
 	 * \param delta_time The time that the last frame took
 	 */
 	void respond_to_mouse_move(glm::vec2 mouse_delta, float delta_time);
+
+	void respond_to_mouse_wheel(float wheel_delta);
 };
 
 #endif

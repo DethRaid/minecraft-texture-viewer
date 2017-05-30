@@ -44,6 +44,8 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 }
 
 void main_window::on_size_change(wxSizeEvent& event) {
+	event.Skip();
+
 	auto size = event.GetSize();
 	size -= wxSize(options_panel->GetSize().GetWidth(), 0);
 	gl_canvas->on_size_change(size);
@@ -58,52 +60,12 @@ void main_window::on_export_textures_pbr(wxCommandEvent& event) {
 }
 
 void main_window::hook_up_albedo_controls() {
-	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto red = albedo_red_slider->GetValue();
-		auto green = albedo_green_slider->GetValue();
-		auto blue = albedo_blue_slider->GetValue();
-
-		set_albedo(red, green, blue);
-	};
-
-	albedo_red_slider->Bind(wxEVT_SLIDER, slider_update_function);
-	albedo_green_slider->Bind(wxEVT_SLIDER, slider_update_function);
-	albedo_blue_slider->Bind(wxEVT_SLIDER, slider_update_function);
-
-	auto input_update = [&](wxCommandEvent& event) {
-		auto red = std::atoi(albedo_red_input->GetValue());
-		auto green = std::atoi(albedo_green_input->GetValue());
-		auto blue = std::atoi(albedo_blue_input->GetValue());
-
-		set_albedo(red, green, blue);
-	};
-
-	albedo_red_input->Bind(wxEVT_TEXT_ENTER, input_update);
-	albedo_green_input->Bind(wxEVT_TEXT_ENTER, input_update);
-	albedo_blue_input->Bind(wxEVT_TEXT_ENTER, input_update);
-
 	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
 		LOG(INFO) << "Grabbed file " << event.GetPath();
 		textures.albedo_tex = std::make_shared<texture>(3, event.GetPath().ToStdString());
 	};
 
 	albedo_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
-
-	slider_update_function(wxCommandEvent());
-}
-
-void main_window::set_albedo(int red, int green, int blue) {
-	set_text_input_value(albedo_red_input, red);
-	set_text_input_value(albedo_green_input, green);
-	set_text_input_value(albedo_blue_input, blue);
-
-	albedo_red_slider->SetValue(red);
-	albedo_green_slider->SetValue(green);
-	albedo_blue_slider->SetValue(blue);
-
-	LOG(DEBUG) << "Updating albedo color to (" << red << ", " << green << ", " << blue << ")";
-
-	textures.albedo_tex = std::make_shared<texture>(ALBEDO_BINDING, red, green, blue);
 }
 
 void main_window::hook_up_opacity_controls() {
@@ -116,7 +78,7 @@ void main_window::hook_up_opacity_controls() {
 	opacity_slider->Bind(wxEVT_SLIDER, slider_update_function);
 
 	auto input_update = [&](wxCommandEvent& event) {
-		auto opacity = std::atoi(opacity_input->GetValue());
+		auto opacity = get_input_value(opacity_input);
 
 		set_opacity(opacity);
 	};
@@ -162,7 +124,7 @@ void main_window::hook_up_specular_color_controls() {
 	specular_red_slider->Bind(wxEVT_SLIDER, slider_update_function);
 
 	auto input_update = [&](wxCommandEvent& event) {
-		auto f0 = std::atoi(specular_red_input->GetValue());
+		auto f0 = get_input_value(specular_red_input);
 
 		set_f0(f0);
 	};
@@ -200,7 +162,7 @@ void main_window::hook_up_smoothness_controls() {
 	smoothness_slider->Bind(wxEVT_SLIDER, slider_update_function);
 
 	auto input_update = [&](wxCommandEvent& event) {
-		auto smoothness = std::atoi(smoothness_input->GetValue());
+		auto smoothness = get_input_value(smoothness_input);
 
 		set_smoothness(smoothness);
 	};
@@ -237,7 +199,7 @@ void main_window::hook_up_emission_controls() {
 	emission_slider->Bind(wxEVT_SLIDER, slider_update_function);
 
 	auto input_update = [&](wxCommandEvent& event) {
-		auto emission = std::atoi(emission_input->GetValue());
+		auto emission = get_input_value(emission_input);
 
 		set_emission(emission);
 	};
@@ -274,7 +236,7 @@ void main_window::hook_up_height_controls() {
 	height_slider->Bind(wxEVT_SLIDER, slider_update_function);
 
 	auto input_update = [&](wxCommandEvent& event) {
-		auto height = std::atoi(height_input->GetValue());
+		auto height = get_input_value(height_input);
 
 		set_height(height);
 	};
@@ -311,7 +273,7 @@ void main_window::hook_up_porosity_controls() {
 	porosity_slider->Bind(wxEVT_SLIDER, slider_update_function);
 
 	auto input_update = [&](wxCommandEvent& event) {
-		auto porosity = std::atoi(porosity_input->GetValue());
+		auto porosity = get_input_value(porosity_input);
 
 		set_porosity(porosity);
 	};
@@ -348,7 +310,7 @@ void main_window::hook_up_translucence_controls() {
 	translucence_slider->Bind(wxEVT_SLIDER, slider_update_function);
 
 	auto input_update = [&](wxCommandEvent& event) {
-		auto translucence = std::atoi(translucence_input->GetValue());
+		auto translucence = get_input_value(translucence_input);
 
 		set_translucence(translucence);
 	};
@@ -385,7 +347,7 @@ void main_window::hook_up_ao_controls() {
 	ao_slider->Bind(wxEVT_SLIDER, slider_update_function);
 
 	auto input_update = [&](wxCommandEvent& event) {
-		auto ao = std::atoi(ao_input->GetValue());
+		auto ao = get_input_value(ao_input);
 
 		set_ao(ao);
 	};
@@ -416,15 +378,39 @@ void main_window::refresh_shaders(wxCommandEvent& event) {
 	gl_canvas->load_shaders();
 }
 
+void main_window::change_background_to_blue_hour(wxCommandEvent& event) {
+	change_background("blue_hour_at_pier.hdr");
+}
+
+void main_window::change_background_to_autumn_road(wxCommandEvent& event) {
+	change_background("golden_autumn_road.hdr");
+}
+
+void main_window::change_background_to_road_in_valley(wxCommandEvent& event) {
+	change_background("road_in_valley.hdr");
+}
+
+void main_window::change_background(std::string background_name) {
+	gl_canvas->change_background(background_name);
+}
+
 wxBEGIN_EVENT_TABLE(main_window, _main_window)
-	EVT_SIZE(main_window::on_size_change)
-	EVT_MENU(ID_EXPORT_PBR, main_window::on_export_textures_pbr)
-	EVT_MENU(ID_REFRESH_SHADERS, main_window::refresh_shaders)
+	EVT_SIZE(									main_window::on_size_change)
+	EVT_MENU(ID_EXPORT_PBR,						main_window::on_export_textures_pbr)
+	EVT_MENU(ID_REFRESH_SHADERS,				main_window::refresh_shaders)
+	EVT_MENU(ID_BLUE_HOUR_AT_PIER_BACKGROUND,	main_window::change_background_to_blue_hour)
+	EVT_MENU(ID_GOLDEN_AUTUMN_ROAD_BACKGROUND,	main_window::change_background_to_autumn_road)
+	EVT_MENU(ID_ROAD_IN_VALLEY_BACKGROUND,		main_window::change_background_to_road_in_valley)
 wxEND_EVENT_TABLE()
 
 void set_text_input_value(wxTextCtrl* input, int value) {
 	static std::stringstream converter;
-	converter << value;
+	converter.precision(3);
+	converter << std::fixed << float(value) / 255.f;
 	input->SetValue(converter.str());
 	converter.str("");
+}
+
+float get_input_value(wxTextCtrl* input) {
+	return std::atof(input->GetValue()) * 255;
 }

@@ -45,6 +45,7 @@ public:
 	void render();
 
 	void load_shaders();
+	void change_background(std::string background_name);
 protected:
 	wxDECLARE_EVENT_TABLE();
 private:
@@ -61,6 +62,7 @@ private:
 	bool dragging = false;
 	glm::vec2 last_mouse_pos;
 	glm::vec2 mouse_delta;
+	float mousewheel_delta = 0;
 
 	std::unique_ptr<render_timer> timer;
 	

@@ -186,10 +186,10 @@ std::shared_ptr<renderable> load_cube() {
 std::shared_ptr<renderable> load_fullscreen_quad() {
 	static auto vertices = std::vector<vertex>{
 		{
-			{-1, -1, 0.5},
-			{0, 0, 1},
-			{1, 0, 0},
-			{0, 0}
+			{ -1, -1, 0.5 },
+			{ 0, 0, 1 },
+			{ 1, 0, 0 },
+			{ 0, 0 }
 		},
 		{
 			{ -1, 1, 0.5 },

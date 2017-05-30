@@ -22,6 +22,9 @@ void APIENTRY error_callback(GLenum source, GLenum type, GLuint id, GLenum sever
 
 texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& attrs, wxSize& size) 
 	: wxGLCanvas(parent, attrs, wxID_ANY, wxDefaultPosition, size) {
+	window_height = size.y;
+	window_width = size.x;
+
 	wxGLContextAttrs contextAttribs;
 	contextAttribs.PlatformDefaults().CoreProfile().OGLVersion(4, 5).DebugCtx().EndList();
 
@@ -47,6 +50,7 @@ texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& 
 
 void texture_preview_canvas::on_size_change(wxSize& size) {
 	SetCurrent(*context);
+	SetSize(size);
 
 	window_height = size.y;
 	window_width = size.x;
@@ -71,18 +75,23 @@ void texture_preview_canvas::on_idle(wxIdleEvent& evt) {
 void texture_preview_canvas::on_mouse_event(wxMouseEvent& event) {
 	event.Skip();
 
-	if(event.LeftIsDown()) {
-		auto mouse_pos = glm::vec2{ event.GetX(), event.GetY() };
-		if(!dragging) {
-			dragging = true;
-		} else {
-			mouse_delta = mouse_pos - last_mouse_pos;
-		}
-		last_mouse_pos = mouse_pos;
+	auto mouse_pos = glm::vec2{ event.GetX(), event.GetY() };
+
+	if(event.Dragging()) {
+		mouse_delta = mouse_pos - last_mouse_pos;
 	} else {
 		dragging = false;
 		mouse_delta = glm::vec2{ 0 };
 	}
+
+	last_mouse_pos = mouse_pos;
+
+	auto wheel_rotation = (float)event.GetWheelRotation();
+	auto wheel_delta = (float)event.GetWheelDelta();
+
+	mousewheel_delta = wheel_rotation * wheel_delta;
+
+	main_camera.respond_to_mouse_wheel(mousewheel_delta);
 }
 
 void texture_preview_canvas::init_opengl() {
@@ -102,6 +111,9 @@ void texture_preview_canvas::init_opengl() {
 	glDepthFunc(GL_LESS);
 	glClearDepth(1.0);
 	glViewport(0, 0, window_width, window_height);
+
+	glHint(GL_AUTO_GENERATE_MIPMAP, GL_FASTEST);
+	glHint(GL_MANUAL_GENERATE_MIPMAP, GL_NICEST);
 }
 
 void texture_preview_canvas::init_resources() {
@@ -127,14 +139,10 @@ void texture_preview_canvas::init_resources() {
 
 	camera_mats.projection_matrix = main_camera.get_projection_matrix();
 
-	skybox_tex = std::make_shared<hdr_texture>(1, "textures/golden_autumn_road_small.hdr");
+	change_background("golden_autumn_road.hdr");
 }
 
 void texture_preview_canvas::load_shaders() {
-	cube_lighting.reset();
-	cube_combine.reset();
-	skybox_mat.reset();
-
 	cube_lighting = load_material("cube_lighting_pass");
 	cube_combine = load_material("cube_combine_pass");
 	skybox_mat = load_material("skybox");
@@ -167,6 +175,7 @@ void texture_preview_canvas::render() {
 
 	camera_mats.view_matrix = main_camera.get_view_matrix();
 
+	cube->set_material(cube_lighting);
 	cube->render(camera_mats);
 
 	render_framebuffer->generate_mipmaps();
@@ -178,6 +187,10 @@ void texture_preview_canvas::render() {
 
 	glFlush();
 	SwapBuffers();
+}
+
+void texture_preview_canvas::change_background(std::string background_name) {
+	skybox_tex = std::make_shared<hdr_texture>(1, "textures/" + background_name);
 }
 
 wxBEGIN_EVENT_TABLE(texture_preview_canvas, wxGLCanvas)

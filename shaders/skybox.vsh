@@ -28,7 +28,7 @@ vec2 get_sky_coord(in vec3 direction) {
 void main() {
     gl_Position = vec4(position_in, 1);
 
-	view_vector = normalize((view_matrix * vec4(position_in, 1.0)).xyz);
+	view_vector = normalize((view_matrix * vec4(position_in, 0.0)).xyz);
 
 	texcoord = get_sky_coord(view_vector);
 }

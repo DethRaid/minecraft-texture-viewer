@@ -10,6 +10,7 @@ hdr_texture::hdr_texture(int binding, std::string filename, bool make_mipmaps) {
 	upload_texture_data();
 
 	if(make_mipmaps) {
+		LOG(TRACE) << "Making mipmaps for texture " << gl_name;
 		glGenerateTextureMipmap(gl_name);
 	}
 }
@@ -45,10 +46,10 @@ void hdr_texture::upload_texture_data() {
 	glGetIntegerv(GL_TEXTURE_BINDING_2D, &previous_texture);
 	glBindTexture(GL_TEXTURE_2D, gl_name);
 	glTextureSubImage2D(gl_name, 0, 0, 0, width, height, format, GL_FLOAT, data);
-	LOG(TRACE) << "HDR texture data updated";
+	LOG(TRACE) << "HDR texture data uploaded";
 
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	glBindTexture(GL_TEXTURE_2D, (GLuint)previous_texture);
 }
