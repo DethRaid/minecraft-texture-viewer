@@ -57,7 +57,8 @@ texture::~texture() {
 }
 
 void texture::create(int binding) {
-	glCreateTextures(GL_TEXTURE_2D, 1, &gl_name);
+	glGenTextures(1, &gl_name);
+	glBindTexture(GL_TEXTURE_2D, gl_name);
 	glBindTextureUnit(binding, gl_name);
 }
 
@@ -89,17 +90,16 @@ void texture::upload_texture_data() {
 		LOG(ERROR) << "Unsupported number of components. You have " << num_components << " components, but I need a "
 				   << "number in [1,4]";
 	}
-
-	glTextureStorage2D(gl_name, 1, internal_format, width, height);
-	
+		
 	GLint previous_texture;
 	glGetIntegerv(GL_TEXTURE_BINDING_2D, &previous_texture);
 	glBindTexture(GL_TEXTURE_2D, gl_name);
-	glTextureSubImage2D(gl_name, 0, 0, 0, width, height, format, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, internal_format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 	LOG(TRACE) << "Texture data updated";
 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, (GLuint)previous_texture);
 }

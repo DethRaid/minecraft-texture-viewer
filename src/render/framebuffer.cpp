@@ -6,13 +6,16 @@ framebuffer::framebuffer(int width, int height) {
 	glGenFramebuffers(1, &framebuffer_id);
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer_id);
 
-	glCreateTextures(GL_TEXTURE_2D, NUM_ATTACHMENTS, attachments);
+	glGenTextures(NUM_ATTACHMENTS, attachments);
 
-	glTextureStorage2D(attachments[DEPTH], 1, GL_DEPTH_COMPONENT16, width, height);
+	glBindTexture(GL_TEXTURE_2D, attachments[DEPTH]);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 	glNamedFramebufferTexture(framebuffer_id, GL_DEPTH_ATTACHMENT, attachments[DEPTH], 0);
 	
 	for(int i = 1; i < NUM_ATTACHMENTS; i++) {
-		glTextureStorage2D(attachments[i], 1, GL_RGBA8, width, height);
+		glBindTexture(GL_TEXTURE_2D, attachments[i]);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+		//glTextureStorage2D(attachments[i], 1, GL_RGBA8, width, height);
 		glBindTexture(GL_TEXTURE_2D, attachments[i]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -73,6 +76,7 @@ void framebuffer::bind() {
 
 void framebuffer::generate_mipmaps() {
 	for(int i = 0; i < NUM_ATTACHMENTS; i++) {
-		glGenerateTextureMipmap(attachments[i]);
+		glBindTexture(GL_TEXTURE_2D, attachments[i]);
+		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 }

@@ -15,7 +15,7 @@
     <DebugOutputMute>true</DebugOutputMute>
   </Options>
   <Inject>false</Inject>
-  <AutoStart>false</AutoStart>
+  <AutoStart>true</AutoStart>
   <Executable>C:\Users\gold1\AppData\Local\CMakeBuild\d4ea7907-c76a-9f3d-93c1-ebae1808cb7b\build\x86-Debug\bin\TexturePreviewer.exe</Executable>
   <WorkingDir>C:\Users\gold1\AppData\Local\CMakeBuild\d4ea7907-c76a-9f3d-93c1-ebae1808cb7b\build\x86-Debug\bin</WorkingDir>
   <CmdLine />

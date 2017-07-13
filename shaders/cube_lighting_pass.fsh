@@ -44,7 +44,7 @@ void main() {
 	vec3 r = reflect(reflection_direction, h);
 	float ndoth = max(0, dot(normal, h));
 
-	specular_out = texture(environment, sky_coord, 7).rgb;
+	specular_out = texture(environment, sky_coord, 0).rgb;
 
 	normal_out = normal * 0.5 + 0.5;
 }

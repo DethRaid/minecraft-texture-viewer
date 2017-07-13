@@ -114,6 +114,11 @@ void texture_preview_canvas::init_opengl() {
 
 	glHint(GL_AUTO_GENERATE_MIPMAP, GL_FASTEST);
 	glHint(GL_MANUAL_GENERATE_MIPMAP, GL_NICEST);
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+	glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
+	glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
 }
 
 void texture_preview_canvas::init_resources() {
@@ -190,7 +195,9 @@ void texture_preview_canvas::render() {
 }
 
 void texture_preview_canvas::change_background(std::string background_name) {
+	LOG(DEBUG) << "Loading background texture " << background_name;
 	skybox_tex = std::make_shared<hdr_texture>(1, "textures/" + background_name);
+	LOG(DEBUG) << "Loading complete";
 }
 
 wxBEGIN_EVENT_TABLE(texture_preview_canvas, wxGLCanvas)
