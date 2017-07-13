@@ -9,8 +9,8 @@ in vec3 view_vector;
 in vec3 reflection_direction;
 in vec3 position_viewspace;
 
-layout(binding = 1) uniform sampler2D environment;
-layout(binding = 3) uniform sampler2D albedo_tex;
+uniform sampler2D environment;
+uniform sampler2D albedo_tex;
 
 layout(location = 0) out vec3 color_out;
 layout(location = 1) out vec3 diffuse_out;

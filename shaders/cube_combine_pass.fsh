@@ -3,10 +3,10 @@
 in vec2 uv;
 in vec3 normal;
 
-layout(binding = 13) uniform sampler2D diffuse_color_tex;
-layout(binding = 14) uniform sampler2D diffuse_light_tex;
-layout(binding = 15) uniform sampler2D specular_light_tex;
-layout(binding = 16) uniform sampler2D normal_tex;
+uniform sampler2D diffuse_color_tex;
+uniform sampler2D diffuse_light_tex;
+uniform sampler2D specular_light_tex;
+uniform sampler2D normal_tex;
 
 layout(location = 0) out vec4 final_color;
 

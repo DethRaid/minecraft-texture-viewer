@@ -181,13 +181,16 @@ void texture_preview_canvas::render() {
 	camera_mats.view_matrix = main_camera.get_view_matrix();
 
 	cube->set_material(cube_lighting);
+	setup_gbuffer_textures(cube_lighting);
 	cube->render(camera_mats);
 
 	render_framebuffer->generate_mipmaps();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	fullscreen_quad->set_material(cube_combine);
+	setup_composite_textures(cube_combine);
 	fullscreen_quad->render();
 
 	glFlush();
@@ -197,7 +200,28 @@ void texture_preview_canvas::render() {
 void texture_preview_canvas::change_background(std::string background_name) {
 	LOG(DEBUG) << "Loading background texture " << background_name;
 	skybox_tex = std::make_shared<hdr_texture>(1, "textures/" + background_name);
-	LOG(DEBUG) << "Loading complete";
+}
+
+void texture_preview_canvas::setup_gbuffer_textures(std::shared_ptr<material> mat) {
+	auto environment_location = mat->get_uniform_location("environment");
+	glUniform1i(environment_location, 1);
+
+	auto albedo_tex_location = mat->get_uniform_location("albedo_tex");
+	glUniform1i(albedo_tex_location, 3);
+}
+
+void texture_preview_canvas::setup_composite_textures(std::shared_ptr<material> mat) {
+	auto diffuse_color_tex_location = mat->get_uniform_location("diffuse_color_tex");
+	glUniform1i(diffuse_color_tex_location, 13);
+
+	auto diffuse_light_tex_location = mat->get_uniform_location("diffuse_light_tex");
+	glUniform1i(diffuse_light_tex_location, 14);
+
+	auto specular_light_tex_location = mat->get_uniform_location("specular_light_tex");
+	glUniform1i(specular_light_tex_location, 15);
+
+	auto normal_tex_location = mat->get_uniform_location("normal_tex");
+	glUniform1i(normal_tex_location, 16);
 }
 
 wxBEGIN_EVENT_TABLE(texture_preview_canvas, wxGLCanvas)

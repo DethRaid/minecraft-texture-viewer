@@ -22,11 +22,20 @@ framebuffer::framebuffer(int width, int height) {
 		glNamedFramebufferTexture(framebuffer_id, GL_COLOR_ATTACHMENT0 + (i - 1), attachments[i], 0);
 	}
 	
-	glBindTextureUnit(2, attachments[DEPTH]);
-	glBindTextureUnit(13, attachments[DIFFUSE_COLOR]);
-	glBindTextureUnit(14, attachments[DIFFUSE_LIGHT]);
-	glBindTextureUnit(15, attachments[SPECULAR_LIGHT]);
-	glBindTextureUnit(16, attachments[NORMALS]);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, attachments[DEPTH]);
+
+	glActiveTexture(GL_TEXTURE13);
+	glBindTexture(GL_TEXTURE_2D, attachments[DIFFUSE_COLOR]);
+
+	glActiveTexture(GL_TEXTURE14);
+	glBindTexture(GL_TEXTURE_2D, attachments[DIFFUSE_LIGHT]);
+
+	glActiveTexture(GL_TEXTURE15);
+	glBindTexture(GL_TEXTURE_2D, attachments[SPECULAR_LIGHT]);
+
+	glActiveTexture(GL_TEXTURE16);
+	glBindTexture(GL_TEXTURE_2D, attachments[NORMALS]);
 
 	auto status = glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
 	switch(status) {

@@ -58,8 +58,8 @@ texture::~texture() {
 
 void texture::create(int binding) {
 	glGenTextures(1, &gl_name);
+	glActiveTexture(GL_TEXTURE0 + binding);
 	glBindTexture(GL_TEXTURE_2D, gl_name);
-	glBindTextureUnit(binding, gl_name);
 }
 
 GLuint texture::get_gl_name() {

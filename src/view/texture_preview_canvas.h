@@ -84,6 +84,9 @@ private:
 	void init_resources();
 
 	void do_tick();
+
+	void setup_gbuffer_textures(std::shared_ptr<material> mat);
+	void setup_composite_textures(std::shared_ptr<material> mat);
 };
 
 
