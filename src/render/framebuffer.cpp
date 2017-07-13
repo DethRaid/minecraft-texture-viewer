@@ -3,7 +3,8 @@
 #include <easylogging++.h>
 
 framebuffer::framebuffer(int width, int height) {
-	glCreateFramebuffers(1, &framebuffer_id);
+	glGenFramebuffers(1, &framebuffer_id);
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer_id);
 
 	glCreateTextures(GL_TEXTURE_2D, NUM_ATTACHMENTS, attachments);
 
