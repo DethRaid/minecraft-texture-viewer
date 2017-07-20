@@ -21,13 +21,13 @@ static void set_clipboard_text(void* user_data, const char* text) {
     glfwSetClipboardString((GLFWwindow*)user_data, text);
 }
 
-void mouse_button_callback(GLFWwindow*, int button, int action, int /*mods*/) {
+void mouse_button_callback(GLFWwindow*, int button, int action, int mods) {
     if(action == GLFW_PRESS && button >= 0 && button < 3) {
         g_MousePressed[button] = true;
     }
 }
 
-void scroll_callback(GLFWwindow*, double /*xoffset*/, double yoffset) {
+void scroll_callback(GLFWwindow*, double xoffset, double yoffset) {
     g_MouseWheel += (float)yoffset; // Use fractional mouse wheel, 1.0 unit 5 lines.
 }
 
@@ -120,7 +120,7 @@ main_window::main_window(int view_width, int view_height) {
     io.ImeWindowHandle = glfwGetWin32Window(window);
 #endif
 
-	gl_canvas = std::make_unique<texture_preview_canvas>(this, attrs, size);
+	gl_canvas = std::make_unique<texture_preview_canvas>(this, window_dimensions);
 
     draw_opacity_controls();
     draw_normal_controls();
@@ -131,13 +131,15 @@ main_window::main_window(int view_width, int view_height) {
     draw_translucence_controls();
     draw_ao_controls();
     draw_emission_controls();
+
+    draw_top_menu();
 }
 
 void main_window::draw() {
     draw_albedo_controls();
 }
 
-void main_window::on_export_textures_pbr(wxCommandEvent& event) {
+void main_window::on_export_textures_pbr() {
 	LOG(INFO) << "Exporting textures...";
 
 	export_dialogue.reset();
@@ -302,36 +304,46 @@ void main_window::draw_ao_controls() {
     ImGui::End();
 }
 
-void main_window::refresh_shaders(wxCommandEvent& event) {
-	gl_canvas->load_shaders();
+void main_window::draw_top_menu() {
+    if (ImGui::BeginMainMenuBar()) {
+        if(ImGui::BeginMenu("File")) {
+            draw_file_menu();
+            ImGui::EndMenu();
+        }
+
+        if(ImGui::BeginMenu("Change background")) {
+            if(ImGui::MenuItem("Blue Hour")) {
+                change_background("blue_hour_at_pier.hdr");
+            }
+            if(ImGui::MenuItem("Autumn Road")) {
+                change_background("golden_autumn_road.hdr");
+            }
+            if(ImGui::MenuItem("Road in Valley")) {
+                change_background("road_in_valley.hdr");
+            }
+            ImGui::EndMenu();
+        }
+
+        ImGui::EndMainMenuBar();
+    }
 }
 
-void main_window::change_background_to_blue_hour(wxCommandEvent& event) {
-	change_background("blue_hour_at_pier.hdr");
-}
+void main_window::draw_file_menu() {
+    if(ImGui::MenuItem("Export", "Ctrl+E")) {
+        on_export_textures_pbr();
+    }
+    ImGui::Separator();
+    if(ImGui::MenuItem("Refresh shaders", "Ctrl+R")) {
+        gl_canvas->load_shaders();
+    }
 
-void main_window::change_background_to_autumn_road(wxCommandEvent& event) {
-	change_background("golden_autumn_road.hdr");
-}
-
-void main_window::change_background_to_road_in_valley(wxCommandEvent& event) {
-	change_background("road_in_valley.hdr");
+    if(ImGui::MenuItem("Quit", "Alt+F4")) {
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
+    }
 }
 
 void main_window::change_background(std::string background_name) {
 	gl_canvas->change_background(background_name);
-}
-
-void set_text_input_value(wxTextCtrl* input, int value) {
-	static std::stringstream converter;
-	converter.precision(3);
-	converter << std::fixed << float(value) / 255.f;
-	input->SetValue(converter.str());
-	converter.str("");
-}
-
-float get_input_value(wxTextCtrl* input) {
-	return std::atof(input->GetValue()) * 255;
 }
 
 void draw_texture_128(std::shared_ptr<texture> data) {

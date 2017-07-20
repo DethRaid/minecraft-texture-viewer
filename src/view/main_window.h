@@ -51,18 +51,13 @@ private:
 	void draw_translucence_controls();
 	void draw_ao_controls();
 
-	void on_export_textures_pbr(wxCommandEvent& event);
-	void refresh_shaders(wxCommandEvent& event);
-	void change_background_to_blue_hour(wxCommandEvent& event);
-	void change_background_to_autumn_road(wxCommandEvent& event);
-	void change_background_to_road_in_valley(wxCommandEvent& event);
+    void draw_top_menu();
+    void draw_file_menu();
+
+	void on_export_textures_pbr();
 
 	void change_background(std::string background_name);
 };
-
-void set_text_input_value(wxTextCtrl* input, int value);
-
-float get_input_value(wxTextCtrl* input);
 
 void draw_texture_128(std::shared_ptr<texture> data);
 
