@@ -124,13 +124,13 @@ main_window::main_window(int view_width, int view_height) {
 
     draw_opacity_controls();
     draw_normal_controls();
-	hook_up_specular_color_controls();
-	hook_up_smoothness_controls();
-	hook_up_height_controls();
-	hook_up_porosity_controls();
-	hook_up_translucence_controls();
-	hook_up_ao_controls();
-	hook_up_emission_controls();
+    draw_specular_color_controls();
+    draw_smoothness_controls();
+    draw_height_controls();
+    draw_porosity_controls();
+    draw_translucence_controls();
+    draw_ao_controls();
+    draw_emission_controls();
 }
 
 void main_window::draw() {
@@ -150,14 +150,7 @@ void main_window::draw_albedo_controls() {
     draw_texture_128(textures.albedo_tex);
     ImGui::LabelText("Selected texture:##albedo", "%s", textures.albedo_tex->get_filepath().data());
     if(ImGui::Button("Select Texture##albedo", {50, 20})) {
-        nfdchar_t *outPath = nullptr;
-        nfdresult_t result = NFD_OpenDialog(nullptr, nullptr, &outPath);
-
-        if(result == NFD_OKAY) {
-            std::string filepath(outPath);
-            LOG(INFO) << "Grabbed file " << filepath;
-            textures.albedo_tex = std::make_shared<texture>(3, filepath);
-        }
+        textures.albedo_tex = pick_texture_from_disk();
 	}
     ImGui::End();
 }
@@ -176,16 +169,8 @@ void main_window::draw_opacity_controls() {
     }
 
     if(ImGui::Button("Select Texture##opacity", {50, 20})) {
-        nfdchar_t *outPath = nullptr;
-        nfdresult_t result = NFD_OpenDialog(nullptr, nullptr, &outPath);
-
-        if(result == NFD_OKAY) {
-            std::string filepath(outPath);
-            LOG(INFO) << "Grabbed file " << filepath;
-            textures.opacity_tex = std::make_shared<texture>(3, filepath);
-        }
+        textures.opacity_tex = pick_texture_from_disk();
     }
-
     ImGui::End();
 }
 
@@ -193,279 +178,128 @@ void main_window::draw_normal_controls() {
     ImGui::Button("Normals");
     draw_texture_128(textures.normal_tex);
     ImGui::LabelText("Selected Texture:##normals", "%s", textures.normal_tex->get_filepath());
-
     if(ImGui::Button("Select Texture##normals", {50, 20})) {
-        nfdchar_t *outPath = nullptr;
-        nfdresult_t result = NFD_OpenDialog(nullptr, nullptr, &outPath);
-
-        if(result == NFD_OKAY) {
-            std::string filepath(outPath);
-            LOG(INFO) << "Grabbed file " << filepath;
-            textures.normal_tex = std::make_shared<texture>(3, filepath);
-        }
+        textures.normal_tex = pick_texture_from_disk();
     }
-
     ImGui::End();
 }
 
-void main_window::hook_up_specular_color_controls() {
-	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto f0 = specular_red_slider->GetValue();
+void main_window::draw_specular_color_controls() {
+    ImGui::Begin("Reflectance at Normal Incidence");
+    draw_texture_128(textures.f0_tex);
 
-		set_f0(f0);
-	};
+    float last_f0 = f0;
+    ImGui::SliderFloat("F0##slider", &f0, 0, 1);
+    ImGui::InputFloat("F0##input", &f0, 0, 1);
+    if(f0 != last_f0) {
+        textures.f0_tex = std::make_shared<texture>(F0_BINDING, f0);
+    }
 
-	specular_red_slider->Bind(wxEVT_SLIDER, slider_update_function);
-
-	auto input_update = [&](wxCommandEvent& event) {
-		auto f0 = get_input_value(specular_red_input);
-
-		set_f0(f0);
-	};
-
-	specular_red_input->Bind(wxEVT_TEXT_ENTER, input_update);
-
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.f0_tex = std::make_shared<texture>(F0_BINDING, event.GetPath().ToStdString());
-	};
-
-	specular_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
-
-	slider_update_function(wxCommandEvent());
+    ImGui::LabelText("Selected Texture:##f0", "%s", textures.f0_tex->get_filepath());
+    if(ImGui::Button("Select Texture##f0", {50, 20})) {
+        textures.f0_tex = pick_texture_from_disk();
+    }
+    ImGui::End();
 }
 
-void main_window::set_f0(int f0) {
-	set_text_input_value(specular_red_input, f0);
+void main_window::draw_smoothness_controls() {
+    ImGui::Begin("Smoothness");
+    draw_texture_128(textures.smoothness_tex);
 
-	specular_red_slider->SetValue(f0);
+    float last_smoothness = smoothness;
+    ImGui::SliderFloat("Smoothness##slider", &smoothness, 0, 1);
+    ImGui::InputFloat("Smoothness##input", &smoothness, 0, 1);
+    if(smoothness != last_smoothness) {
+        textures.smoothness_tex = std::make_shared<texture>(SMOOTHNESS_BINDING, smoothness);
+    }
 
-
-	LOG(DEBUG) << "Updating F0 to " << f0;
-
-	textures.f0_tex = std::make_shared<texture>(F0_BINDING, f0);
+    ImGui::LabelText("Selected Texture:##smoothness", "%s", textures.smoothness_tex->get_filepath());
+    if(ImGui::Button("Select Texture##smoothness", {50, 20})) {
+        textures.smoothness_tex = pick_texture_from_disk();
+    }
+    ImGui::End();
 }
 
-void main_window::hook_up_smoothness_controls() {
-	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto smoothness = smoothness_slider->GetValue();
+void main_window::draw_emission_controls() {
+    ImGui::Begin("Emission");
+    draw_texture_128(textures.emission_tex);
 
-		set_smoothness(smoothness);
-	};
+    glm::vec3 last_emission = emission;
+    ImGui::ColorEdit3("Emission##color_edit", &emission.x);
+    if(emission != last_emission) {
+        textures.emission_tex = std::make_shared<texture>(EMISSION_BINDING, emission.x, emission.y, emission.z);
+    }
 
-	smoothness_slider->Bind(wxEVT_SLIDER, slider_update_function);
-
-	auto input_update = [&](wxCommandEvent& event) {
-		auto smoothness = get_input_value(smoothness_input);
-
-		set_smoothness(smoothness);
-	};
-
-	smoothness_input->Bind(wxEVT_TEXT_ENTER, input_update);
-
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.smoothness_tex = std::make_shared<texture>(SMOOTHNESS_BINDING, event.GetPath().ToStdString());
-	};
-
-	smoothness_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
-
-	slider_update_function(wxCommandEvent());
+    ImGui::LabelText("Selected Texture:##emission", "%s", textures.emission_tex->get_filepath());
+    if(ImGui::Button("Select Texture##emission", {50, 20})) {
+        textures.emission_tex = pick_texture_from_disk();
+    }
+    ImGui::End();
 }
 
-void main_window::set_smoothness(int smoothness) {
-	set_text_input_value(smoothness_input, smoothness);
+void main_window::draw_height_controls() {
+    ImGui::Begin("Heightmap");
+    draw_texture_128(textures.height_tex);
 
-	smoothness_slider->SetValue(smoothness);
+    float last_height = height;
+    ImGui::SliderFloat("Height##slider", &height, 0, 1);
+    ImGui::InputFloat("Height##input", &height, 0, 1);
+    if(last_height != height) {
+        textures.height_tex = std::make_shared<texture>(HEIGHT_BINDING, height);
+    }
 
-	LOG(DEBUG) << "Updating smoothness to " << smoothness;
-
-	textures.smoothness_tex = std::make_shared<texture>(SMOOTHNESS_BINDING, smoothness);
+    ImGui::LabelText("Selected Texture:##height", "%s", textures.height_tex->get_filepath());
+    if(ImGui::Button("Select Texture##height", {50, 20})) {
+        textures.height_tex = pick_texture_from_disk();
+    }
+    ImGui::End();
 }
 
-void main_window::hook_up_emission_controls() {
-	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto emission = emission_slider->GetValue();
+void main_window::draw_porosity_controls() {
+    ImGui::Begin("Porosity");
+    draw_texture_128(textures.porosity_tex);
 
-		set_emission(emission);
-	};
+    float last_porosity = porosity;
+    ImGui::SliderFloat("Porosity##slider", &porosity, 0, 1);
+    ImGui::InputFloat("Porosity##input", &porosity, 0, 1);
+    if(last_porosity != porosity) {
+        textures.porosity_tex = std::make_shared<texture>(POROSITY_BINDING, porosity);
+    }
 
-	emission_slider->Bind(wxEVT_SLIDER, slider_update_function);
-
-	auto input_update = [&](wxCommandEvent& event) {
-		auto emission = get_input_value(emission_input);
-
-		set_emission(emission);
-	};
-
-	emission_input->Bind(wxEVT_TEXT_ENTER, input_update);
-
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.emission_tex = std::make_shared<texture>(EMISSION_BINDING, event.GetPath().ToStdString());
-	};
-
-	emission_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
-
-	slider_update_function(wxCommandEvent());
+    ImGui::LabelText("Selected Texture:##porosity", "%s", textures.porosity_tex->get_filepath());
+    if(ImGui::Button("Select Texture##porosity", {50, 20})) {
+        textures.porosity_tex = pick_texture_from_disk();
+    }
+    ImGui::End();
 }
 
-void main_window::set_emission(int emission) {
-	set_text_input_value(emission_input, emission);
+void main_window::draw_translucence_controls() {
+    ImGui::Begin("Translucence");
+    draw_texture_128(textures.translucence_tex);
 
-	emission_slider->SetValue(emission);
+    float last_translucence = translucence;
+    ImGui::SliderFloat("Translucence##slider", &translucence, 0, 1);
+    ImGui::InputFloat("Translucence##input", &translucence, 0, 1);
+    if(translucence != last_translucence) {
+        textures.translucence_tex = std::make_shared<texture>(TRANSLUCENCE_BINDING, translucence);
+    }
 
-	LOG(DEBUG) << "Updating emission to " << emission;
-
-	textures.emission_tex = std::make_shared<texture>(EMISSION_BINDING, emission);
+    ImGui::LabelText("Selected Texture:##translucence", "%s", textures.translucence_tex->get_filepath());
+    if(ImGui::Button("Select Texture##translucence", {50, 20})) {
+        textures.translucence_tex = pick_texture_from_disk();
+    }
+    ImGui::End();
 }
 
-void main_window::hook_up_height_controls() {
-	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto height = height_slider->GetValue();
+void main_window::draw_ao_controls() {
+    ImGui::Begin("Ambient Occlusion");
+    draw_texture_128(textures.ao_tex);
 
-		set_height(height);
-	};
-
-	height_slider->Bind(wxEVT_SLIDER, slider_update_function);
-
-	auto input_update = [&](wxCommandEvent& event) {
-		auto height = get_input_value(height_input);
-
-		set_height(height);
-	};
-
-	height_input->Bind(wxEVT_TEXT_ENTER, input_update);
-
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.height_tex = std::make_shared<texture>(HEIGHT_BINDING, event.GetPath().ToStdString());
-	};
-
-	height_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
-
-	slider_update_function(wxCommandEvent());
-}
-
-void main_window::set_height(int height) {
-	set_text_input_value(height_input, height);
-
-	height_slider->SetValue(height);
-
-	LOG(DEBUG) << "Updating height to " << height;
-
-	textures.height_tex = std::make_shared<texture>(HEIGHT_BINDING, height);
-}
-
-void main_window::hook_up_porosity_controls() {
-	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto porosity = porosity_slider->GetValue();
-
-		set_porosity(porosity);
-	};
-
-	porosity_slider->Bind(wxEVT_SLIDER, slider_update_function);
-
-	auto input_update = [&](wxCommandEvent& event) {
-		auto porosity = get_input_value(porosity_input);
-
-		set_porosity(porosity);
-	};
-
-	porosity_input->Bind(wxEVT_TEXT_ENTER, input_update);
-
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.porosity_tex = std::make_shared<texture>(POROSITY_BINDING, event.GetPath().ToStdString());
-	};
-
-	porosity_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
-
-	slider_update_function(wxCommandEvent());
-}
-
-void main_window::set_porosity(int porosity) {
-	set_text_input_value(porosity_input, porosity);
-
-	porosity_slider->SetValue(porosity);
-
-	LOG(DEBUG) << "Updating porosity to " << porosity;
-
-	textures.porosity_tex = std::make_shared<texture>(POROSITY_BINDING, porosity);
-}
-
-void main_window::hook_up_translucence_controls() {
-	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto translucence = translucence_slider->GetValue();
-
-		set_translucence(translucence);
-	};
-
-	translucence_slider->Bind(wxEVT_SLIDER, slider_update_function);
-
-	auto input_update = [&](wxCommandEvent& event) {
-		auto translucence = get_input_value(translucence_input);
-
-		set_translucence(translucence);
-	};
-
-	translucence_input->Bind(wxEVT_TEXT_ENTER, input_update);
-
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.translucence_tex = std::make_shared<texture>(TRANSLUCENCE_BINDING, event.GetPath().ToStdString());
-	};
-
-	translucence_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
-
-	slider_update_function(wxCommandEvent());
-}
-
-void main_window::set_translucence(int translucence) {
-	set_text_input_value(translucence_input, translucence);
-
-	translucence_slider->SetValue(translucence);
-
-	LOG(DEBUG) << "Updating translucence to " << translucence;
-
-	textures.translucence_tex = std::make_shared<texture>(TRANSLUCENCE_BINDING, translucence);
-}
-
-void main_window::hook_up_ao_controls() {
-	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto ao = ao_slider->GetValue();
-
-		set_ao(ao);
-	};
-
-	ao_slider->Bind(wxEVT_SLIDER, slider_update_function);
-
-	auto input_update = [&](wxCommandEvent& event) {
-		auto ao = get_input_value(ao_input);
-
-		set_ao(ao);
-	};
-
-	ao_input->Bind(wxEVT_TEXT_ENTER, input_update);
-
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.ao_tex = std::make_shared<texture>(AO_BINDING, event.GetPath().ToStdString());
-	};
-
-	ao_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
-
-	slider_update_function(wxCommandEvent());
-}
-
-void main_window::set_ao(int ao) {
-	set_text_input_value(ao_input, ao);
-
-	ao_slider->SetValue(ao);
-
-	LOG(DEBUG) << "Updating ao to " << ao;
-
-	textures.ao_tex = std::make_shared<texture>(AO_BINDING, ao);
+    ImGui::LabelText("Selected Texture:##ao", "%s", textures.ao_tex->get_filepath());
+    if(ImGui::Button("Select Texture##ao", {50, 20})) {
+        textures.ao_tex = pick_texture_from_disk();
+    }
+    ImGui::End();
 }
 
 void main_window::refresh_shaders(wxCommandEvent& event) {
@@ -488,15 +322,6 @@ void main_window::change_background(std::string background_name) {
 	gl_canvas->change_background(background_name);
 }
 
-wxBEGIN_EVENT_TABLE(main_window, _main_window)
-	EVT_SIZE(									main_window::on_size_change)
-	EVT_MENU(ID_EXPORT_PBR,						main_window::on_export_textures_pbr)
-	EVT_MENU(ID_REFRESH_SHADERS,				main_window::refresh_shaders)
-	EVT_MENU(ID_BLUE_HOUR_AT_PIER_BACKGROUND,	main_window::change_background_to_blue_hour)
-	EVT_MENU(ID_GOLDEN_AUTUMN_ROAD_BACKGROUND,	main_window::change_background_to_autumn_road)
-	EVT_MENU(ID_ROAD_IN_VALLEY_BACKGROUND,		main_window::change_background_to_road_in_valley)
-wxEND_EVENT_TABLE()
-
 void set_text_input_value(wxTextCtrl* input, int value) {
 	static std::stringstream converter;
 	converter.precision(3);
@@ -511,4 +336,15 @@ float get_input_value(wxTextCtrl* input) {
 
 void draw_texture_128(std::shared_ptr<texture> data) {
     ImGui::Image(data.get(), {128, 128});
+}
+
+std::shared_ptr<texture> pick_texture_from_disk() {
+    nfdchar_t *outPath = nullptr;
+    nfdresult_t result = NFD_OpenDialog(nullptr, nullptr, &outPath);
+
+    if(result == NFD_OKAY) {
+        std::string filepath(outPath);
+        LOG(INFO) << "Grabbed file " << filepath;
+        return std::make_shared<texture>(3, filepath);
+    }
 }

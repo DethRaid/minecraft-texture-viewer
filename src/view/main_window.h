@@ -32,33 +32,24 @@ private:
 
 	textures_struct textures;
 
-    float opacity;
+    float opacity = 0;
+    float f0 = 0.2;
+    float smoothness = 0.9;
+    glm::vec3 emission = {0, 0, 0};
+    float height = 1;
+    float porosity = 0.1;
+    float translucence = 0;
 
 	void draw_albedo_controls();
 	void draw_opacity_controls();
-
 	void draw_normal_controls();
-
-	void hook_up_specular_color_controls();
-	void set_f0(int f0);
-
-	void hook_up_smoothness_controls();
-	void set_smoothness(int smoothness);
-
-	void hook_up_emission_controls();
-	void set_emission(int emission);
-
-	void hook_up_height_controls();
-	void set_height(int height);
-
-	void hook_up_porosity_controls();
-	void set_porosity(int porosity);
-
-	void hook_up_translucence_controls();
-	void set_translucence(int translucence);
-
-	void hook_up_ao_controls();
-	void set_ao(int ao);
+	void draw_specular_color_controls();
+	void draw_smoothness_controls();
+	void draw_emission_controls();
+	void draw_height_controls();
+	void draw_porosity_controls();
+	void draw_translucence_controls();
+	void draw_ao_controls();
 
 	void on_export_textures_pbr(wxCommandEvent& event);
 	void refresh_shaders(wxCommandEvent& event);
@@ -74,6 +65,8 @@ void set_text_input_value(wxTextCtrl* input, int value);
 float get_input_value(wxTextCtrl* input);
 
 void draw_texture_128(std::shared_ptr<texture> data);
+
+std::shared_ptr<texture> pick_texture_from_disk();
 
 
 #endif //TEXTUREPREVIEWER_MAIN_WINDOW_H
