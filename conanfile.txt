@@ -5,6 +5,7 @@ stb_image/2.12@dsobczyk/testing
 OpenEXR/2.2.0@Mikayex/stable
 stb_image_write/1.02@fr00b0/testing
 ImGui/latest@thoughton/testing
+glfw/3.2.1@dballesg/stable
 
 [generators]
 cmake

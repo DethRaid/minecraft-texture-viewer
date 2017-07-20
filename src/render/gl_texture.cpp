@@ -18,6 +18,8 @@ texture::texture(int binding, int red, int green, int blue) {
 	height = 1;
 	num_components = 3;
 	upload_texture_data();
+
+	filepath = "From slider";
 }
 
 texture::texture(int binding, int grayscale) {
@@ -29,6 +31,8 @@ texture::texture(int binding, int grayscale) {
 	height = 1;
 	num_components = 1;
 	upload_texture_data();
+
+	filepath = "From slider";
 }
 
 texture::texture(int binding, std::string& filename) {
@@ -36,6 +40,7 @@ texture::texture(int binding, std::string& filename) {
 
 	data = stbi_load(filename.c_str(), &width, &height, &num_components, 0);
 	upload_texture_data();
+	filepath = filename;
 }
 
 texture::texture(texture&& other) {
@@ -150,6 +155,10 @@ glm::vec4 texture::texel_fetch(int x, int y) {
 	}
 
 	return ret_val;
+}
+
+std::string &texture::get_filepath() {
+	return filepath;
 }
 
 glm::vec4 operator*(glm::vec4 vec, float f) {

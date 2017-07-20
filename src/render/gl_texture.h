@@ -59,6 +59,8 @@ public:
 
 	GLuint get_gl_name();
 
+	std::string& get_filepath();
+
 	/*!
 	 * \brief Gets the value of the texture at the specified UV coordinates
 	 *
@@ -77,6 +79,7 @@ protected:
 	int num_components;
 
 	GLuint gl_name;
+	std::string filepath;
 
 	texture();
 

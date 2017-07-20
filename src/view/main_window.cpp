@@ -3,37 +3,127 @@
 //
 
 #include "main_window.h"
-#include <wx/filepicker.h>
 #include <sstream>
 
 #include <easylogging++.h>
+#include <imgui.h>
+#include <nfd.h>
 
-main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpack Texture Viewer") {
-	wxGLAttributes attrs;
-	attrs.PlatformDefaults().Defaults().EndList();
-	bool accepted = wxGLCanvas::IsDisplaySupported(attrs);
+void error_callback(int error, const char *description) {
+	LOG(ERROR) << "GLFW Error " << error << ": " << description;
+}
 
-	if(!accepted) {
-		LOG(WARNING) << "Could not create OpenGL context with default attributes, trying again";
+static const char* get_clipboard_text(void* user_data) {
+    return glfwGetClipboardString((GLFWwindow*)user_data);
+}
 
-		attrs.Reset();
-		attrs.PlatformDefaults().MinRGBA(8, 8, 8, 8).DoubleBuffer().Depth(24).EndList();
-		accepted = wxGLCanvas::IsDisplaySupported(attrs);
+static void set_clipboard_text(void* user_data, const char* text) {
+    glfwSetClipboardString((GLFWwindow*)user_data, text);
+}
 
-		if(!accepted) {
-			LOG(ERROR) << "Could not create OpenGL context with needed attributes";
-		}
+void mouse_button_callback(GLFWwindow*, int button, int action, int /*mods*/) {
+    if(action == GLFW_PRESS && button >= 0 && button < 3) {
+        g_MousePressed[button] = true;
+    }
+}
+
+void scroll_callback(GLFWwindow*, double /*xoffset*/, double yoffset) {
+    g_MouseWheel += (float)yoffset; // Use fractional mouse wheel, 1.0 unit 5 lines.
+}
+
+void key_callback(GLFWwindow*, int key, int, int action, int mods) {
+    ImGuiIO& io = ImGui::GetIO();
+    if(action == GLFW_PRESS) {
+        io.KeysDown[key] = true;
+    }
+
+    if(action == GLFW_RELEASE) {
+        io.KeysDown[key] = false;
+    }
+
+    (void)mods; // Modifiers are not reliable across systems
+    io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+    io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+    io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+    io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+}
+
+void char_callback(GLFWwindow*, unsigned int c) {
+    ImGuiIO& io = ImGui::GetIO();
+    if (c > 0 && c < 0x10000) {
+        io.AddInputCharacter((unsigned short) c);
+    }
+}
+
+main_window::main_window(int view_width, int view_height) {
+	glfwSetErrorCallback(error_callback);
+
+	if(glfwInit() == 0) {
+		LOG(FATAL) << "Could not initialize GLFW";
 	}
 
-	auto options_panel_width = options_panel->GetSize().GetWidth();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	window = glfwCreateWindow(view_width, view_height, "Minecraft Texture Packer", NULL, NULL);
+	if(window == nullptr) {
+		LOG(FATAL) << "Could not initialize window :(";
+	}
+	LOG(INFO) << "GLFW window created";
 
-	auto size = GetClientSize();
-	size -= wxSize(options_panel_width, 0);
+	glfwMakeContextCurrent(window);
+	gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+
+	if(gladLoadGL() == 0) {
+		LOG(FATAL) << "Could not load OpenGL";
+	}
+
+	const GLubyte *vendor = glGetString(GL_VENDOR);
+	LOG(INFO) << "Vendor: " << vendor;
+
+	glfwGetFramebufferSize(window, &window_dimensions.x, &window_dimensions.y);
+	glViewport(0, 0, window_dimensions.x, window_dimensions.y);
+
+	glfwSetKeyCallback(window, key_callback);
+	glfwSetCharCallback(window, char_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
+	glfwSetScrollCallback(window, scroll_callback);
+	glfwSwapInterval(0);
+
+    ImGuiIO& io = ImGui::GetIO();
+    io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;                         // Keyboard mapping. ImGui will use those indices to peek into the io.KeyDown[] array.
+    io.KeyMap[ImGuiKey_LeftArrow] = GLFW_KEY_LEFT;
+    io.KeyMap[ImGuiKey_RightArrow] = GLFW_KEY_RIGHT;
+    io.KeyMap[ImGuiKey_UpArrow] = GLFW_KEY_UP;
+    io.KeyMap[ImGuiKey_DownArrow] = GLFW_KEY_DOWN;
+    io.KeyMap[ImGuiKey_PageUp] = GLFW_KEY_PAGE_UP;
+    io.KeyMap[ImGuiKey_PageDown] = GLFW_KEY_PAGE_DOWN;
+    io.KeyMap[ImGuiKey_Home] = GLFW_KEY_HOME;
+    io.KeyMap[ImGuiKey_End] = GLFW_KEY_END;
+    io.KeyMap[ImGuiKey_Delete] = GLFW_KEY_DELETE;
+    io.KeyMap[ImGuiKey_Backspace] = GLFW_KEY_BACKSPACE;
+    io.KeyMap[ImGuiKey_Enter] = GLFW_KEY_ENTER;
+    io.KeyMap[ImGuiKey_Escape] = GLFW_KEY_ESCAPE;
+    io.KeyMap[ImGuiKey_A] = GLFW_KEY_A;
+    io.KeyMap[ImGuiKey_C] = GLFW_KEY_C;
+    io.KeyMap[ImGuiKey_V] = GLFW_KEY_V;
+    io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
+    io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
+    io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
+
+    io.RenderDrawListsFn = ImGui_ImplGlfwGL3_RenderDrawLists;       // Alternatively you can set this to NULL and call ImGui::GetDrawData() after ImGui::Render() to get the same ImDrawData pointer.
+    io.SetClipboardTextFn = set_clipboard_text;
+    io.GetClipboardTextFn = get_clipboard_text;
+    io.ClipboardUserData = window;
+#ifdef _WIN32
+    io.ImeWindowHandle = glfwGetWin32Window(window);
+#endif
+
 	gl_canvas = std::make_unique<texture_preview_canvas>(this, attrs, size);
 
-	hook_up_albedo_controls();
-	hook_up_opacity_controls();
-	hook_up_normal_controls();
+    draw_opacity_controls();
+    draw_normal_controls();
 	hook_up_specular_color_controls();
 	hook_up_smoothness_controls();
 	hook_up_height_controls();
@@ -43,12 +133,8 @@ main_window::main_window() : _main_window(nullptr, wxID_ANY, "Minecraft Shaderpa
 	hook_up_emission_controls();
 }
 
-void main_window::on_size_change(wxSizeEvent& event) {
-	event.Skip();
-
-	auto size = event.GetSize();
-	size -= wxSize(options_panel->GetSize().GetWidth(), 0);
-	gl_canvas->on_size_change(size);
+void main_window::draw() {
+    draw_albedo_controls();
 }
 
 void main_window::on_export_textures_pbr(wxCommandEvent& event) {
@@ -59,59 +145,67 @@ void main_window::on_export_textures_pbr(wxCommandEvent& event) {
 	export_dialogue->Show(true);
 }
 
-void main_window::hook_up_albedo_controls() {
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.albedo_tex = std::make_shared<texture>(3, event.GetPath().ToStdString());
-	};
+void main_window::draw_albedo_controls() {
+    ImGui::Begin("Albedo");
+    draw_texture_128(textures.albedo_tex);
+    ImGui::LabelText("Selected texture:##albedo", "%s", textures.albedo_tex->get_filepath().data());
+    if(ImGui::Button("Select Texture##albedo", {50, 20})) {
+        nfdchar_t *outPath = nullptr;
+        nfdresult_t result = NFD_OpenDialog(nullptr, nullptr, &outPath);
 
-	albedo_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
+        if(result == NFD_OKAY) {
+            std::string filepath(outPath);
+            LOG(INFO) << "Grabbed file " << filepath;
+            textures.albedo_tex = std::make_shared<texture>(3, filepath);
+        }
+	}
+    ImGui::End();
 }
 
-void main_window::hook_up_opacity_controls() {
-	auto slider_update_function = [&](wxCommandEvent& event) {
-		auto opacity = opacity_slider->GetValue();
+void main_window::draw_opacity_controls() {
+    ImGui::Begin("Opacity");
+    draw_texture_128(textures.opacity_tex);
+    ImGui::LabelText("Selected Texture:##opacity", "%s", textures.opacity_tex->get_filepath());
+    float lastOpacity = opacity;
+    ImGui::SliderFloat("Opacity##slider", &opacity, 0, 1);
+    ImGui::InputFloat("Opacity##input", &opacity, 0, 1);
 
-		set_opacity(opacity);
-	};
+    if(opacity != lastOpacity) {
+        LOG(DEBUG) << "Updating opacity to " << opacity;
+        textures.opacity_tex = std::make_shared<texture>(OPACITY_BINDING, opacity);
+    }
 
-	opacity_slider->Bind(wxEVT_SLIDER, slider_update_function);
+    if(ImGui::Button("Select Texture##opacity", {50, 20})) {
+        nfdchar_t *outPath = nullptr;
+        nfdresult_t result = NFD_OpenDialog(nullptr, nullptr, &outPath);
 
-	auto input_update = [&](wxCommandEvent& event) {
-		auto opacity = get_input_value(opacity_input);
+        if(result == NFD_OKAY) {
+            std::string filepath(outPath);
+            LOG(INFO) << "Grabbed file " << filepath;
+            textures.opacity_tex = std::make_shared<texture>(3, filepath);
+        }
+    }
 
-		set_opacity(opacity);
-	};
-
-	opacity_input->Bind(wxEVT_TEXT_ENTER, input_update);
-
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.opacity_tex = std::make_shared<texture>(OPACITY_BINDING, event.GetPath().ToStdString());
-	};
-
-	opacity_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
-
-	slider_update_function(wxCommandEvent());
+    ImGui::End();
 }
 
-void main_window::set_opacity(int opacity) {
-	set_text_input_value(opacity_input, opacity);
+void main_window::draw_normal_controls() {
+    ImGui::Button("Normals");
+    draw_texture_128(textures.normal_tex);
+    ImGui::LabelText("Selected Texture:##normals", "%s", textures.normal_tex->get_filepath());
 
-	opacity_slider->SetValue(opacity);
+    if(ImGui::Button("Select Texture##normals", {50, 20})) {
+        nfdchar_t *outPath = nullptr;
+        nfdresult_t result = NFD_OpenDialog(nullptr, nullptr, &outPath);
 
-	LOG(DEBUG) << "Updating opacity to " << opacity;
+        if(result == NFD_OKAY) {
+            std::string filepath(outPath);
+            LOG(INFO) << "Grabbed file " << filepath;
+            textures.normal_tex = std::make_shared<texture>(3, filepath);
+        }
+    }
 
-	textures.opacity_tex = std::make_shared<texture>(OPACITY_BINDING, opacity);
-}
-
-void main_window::hook_up_normal_controls() {
-	auto filepicker_update = [&](wxFileDirPickerEvent& event) {
-		LOG(INFO) << "Grabbed file " << event.GetPath();
-		textures.normal_tex = std::make_shared<texture>(NORMAL_BINDING, event.GetPath().ToStdString());
-	};
-
-	normal_file_picker->Bind(wxEVT_FILEPICKER_CHANGED, filepicker_update);
+    ImGui::End();
 }
 
 void main_window::hook_up_specular_color_controls() {
@@ -413,4 +507,8 @@ void set_text_input_value(wxTextCtrl* input, int value) {
 
 float get_input_value(wxTextCtrl* input) {
 	return std::atof(input->GetValue()) * 255;
+}
+
+void draw_texture_128(std::shared_ptr<texture> data) {
+    ImGui::Image(data.get(), {128, 128});
 }
