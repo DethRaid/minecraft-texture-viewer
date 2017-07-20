@@ -4,6 +4,7 @@ glm/0.9.7.6@dlarudgus20/stable
 stb_image/2.12@dsobczyk/testing
 OpenEXR/2.2.0@Mikayex/stable
 stb_image_write/1.02@fr00b0/testing
+ImGui/latest@thoughton/testing
 
 [generators]
 cmake
