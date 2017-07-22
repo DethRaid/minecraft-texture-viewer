@@ -6,52 +6,22 @@
 #include <stdexcept>
 #include <glm/gtc/matrix_transform.hpp>
 
-render_timer::render_timer(texture_preview_canvas* pane) : wxTimer(), pane(pane) {}
-
-void render_timer::Notify() {
-	pane->Refresh();
-}
-
-void render_timer::start() {
-	wxTimer::Start(16);
-}
-
 void APIENTRY error_callback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* user_param) {
 	LOG(ERROR) << message;
 }
 
-texture_preview_canvas::texture_preview_canvas(wxFrame* parent, wxGLAttributes& attrs, wxSize& size) 
-	: wxGLCanvas(parent, attrs, wxID_ANY, wxDefaultPosition, size) {
+texture_preview_canvas::texture_preview_canvas(glm::ivec2& size, textures_struct& textures) : textures(textures) {
 	window_height = size.y;
 	window_width = size.x;
 
-	wxGLContextAttrs contextAttribs;
-	contextAttribs.PlatformDefaults().CoreProfile().OGLVersion(4, 5).DebugCtx().EndList();
-
-	context = std::make_unique<wxGLContext>(this, nullptr, &contextAttribs);
-
-	if(!context->IsOK()) {
-		LOG(ERROR) << "Could not create OpenGL context";
-		throw std::runtime_error("Could not initialize OpenGL");
-	}
-
-	SetCurrent(*context);
-
 	init_opengl();
-	SwapBuffers();
 
 	init_resources();
-
-	timer = std::make_unique<render_timer>(this);
-	timer->start();
 
 	last_frame_end = clock();
 }
 
-void texture_preview_canvas::on_size_change(wxSize& size) {
-	SetCurrent(*context);
-	SetSize(size);
-
+void texture_preview_canvas::on_size_change(glm::ivec2& size) {
 	window_height = size.y;
 	window_width = size.x;
 	LOG(INFO) << "Changing size to " << window_width << " by " << window_height;
@@ -62,14 +32,6 @@ void texture_preview_canvas::on_size_change(wxSize& size) {
 	}
 	render_framebuffer = std::make_unique<framebuffer>(window_width, window_height);
 	main_camera.aspect_ratio = (float)window_width / (float)window_height;
-}
-
-void texture_preview_canvas::on_paint(wxPaintEvent& evt) {
-	do_tick();
-}
-
-void texture_preview_canvas::on_idle(wxIdleEvent& evt) {
-	Refresh();
 }
 
 void texture_preview_canvas::on_mouse_event(wxMouseEvent& event) {
@@ -95,14 +57,6 @@ void texture_preview_canvas::on_mouse_event(wxMouseEvent& event) {
 }
 
 void texture_preview_canvas::init_opengl() {
-	if(!gladLoadGL()) {
-		LOG(ERROR) << "Could not load OpenGL functions";
-		el::Loggers::flushAll();
-	
-		//throw std::runtime_error("Could not initialize OpenGL");
-	}
-	LOG(DEBUG) << "OpenGL functions loaded";
-
 	glDebugMessageCallback(error_callback, nullptr);
 
 	render_available = true;
@@ -154,8 +108,8 @@ void texture_preview_canvas::load_shaders() {
 }
 
 void texture_preview_canvas::do_tick() {
-	cube->get_transform().set_rotation(CUBE_ROTATE_SPEED * elapsed_time, glm::vec3(0, 1, 0));
-	main_camera.respond_to_mouse_move(mouse_delta, delta_time);
+	cube->get_transform().set_rotation(static_cast<float>(CUBE_ROTATE_SPEED * elapsed_time), glm::vec3(0, 1, 0));
+	main_camera.respond_to_mouse_move(mouse_delta, static_cast<float>(delta_time));
 
 	render();
 
@@ -166,17 +120,12 @@ void texture_preview_canvas::do_tick() {
 }
 
 void texture_preview_canvas::render() {
-	wxPaintDC dc(this);
-	SetCurrent(*context);
-
-	wxPaintDC(this);
-
 	render_framebuffer->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glDepthMask(false);
+	glDepthMask(static_cast<GLboolean>(false));
 	fullscreen_quad->set_material(skybox_mat);
 	fullscreen_quad->render(camera_mats);
-	glDepthMask(true);
+	glDepthMask(static_cast<GLboolean>(true));
 
 	camera_mats.view_matrix = main_camera.get_view_matrix();
 
@@ -194,7 +143,6 @@ void texture_preview_canvas::render() {
 	fullscreen_quad->render();
 
 	glFlush();
-	SwapBuffers();
 }
 
 void texture_preview_canvas::change_background(std::string background_name) {
@@ -223,9 +171,3 @@ void texture_preview_canvas::setup_composite_textures(std::shared_ptr<material> 
 	auto normal_tex_location = mat->get_uniform_location("normal_tex");
 	glUniform1i(normal_tex_location, 16);
 }
-
-wxBEGIN_EVENT_TABLE(texture_preview_canvas, wxGLCanvas)
-	EVT_PAINT(texture_preview_canvas::on_paint)
-	EVT_IDLE(texture_preview_canvas::on_idle)
-	EVT_MOUSE_EVENTS(texture_preview_canvas::on_mouse_event)
-wxEND_EVENT_TABLE()

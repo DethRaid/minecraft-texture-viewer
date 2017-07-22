@@ -13,49 +13,31 @@
 #include "../render/gl_texture.h"
 #include "../render/camera.h"
 
-#include <wx/wxprec.h>
-
-#ifndef WX_PRECOMP
-#include <wx/wx.h>
-#endif
-#include <wx/glcanvas.h>
-#include <wx/timer.h>
 
 #include <glm/glm.hpp>
 
 #define CUBE_ROTATE_SPEED 0.1f
 
-class texture_preview_canvas;
-
-class render_timer : public wxTimer {
-	texture_preview_canvas* pane;
+class texture_preview_canvas {
 public:
-	render_timer(texture_preview_canvas* pane);
-	void Notify();
-	void start();
-};
+	explicit texture_preview_canvas(glm::ivec2& size, textures_struct& textures);
 
-class texture_preview_canvas : public wxGLCanvas {
-public:
-	texture_preview_canvas(wxFrame* parent, wxGLAttributes& attrs, wxSize& size);
-	void on_size_change(wxSize& size);
-	void on_paint(wxPaintEvent& evt);
-	void on_idle(wxIdleEvent& evt);
-	void on_mouse_event(wxMouseEvent& event);
-	void render();
+	void do_tick();
 
 	void load_shaders();
 	void change_background(std::string background_name);
-protected:
-	wxDECLARE_EVENT_TABLE();
+
+	void on_size_change(glm::ivec2& size);
+
 private:
-	std::unique_ptr<wxGLContext> context;
 	int window_height = 200;
 	int window_width = 200;
 
 	double delta_time = 0;
 	double elapsed_time = 0;
 	clock_t last_frame_end = 0;
+
+	textures_struct& textures;
 
 	bool render_available = false;
 
@@ -64,8 +46,6 @@ private:
 	glm::vec2 mouse_delta;
 	float mousewheel_delta = 0;
 
-	std::unique_ptr<render_timer> timer;
-	
 	camera_matrices camera_mats;
 	std::unique_ptr<framebuffer> render_framebuffer;
 
@@ -83,10 +63,10 @@ private:
 	void init_opengl();
 	void init_resources();
 
-	void do_tick();
-
 	void setup_gbuffer_textures(std::shared_ptr<material> mat);
 	void setup_composite_textures(std::shared_ptr<material> mat);
+
+	void render();
 };
 
 

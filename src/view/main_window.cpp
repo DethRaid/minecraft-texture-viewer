@@ -121,6 +121,10 @@ main_window::main_window(int view_width, int view_height) {
 #endif
 
 	gl_canvas = std::make_unique<texture_preview_canvas>(this, window_dimensions);
+}
+
+void main_window::draw() {
+    draw_albedo_controls();
 
     draw_opacity_controls();
     draw_normal_controls();
@@ -133,10 +137,12 @@ main_window::main_window(int view_width, int view_height) {
     draw_emission_controls();
 
     draw_top_menu();
-}
 
-void main_window::draw() {
-    draw_albedo_controls();
+    gl_canvas->do_tick();
+
+    ImGui::Render();
+
+    glfwSwapBuffers(window);
 }
 
 void main_window::on_export_textures_pbr() {
@@ -144,7 +150,7 @@ void main_window::on_export_textures_pbr() {
 
 	export_dialogue.reset();
 	export_dialogue = std::make_unique<export_options_dialogue>(this, textures);
-	export_dialogue->Show(true);
+	export_dialogue->show();
 }
 
 void main_window::draw_albedo_controls() {

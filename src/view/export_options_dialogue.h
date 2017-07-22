@@ -3,12 +3,11 @@
 
 #include <string>
 #include <memory>
-#include "noname.h"
 #include "../render/gl_texture.h"
 
-class export_options_dialogue : public _export_options_dialogue {
+class export_options_dialogue {
 public:
-	export_options_dialogue(wxWindow* parent, textures_struct& textures);
+	export_options_dialogue(textures_struct& textures);
 
 private:
 	textures_struct& textures;

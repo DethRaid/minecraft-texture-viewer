@@ -2,13 +2,11 @@
 
 #include <easylogging++.h>
 
-#include <wx/msgdlg.h>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb/stb_image_write.h>
 
-export_options_dialogue::export_options_dialogue(wxWindow* parent, textures_struct& textures) :
-	_export_options_dialogue(parent), textures(textures) {
+export_options_dialogue::export_options_dialogue(textures_struct& textures) : textures(textures) {
 	export_folder_picker->Bind(wxEVT_FILEPICKER_CHANGED, [&](wxFileDirPickerEvent& event) {
 		LOG(DEBUG) << "Set output file path to " << event.GetPath();
 		output_directory = event.GetPath().ToStdString();
